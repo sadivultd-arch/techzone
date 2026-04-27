@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 :root{
   --bg:#070b14;--bg2:#0d1526;--bg3:#111e35;
@@ -397,9 +398,14 @@ input:checked+.sl::before{transform:translateX(-20px)}
 <!-- LOGIN OVERLAY -->
 <div id="lo">
 <div class="lo-wrap">
+  <div style="text-align:left;margin-bottom:12px">
+    <span onclick="showSiteGuest()" style="font-size:12px;color:var(--t2);cursor:pointer;display:inline-flex;align-items:center;gap:6px">
+      <i class="fas fa-arrow-right"></i> המשך גלישה ללא כניסה
+    </span>
+  </div>
   <div class="lo-logo">
     <div class="lo-big">⚡ TechZone</div>
-    <p class="lo-tag">אביזרי סלולר מקצועיים · חברי מועדון בלבד</p>
+    <p class="lo-tag">אביזרי סלולר מקצועיים · מחירים מיוחדים לחברי מועדון</p>
   </div>
   <div class="lo-card">
     <div class="lo-tabs">
@@ -421,11 +427,8 @@ input:checked+.sl::before{transform:translateX(-20px)}
       <button class="btn btn-p btn-bl btn-lg" onclick="doLogin()">
         <i class="fas fa-sign-in-alt"></i> כניסה
       </button>
-      <div class="demo-box">
-        <div><strong>🔑 משתמשי הדגמה:</strong></div>
-        <div>👑 מנהל: <strong>admin</strong> / <strong>Admin@123</strong></div>
-        <div>🏢 עסקי: <strong>biz@demo.com</strong> / <strong>Biz@123</strong></div>
-        <div>👤 פרטי: <strong>user@demo.com</strong> / <strong>User@123</strong></div>
+      <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--t3)">
+        🔒 חנות לחברי מועדון בלבד · <span class="lo-link" onclick="loTab('register')">הצטרף עכשיו חינם</span>
       </div>
     </div>
     <!-- REGISTER -->
@@ -942,6 +945,51 @@ input:checked+.sl::before{transform:translateX(-20px)}
 
 </div><!-- /site -->
 
+<!-- ===== GUEST POPUP ===== -->
+<div id="guest-pop" style="display:none;position:fixed;inset:0;z-index:8500;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--bg2);border:1px solid rgba(212,175,55,.35);border-radius:var(--r4);width:100%;max-width:480px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.7),0 0 0 1px rgba(212,175,55,.1)">
+    <div style="background:linear-gradient(135deg,rgba(212,175,55,.12),rgba(0,170,255,.06));padding:32px 32px 24px;text-align:center;position:relative">
+      <button onclick="closeGuestPop()" style="position:absolute;top:12px;left:12px;width:32px;height:32px;background:rgba(255,255,255,.06);border:1px solid var(--bdr);border-radius:8px;cursor:pointer;color:var(--t2);font-size:14px;display:flex;align-items:center;justify-content:center">✕</button>
+      <div style="font-size:48px;margin-bottom:10px">⚡</div>
+      <h2 style="font-size:22px;font-weight:900;color:var(--gold);margin-bottom:8px">מחירים מיוחדים לחברי מועדון!</h2>
+      <p style="font-size:14px;color:var(--t2);line-height:1.65">הצטרף חינם וקבל גישה למחירי VIP, מבצעים בלעדיים ועדכונים ראשון.</p>
+    </div>
+    <div style="padding:24px 32px 32px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+        <div style="background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.2);border-radius:12px;padding:14px;text-align:center">
+          <div style="font-size:22px;margin-bottom:5px">🏷️</div>
+          <div style="font-size:12px;font-weight:700;color:var(--gold)">עד 40% הנחה</div>
+          <div style="font-size:11px;color:var(--t3)">ממחיר קמעונאי</div>
+        </div>
+        <div style="background:rgba(0,170,255,.06);border:1px solid rgba(0,170,255,.2);border-radius:12px;padding:14px;text-align:center">
+          <div style="font-size:22px;margin-bottom:5px">🚚</div>
+          <div style="font-size:12px;font-weight:700;color:var(--blue)">משלוח חינם</div>
+          <div style="font-size:11px;color:var(--t3)">מ-₪200 הזמנה</div>
+        </div>
+      </div>
+      <div style="margin-bottom:12px">
+        <input type="text" id="gp-name" class="fi" placeholder="שם מלא *" style="margin-bottom:10px">
+        <input type="email" id="gp-email" class="fi" placeholder="כתובת אימייל *" style="margin-bottom:10px">
+        <input type="tel" id="gp-phone" class="fi" placeholder="טלפון (לא חובה)">
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:14px">
+        <div style="flex:1;padding:10px;background:rgba(255,255,255,.03);border:2px solid transparent;border-radius:10px;cursor:pointer;text-align:center;font-size:12px;font-weight:700;transition:all .2s" id="gp-private" onclick="gpType('private')" style="border-color:var(--gold)">
+          👤 לקוח פרטי
+        </div>
+        <div style="flex:1;padding:10px;background:rgba(255,255,255,.03);border:2px solid transparent;border-radius:10px;cursor:pointer;text-align:center;font-size:12px;font-weight:700;transition:all .2s" id="gp-business" onclick="gpType('business')">
+          🏢 לקוח עסקי
+        </div>
+      </div>
+      <button class="btn btn-p btn-bl btn-lg" onclick="gpRegister()">
+        <i class="fas fa-star"></i> הצטרף למועדון חינם
+      </button>
+      <p style="text-align:center;font-size:11px;color:var(--t3);margin-top:10px">
+        בהצטרפות אתה מסכים ל<span style="color:var(--gold);cursor:pointer" onclick="showLegal('terms')">תנאי השימוש</span> ול<span style="color:var(--gold);cursor:pointer" onclick="showLegal('privacy')">מדיניות הפרטיות</span>. ללא ספאם, ניתן לבטל בכל עת.
+      </p>
+    </div>
+  </div>
+</div>
+
 <!-- CART OVERLAY -->
 <div id="cart-ov" onclick="if(event.target===this)closeCart()">
   <div id="cart-sb">
@@ -1357,8 +1405,91 @@ let S = {
   cfg:{name:'TechZone',tag:'אביזרי סלולר מקצועיים',email:'info@techzone.co.il',phone:'03-1234567',addr:'רחוב הטכנולוגיה 5, תל אביב',vat:18,shipPriv:200,shipBiz:0,ga:'',fb:'',maps:'',wa:'972501234567'}
 };
 
+// ===== EMAILJS CONFIG =====
+const EJS={svc:'service_8il8ss9',tplOrder:'template_6jv4hok',tplReset:'template_68ws1l2'};
+
+function ejsInit(){
+  if(window.emailjs)emailjs.init({publicKey:'YOUR_PUBLIC_KEY'});
+}
+
+function ejsSendOrder(order){
+  if(!window.emailjs)return;
+  const u=S.user;
+  emailjs.send(EJS.svc,EJS.tplOrder,{
+    to_name:u.name,to_email:u.email,
+    order_id:order.id,order_total:'₪'+order.total.toLocaleString(),
+    order_items:order.items.map(i=>`${i.nm} × ${i.qty} — ₪${(i.pr*i.qty).toLocaleString()}`).join('\n'),
+    order_date:order.date,company_name:'TechZone'
+  }).catch(()=>{});
+}
+
+function ejsSendReset(email,name,token){
+  if(!window.emailjs)return;
+  emailjs.send(EJS.svc,EJS.tplReset,{
+    to_name:name,to_email:email,
+    reset_link:`https://techzone.co.il/reset?token=${token}`,
+    company_name:'TechZone'
+  }).catch(()=>{});
+}
+
+// ===== GUEST POPUP =====
+let _gpType='private';
+let _guestTimer=null;
+
+function startGuestTimer(){
+  if(localStorage.getItem('tz_gp_shown'))return;
+  _guestTimer=setTimeout(()=>{
+    if(!S.user){
+      const pop=document.getElementById('guest-pop');
+      pop.style.display='flex';
+      gpType('private');
+      localStorage.setItem('tz_gp_shown','1');
+    }
+  },18000);
+}
+
+function closeGuestPop(){
+  document.getElementById('guest-pop').style.display='none';
+}
+
+function gpType(t){
+  _gpType=t;
+  document.getElementById('gp-private').style.border=t==='private'?'2px solid var(--gold)':'2px solid transparent';
+  document.getElementById('gp-business').style.border=t==='business'?'2px solid var(--gold)':'2px solid transparent';
+  document.getElementById('gp-private').style.background=t==='private'?'rgba(212,175,55,.1)':'rgba(255,255,255,.03)';
+  document.getElementById('gp-business').style.background=t==='business'?'rgba(212,175,55,.1)':'rgba(255,255,255,.03)';
+}
+
+function gpRegister(){
+  const name=document.getElementById('gp-name').value.trim();
+  const email=document.getElementById('gp-email').value.trim();
+  const phone=document.getElementById('gp-phone').value.trim();
+  if(!name){toast('נא להזין שם מלא','er');return;}
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){toast('נא להזין אימייל תקין','er');return;}
+  if(S.users.find(u=>u.email===email)){
+    closeGuestPop();toast('האימייל כבר רשום. התחבר למטה','in');return;
+  }
+  const pass=Math.random().toString(36).slice(-8)+'A1!';
+  const nu={id:Date.now(),un:email,name,email,pass,type:_gpType,phone,act:true,joined:new Date().toISOString().split('T')[0],orders:[]};
+  S.users.push(nu);save();
+  S.user=nu;localStorage.setItem('tz_ses',JSON.stringify({id:nu.id}));
+  closeGuestPop();
+  document.getElementById('lo').style.display='none';
+  document.getElementById('site').style.display='block';
+  setupHdr();renderHome();
+  toast(`ברוך הבא למועדון TechZone! 🎉 הסיסמה נשלחה לאימייל שלך`,'ok');
+  if(window.emailjs){
+    emailjs.send(EJS.svc,EJS.tplReset,{
+      to_name:name,to_email:email,
+      reset_link:`הסיסמה הזמנית שלך: ${pass}`,
+      company_name:'TechZone'
+    }).catch(()=>{});
+  }
+}
+
 // ===== INIT =====
 function init(){
+  ejsInit();
   loadData(); checkSession(); updateCartCt();
   setInterval(updTime,30000); updTime();
   document.addEventListener('click',e=>{
@@ -1398,13 +1529,35 @@ function checkSession(){
   const s=localStorage.getItem('tz_ses');
   if(s){const u=JSON.parse(s);const found=S.users.find(x=>x.id===u.id);
     if(found&&found.act){S.user=found;showSite();return;}}
-  showLogin();
+  // Allow guest browsing — show site immediately
+  showSiteGuest();
 }
 
 function showLogin(){document.getElementById('lo').style.display='flex';document.getElementById('site').style.display='none';}
+function showSiteGuest(){
+  // Show site for guest — with limited pricing (show private prices)
+  S.user={id:0,name:'אורח',type:'guest',act:true};
+  document.getElementById('lo').style.display='none';
+  document.getElementById('site').style.display='block';
+  setupHdrGuest();renderHome();
+  startGuestTimer();
+}
 function showSite(){
   document.getElementById('lo').style.display='none';document.getElementById('site').style.display='block';
   setupHdr();renderHome();
+  if(_guestTimer){clearTimeout(_guestTimer);_guestTimer=null;}
+}
+function setupHdrGuest(){
+  document.getElementById('hdr-name').textContent='כניסה / הרשמה';
+  document.getElementById('ud-name').textContent='אורח';
+  document.getElementById('ud-email').textContent='לא מחובר';
+  document.getElementById('ud-type').textContent='🔓 גולש אורח';
+  document.getElementById('adm-btn').style.display='none';
+  document.getElementById('mob-adm').style.display='none';
+  // Replace umenu-btn click to open login
+  const btn=document.querySelector('.umenu-btn');
+  if(btn){btn.innerHTML='<i class="fas fa-sign-in-alt" style="color:var(--gold)"></i><span>כניסה / הרשמה</span>';
+    btn.onclick=()=>showLoginModal();}
 }
 
 function setupHdr(){
@@ -1427,6 +1580,11 @@ function setupHdr(){
   }
 }
 
+function showLoginModal(){
+  document.getElementById('lo').style.display='flex';
+  document.getElementById('site').style.display='none';
+}
+
 function doLogin(){
   const u=document.getElementById('lo-u').value.trim();
   const p=document.getElementById('lo-p').value;
@@ -1435,6 +1593,7 @@ function doLogin(){
   if(!found){toast('שם משתמש או סיסמה שגויים','er');return;}
   if(!found.act){toast('החשבון מושהה. צור קשר עם תמיכה','er');return;}
   S.user=found;localStorage.setItem('tz_ses',JSON.stringify({id:found.id}));
+  S.cart=[];
   showSite();toast(`ברוך הבא, ${found.name.split(' ')[0]}! 👋`,'ok');
 }
 
@@ -1442,7 +1601,7 @@ function doLogout(){
   S.user=null;S.cart=[];localStorage.removeItem('tz_ses');
   document.getElementById('adm').classList.remove('open');
   document.getElementById('udrop').style.display='none';
-  showLogin();toast('התנתקת בהצלחה','in');
+  showSiteGuest();toast('התנתקת בהצלחה','in');
 }
 
 function doRegister(){
@@ -1460,6 +1619,7 @@ function doRegister(){
     phone:document.getElementById('rg-phone').value,
     act:true,joined:new Date().toISOString().split('T')[0],orders:[]};
   S.users.push(nu);save();S.user=nu;localStorage.setItem('tz_ses',JSON.stringify({id:nu.id}));
+  if(_guestTimer){clearTimeout(_guestTimer);_guestTimer=null;}
   showSite();toast(`ברוך הבא למועדון TechZone! 🎉`,'ok');
 }
 
@@ -1474,7 +1634,17 @@ function toggleUDrop(){const d=document.getElementById('udrop');d.style.display=
 function closeUDrop(){document.getElementById('udrop').style.display='none';}
 function toggleMobNav(){document.getElementById('mob-nav').classList.toggle('open');}
 function showForgot(){document.getElementById('lo').style.display='none';openMo('mo-forgot');}
-function sendForgot(){toast('קישור לאיפוס סיסמה נשלח לאימייל שלך 📧','ok');closeMo('mo-forgot');document.getElementById('lo').style.display='flex';}
+function sendForgot(){
+  const email=document.getElementById('forgot-email').value.trim();
+  if(!email){toast('נא להזין כתובת אימייל','er');return;}
+  const u=S.users.find(x=>x.email===email);
+  if(!u){toast('אימייל לא נמצא במערכת','er');return;}
+  const token=Math.random().toString(36).slice(-12);
+  ejsSendReset(email,u.name,token);
+  toast('קישור לאיפוס סיסמה נשלח לאימייל שלך 📧','ok');
+  closeMo('mo-forgot');
+  document.getElementById('lo').style.display='flex';
+}
 
 // ===== NAVIGATION =====
 function go(pg){
@@ -1571,6 +1741,7 @@ function filterProds(){
 }
 
 function getP(p,isBiz){return isBiz?(p.sb||p.pb):(p.sp||p.pp);}
+function isGuest(){return !S.user||S.user.type==='guest';}
 
 function prodCard(p){
   const isBiz=S.user?.type==='business';
@@ -1686,6 +1857,14 @@ function shareP(id){if(navigator.share)navigator.share({title:'TechZone',url:loc
 
 // ===== CART =====
 function addCart(id,qty=1){
+  if(!S.user||S.user.type==='guest'){
+    toast('כניסה נדרשת לרכישה — הצטרף חינם!','in');
+    setTimeout(()=>{
+      const pop=document.getElementById('guest-pop');
+      pop.style.display='flex';gpType('private');
+    },300);
+    return;
+  }
   const p=S.prods.find(x=>x.id===id);if(!p||p.stock===0)return;
   const isBiz=S.user?.type==='business';
   const pr=isBiz?(p.sb||p.pb):(p.sp||p.pp);
@@ -1827,6 +2006,8 @@ function placeOrder(tot){
   const u=S.users.find(x=>x.id===S.user.id);
   if(u){u.orders=u.orders||[];u.orders.push(oid);}
   save();S.cart=[];updateCartCt();
+  // Send EmailJS order confirmation
+  ejsSendOrder(o);
   document.getElementById('success-num').textContent=`מספר הזמנה: #${oid}`;
   openMo('mo-success');
 }
