@@ -1,0 +1,2364 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TechZone - חנות אביזרי סלולר מקצועית לחברי מועדון. אוזניות, רמקולים, מטענים, כבלים ועוד">
+<meta name="keywords" content="אוזניות,רמקולים,מטענים,כבלים,אביזרי סלולר,ישראל,מטענים ניידים">
+<meta property="og:title" content="TechZone | אביזרי סלולר מקצועיים">
+<meta property="og:description" content="החנות המובילה לאביזרי סלולר - מחירים מיוחדים לחברי מועדון">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#D4AF37">
+<title>TechZone | אביזרי סלולר מקצועיים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --bg:#070b14;--bg2:#0d1526;--bg3:#111e35;
+  --card:rgba(255,255,255,0.04);--cardhov:rgba(255,255,255,0.07);
+  --glass:rgba(13,21,38,0.85);
+  --gold:#D4AF37;--gold2:#F5D060;--gold3:rgba(212,175,55,0.15);
+  --blue:#00aaff;--cyan:#00d4ff;--green:#00e676;--red:#ff4444;--orange:#ff9800;
+  --t1:#f0f4ff;--t2:#8899bb;--t3:#4a5a78;
+  --bdr:rgba(255,255,255,0.08);--bdra:rgba(212,175,55,0.3);
+  --sh1:0 2px 8px rgba(0,0,0,.3);--sh2:0 4px 20px rgba(0,0,0,.4);
+  --sh3:0 8px 40px rgba(0,0,0,.6);--shg:0 0 30px rgba(212,175,55,.2);
+  --r1:8px;--r2:14px;--r3:20px;--r4:28px;
+  --hh:68px;--tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Heebo','Rubik',sans-serif;background:var(--bg);color:var(--t1);direction:rtl;text-align:right;overflow-x:hidden;min-height:100vh}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+h1{font-size:clamp(1.8rem,5vw,3.2rem);font-weight:900}
+h2{font-size:clamp(1.4rem,3vw,2.2rem);font-weight:800}
+h3{font-size:clamp(1rem,2vw,1.4rem);font-weight:700}
+a{color:inherit;text-decoration:none}
+.con{max-width:1280px;margin:0 auto;padding:0 20px}
+.hidden{display:none!important}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:var(--r2);font-family:'Heebo',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;outline:none;transition:var(--tr);white-space:nowrap;text-decoration:none}
+.btn-p{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#070b14}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(212,175,55,.4)}
+.btn-s{background:transparent;border:1.5px solid var(--gold);color:var(--gold)}
+.btn-s:hover{background:rgba(212,175,55,.1)}
+.btn-g{background:rgba(255,255,255,.05);color:var(--t1);border:1px solid var(--bdr)}
+.btn-g:hover{background:rgba(255,255,255,.1)}
+.btn-d{background:var(--red);color:#fff}
+.btn-d:hover{background:#cc3333}
+.btn-ok{background:var(--green);color:#070b14}
+.btn-sm{padding:7px 14px;font-size:12px}
+.btn-lg{padding:14px 32px;font-size:16px}
+.btn-bl{width:100%;justify-content:center}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+
+/* FORMS */
+.fg{margin-bottom:16px}
+.fl{display:block;font-size:12px;font-weight:700;color:var(--t2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.fi,.fs,.fta{width:100%;padding:12px 15px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:var(--r1);color:var(--t1);font-family:'Heebo',sans-serif;font-size:14px;transition:var(--tr);outline:none;direction:rtl}
+.fi:focus,.fs:focus,.fta:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.12);background:rgba(255,255,255,.07)}
+.fta{resize:vertical;min-height:90px}
+.fs option{background:var(--bg2)}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r3);overflow:hidden;transition:var(--tr)}
+.card-hov:hover{background:var(--cardhov);border-color:var(--bdra);transform:translateY(-4px);box-shadow:var(--shg)}
+
+/* BADGES */
+.bdg{display:inline-block;padding:3px 10px;border-radius:50px;font-size:11px;font-weight:700;letter-spacing:.4px}
+.bdg-g{background:rgba(212,175,55,.15);color:var(--gold);border:1px solid rgba(212,175,55,.3)}
+.bdg-b{background:rgba(0,170,255,.15);color:var(--blue)}
+.bdg-ok{background:rgba(0,230,118,.15);color:var(--green)}
+.bdg-r{background:rgba(255,68,68,.15);color:var(--red)}
+.bdg-muted{background:rgba(255,255,255,.08);color:var(--t2)}
+
+/* HEADER */
+#hdr{position:fixed;top:0;right:0;left:0;z-index:1000;height:var(--hh);background:rgba(7,11,20,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);transition:var(--tr)}
+#hdr .con{height:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:9px;cursor:pointer;text-decoration:none}
+.logo-ic{width:38px;height:38px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#070b14;font-weight:900;flex-shrink:0}
+.logo-txt{font-size:20px;font-weight:900;color:var(--t1)}
+.logo-txt span{color:var(--gold)}
+.nav{display:flex;align-items:center;gap:4px}
+.nl{padding:7px 12px;border-radius:var(--r1);font-size:13px;font-weight:500;cursor:pointer;transition:var(--tr);color:var(--t2)}
+.nl:hover,.nl.act{color:var(--t1);background:rgba(255,255,255,.07)}
+.hdr-act{display:flex;align-items:center;gap:10px}
+.lang-sw{display:flex;gap:3px;background:rgba(255,255,255,.04);border-radius:var(--r1);padding:3px}
+.lang-btn{padding:4px 9px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;transition:var(--tr);color:var(--t2);border:none;background:none}
+.lang-btn.act{background:var(--gold);color:#070b14}
+.cart-ic{position:relative;width:40px;height:40px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:var(--r1);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:var(--tr)}
+.cart-ic:hover{background:rgba(212,175,55,.1);border-color:var(--gold)}
+.cart-ct{position:absolute;top:-5px;left:-5px;width:19px;height:19px;border-radius:50%;background:var(--gold);color:#070b14;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.umenu-btn{display:flex;align-items:center;gap:7px;padding:7px 12px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:var(--r1);cursor:pointer;font-size:13px;font-weight:500;transition:var(--tr)}
+.umenu-btn:hover{background:rgba(212,175,55,.1);border-color:var(--gold)}
+.mob-btn{display:none;background:none;border:none;cursor:pointer;color:var(--t1);font-size:20px;padding:6px}
+
+/* MOBILE NAV */
+#mob-nav{position:fixed;top:var(--hh);right:0;left:0;background:var(--glass);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:12px;z-index:999;transform:translateY(-110%);opacity:0;transition:var(--tr)}
+#mob-nav.open{transform:translateY(0);opacity:1}
+.mob-lnk{padding:11px 14px;border-radius:var(--r1);font-size:14px;cursor:pointer;transition:var(--tr)}
+.mob-lnk:hover{background:rgba(255,255,255,.07)}
+
+/* USER DROPDOWN */
+#udrop{display:none;position:fixed;top:72px;left:16px;background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r3);padding:10px;z-index:2000;min-width:200px;box-shadow:var(--sh3)}
+.udrop-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r1);font-size:13px;cursor:pointer;transition:var(--tr);color:var(--t2)}
+.udrop-item:hover{background:rgba(255,255,255,.06);color:var(--t1)}
+.udrop-item i{width:16px}
+
+/* PAGES */
+#pages{min-height:100vh;padding-top:var(--hh)}
+.pg{display:none}.pg.act{display:block}
+
+/* ====== LOGIN ====== */
+#lo{position:fixed;inset:0;z-index:9000;background:radial-gradient(ellipse at 30% 70%,#0d1a2e 0%,#070b14 70%);display:flex;align-items:center;justify-content:center;padding:20px}
+.lo-wrap{width:100%;max-width:440px}
+.lo-logo{text-align:center;margin-bottom:36px}
+.lo-big{font-size:44px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.lo-tag{color:var(--t2);font-size:13px;margin-top:8px}
+.lo-card{background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:var(--r4);padding:36px;backdrop-filter:blur(20px);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lo-tabs{display:flex;margin-bottom:28px;background:rgba(255,255,255,.03);border-radius:var(--r2);padding:4px;gap:4px}
+.lo-tab{flex:1;padding:9px;text-align:center;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;transition:var(--tr);color:var(--t2);border:none;background:none}
+.lo-tab.act{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#070b14}
+.lo-form{display:none}.lo-form.act{display:block}
+.demo-box{background:rgba(0,170,255,.07);border:1px solid rgba(0,170,255,.2);border-radius:var(--r1);padding:12px;margin-top:14px;font-size:12px;color:var(--t2);line-height:1.7}
+.demo-box strong{color:var(--blue)}
+.lo-link{font-size:12px;color:var(--gold);cursor:pointer}
+
+/* COOKIE */
+#ck-bar{position:fixed;bottom:0;right:0;left:0;z-index:8000;background:var(--glass);backdrop-filter:blur(20px);border-top:1px solid var(--bdr);padding:14px 20px;display:none;align-items:center;gap:16px;flex-wrap:wrap}
+
+/* TOAST */
+#toasts{position:fixed;top:80px;left:16px;z-index:99999;display:flex;flex-direction:column;gap:8px}
+.toast{padding:12px 18px;border-radius:var(--r2);font-size:13px;font-weight:600;box-shadow:var(--sh2);animation:tIn .3s ease;min-width:240px;max-width:320px}
+.toast-ok{background:rgba(0,230,118,.12);border:1px solid rgba(0,230,118,.3);color:var(--green)}
+.toast-er{background:rgba(255,68,68,.12);border:1px solid rgba(255,68,68,.3);color:var(--red)}
+.toast-in{background:rgba(0,170,255,.12);border:1px solid rgba(0,170,255,.3);color:var(--blue)}
+@keyframes tIn{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
+
+/* HERO */
+#hero{min-height:calc(100vh - var(--hh));display:flex;align-items:center;position:relative;overflow:hidden;padding:48px 0}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 40%,rgba(212,175,55,.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(0,170,255,.05) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;opacity:.025;background-image:linear-gradient(var(--gold) 1px,transparent 1px),linear-gradient(90deg,var(--gold) 1px,transparent 1px);background-size:60px 60px}
+.hero-inn{position:relative;z-index:1;width:100%}
+.hero-gr{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.hero-bdg{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);border-radius:50px;font-size:12px;font-weight:700;color:var(--gold);margin-bottom:18px}
+.hero-h1{margin-bottom:14px;line-height:1.1}
+.hl{background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:17px;color:var(--t2);margin-bottom:32px;line-height:1.65}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:28px;margin-top:44px;flex-wrap:wrap}
+.hs-num{font-size:26px;font-weight:900;color:var(--gold)}
+.hs-lbl{font-size:11px;color:var(--t2);margin-top:2px}
+.hero-vis{display:flex;justify-content:center;align-items:center;position:relative}
+.phone-mock{width:200px;height:400px;background:linear-gradient(135deg,#1a2a4a,#0d1526);border:2px solid var(--gold);border-radius:32px;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(212,175,55,.2),0 0 0 6px rgba(212,175,55,.05)}
+.fl-bdg{position:absolute;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--bdr);border-radius:var(--r2);padding:10px 14px;font-size:12px;font-weight:600;box-shadow:var(--sh2)}
+.fl-1{top:40px;right:-55px;color:var(--green)}
+.fl-2{bottom:60px;left:-65px;color:var(--blue)}
+
+/* SECTION HEADER */
+.sh{text-align:center;margin-bottom:44px}
+.sb{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.2);border-radius:50px;font-size:11px;font-weight:800;color:var(--gold);letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px}
+.s-sub{color:var(--t2);font-size:15px;margin-top:8px}
+
+/* CATEGORIES */
+.cats-gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.cat-c{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r3);padding:20px 12px;text-align:center;cursor:pointer;transition:var(--tr)}
+.cat-c:hover,.cat-c.act{border-color:var(--gold);background:rgba(212,175,55,.06);transform:translateY(-3px)}
+.cat-ic{font-size:28px;margin-bottom:8px;display:block}
+.cat-nm{font-size:13px;font-weight:600;margin-bottom:3px}
+.cat-ct{font-size:11px;color:var(--t3)}
+
+/* PRODUCTS */
+.prods-gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+.pcard{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r3);overflow:hidden;transition:var(--tr);cursor:pointer;position:relative}
+.pcard:hover{transform:translateY(-5px);border-color:var(--bdra);box-shadow:var(--shg)}
+.pimg{height:190px;overflow:hidden;position:relative;background:rgba(255,255,255,.02);display:flex;align-items:center;justify-content:center}
+.pimg img{width:100%;height:100%;object-fit:contain;padding:14px;transition:transform .5s}
+.pcard:hover .pimg img{transform:scale(1.06)}
+.pbdgs{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:5px}
+.oos-ov{position:absolute;inset:0;background:rgba(7,11,20,.75);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--red);gap:6px}
+.pbdy{padding:16px}
+.pcat{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
+.pnm{font-size:14px;font-weight:700;margin-bottom:10px;line-height:1.4;height:2.8em;overflow:hidden}
+.ppr{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.ppr-cur{font-size:18px;font-weight:900;color:var(--gold)}
+.ppr-old{font-size:13px;color:var(--t3);text-decoration:line-through}
+.pact{display:flex;gap:7px}
+.wl-btn{width:40px;height:40px;border-radius:var(--r1);background:rgba(255,255,255,.05);border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--tr);font-size:14px}
+.wl-btn:hover{color:var(--red);border-color:var(--red);background:rgba(255,68,68,.1)}
+
+/* TOOLBAR */
+.tb{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;gap:12px;flex-wrap:wrap}
+.srch{position:relative;flex:1;max-width:340px}
+.srch i{position:absolute;top:50%;right:13px;transform:translateY(-50%);color:var(--t3);font-size:13px}
+.srch-in{width:100%;padding:11px 40px 11px 14px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:var(--r2);color:var(--t1);font-family:'Heebo',sans-serif;font-size:13px;outline:none;transition:var(--tr)}
+.srch-in:focus{border-color:var(--gold);background:rgba(255,255,255,.07)}
+
+/* PRODUCT DETAIL */
+.pd-gr{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+.pgal{position:sticky;top:82px}
+.pgal-main{background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:var(--r4);padding:28px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;min-height:320px}
+.pgal-main img{max-width:100%;max-height:300px;object-fit:contain}
+.pgal-thumbs{display:flex;gap:10px}
+.pgal-th{width:64px;height:64px;background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:var(--r1);padding:6px;cursor:pointer;transition:var(--tr)}
+.pgal-th img{width:100%;height:100%;object-fit:contain}
+.pgal-th.act,.pgal-th:hover{border-color:var(--gold)}
+.price-box{background:rgba(212,175,55,.04);border:1px solid rgba(212,175,55,.2);border-radius:var(--r2);padding:18px;margin:18px 0}
+.qty-sel{display:flex;align-items:center;border:1px solid var(--bdr);border-radius:var(--r1);overflow:hidden;width:fit-content;margin:16px 0}
+.qty-b{width:40px;height:40px;background:rgba(255,255,255,.05);border:none;color:var(--t1);font-size:17px;cursor:pointer;transition:var(--tr)}
+.qty-b:hover{background:rgba(212,175,55,.1);color:var(--gold)}
+.qty-in{width:52px;height:40px;background:transparent;border:none;border-right:1px solid var(--bdr);border-left:1px solid var(--bdr);color:var(--t1);font-size:15px;font-weight:700;text-align:center}
+.tabs-nav{display:flex;border-bottom:1px solid var(--bdr);margin-bottom:20px}
+.tab-b{padding:11px 18px;font-size:13px;font-weight:600;cursor:pointer;color:var(--t3);border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:var(--tr)}
+.tab-b.act{color:var(--gold);border-bottom-color:var(--gold)}
+.tab-c{display:none;font-size:14px;line-height:1.75;color:var(--t2)}.tab-c.act{display:block}
+.bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--t3);margin-bottom:28px;flex-wrap:wrap}
+.bc-lnk{cursor:pointer}.bc-lnk:hover{color:var(--t1)}
+.bc-sep{opacity:.4}
+
+/* CART */
+#cart-ov{position:fixed;inset:0;z-index:7000;background:rgba(0,0,0,.65);backdrop-filter:blur(4px);display:none;opacity:0;transition:opacity .3s}
+#cart-ov.open{display:flex;opacity:1}
+#cart-sb{position:fixed;left:0;top:0;bottom:0;width:360px;background:var(--bg2);border-right:1px solid var(--bdr);display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .4s cubic-bezier(.4,0,.2,1);z-index:7001}
+#cart-ov.open #cart-sb{transform:translateX(0)}
+.cart-hdr{padding:20px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.cart-items{flex:1;overflow-y:auto;padding:14px}
+.ci{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--bdr)}
+.ci-img{width:60px;height:60px;background:rgba(255,255,255,.04);border-radius:var(--r1);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.ci-img img{width:100%;height:100%;object-fit:contain;padding:4px}
+.ci-nm{font-size:13px;font-weight:600;margin-bottom:4px}
+.ci-pr{font-size:14px;font-weight:900;color:var(--gold)}
+.ci-rm{color:var(--t3);cursor:pointer;font-size:13px;transition:var(--tr);padding:4px}
+.ci-rm:hover{color:var(--red)}
+.cart-ftr{padding:18px;border-top:1px solid var(--bdr)}
+.cart-tot{display:flex;justify-content:space-between;margin-bottom:14px;font-size:17px;font-weight:700}
+.cart-tot-amt{color:var(--gold)}
+.vat-note{font-size:11px;color:var(--t3)}
+
+/* MEMBERS */
+.mbrs-gr{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:44px}
+.mbr-c{padding:32px;border-radius:var(--r4);border:2px solid;transition:var(--tr)}
+.mbr-c:hover{transform:translateY(-4px)}
+.mbr-c.biz{border-color:rgba(0,170,255,.3);background:rgba(0,170,255,.04)}
+.mbr-c.priv{border-color:rgba(212,175,55,.3);background:rgba(212,175,55,.04)}
+.mbr-ic{font-size:44px;margin-bottom:14px}
+.mbr-ti{font-size:22px;font-weight:800;margin-bottom:8px}
+.mbr-ds{color:var(--t2);line-height:1.65;margin-bottom:18px;font-size:14px}
+.mbr-ul{list-style:none;margin-bottom:20px}
+.mbr-ul li{padding:5px 0;font-size:13px;color:var(--t2)}
+.mbr-ul li::before{content:'✓';color:var(--gold);font-weight:700;margin-left:7px}
+
+/* TRUST */
+.trust-gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px}
+.trust-c{text-align:center;padding:24px 16px}
+.trust-ic{font-size:36px;margin-bottom:10px}
+.trust-ti{font-weight:700;margin-bottom:5px;font-size:14px}
+.trust-ds{font-size:12px;color:var(--t3);line-height:1.5}
+
+/* FOOTER */
+#ftr{background:var(--bg2);border-top:1px solid var(--bdr);padding:56px 0 28px;margin-top:72px}
+.ftr-gr{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
+.ftr-brand .logo-txt{font-size:22px;margin-bottom:12px;display:block}
+.ftr-ds{font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:18px}
+.ftr-soc{display:flex;gap:8px}
+.soc-b{width:36px;height:36px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:var(--r1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--tr);font-size:14px}
+.soc-b:hover{background:rgba(212,175,55,.1);border-color:var(--gold);color:var(--gold)}
+.ftr-ti{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--gold);margin-bottom:14px}
+.ftr-lnks{display:flex;flex-direction:column;gap:7px}
+.ftr-lnk{font-size:13px;color:var(--t2);cursor:pointer;transition:var(--tr)}
+.ftr-lnk:hover{color:var(--t1)}
+.ftr-bot{border-top:1px solid var(--bdr);padding-top:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.ftr-cp{font-size:12px;color:var(--t3)}
+.pay-ic{height:20px;opacity:.7}
+
+/* ADMIN */
+#adm{position:fixed;inset:0;z-index:9500;background:var(--bg);display:none;flex-direction:row}
+#adm.open{display:flex}
+.adm-sb{width:250px;min-height:100vh;background:var(--bg2);border-left:1px solid var(--bdr);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+.adm-sb-hdr{padding:20px 16px;border-bottom:1px solid var(--bdr)}
+.adm-sb-logo{font-size:16px;font-weight:800}
+.adm-sb-role{font-size:11px;color:var(--t3);margin-top:3px}
+.adm-nav{padding:12px 8px;flex:1}
+.adm-nsec{font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;padding:0 6px;margin:14px 0 6px}
+.ani{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r1);font-size:13px;cursor:pointer;transition:var(--tr);color:var(--t2)}
+.ani:hover{background:rgba(255,255,255,.05);color:var(--t1)}
+.ani.act{background:rgba(212,175,55,.1);color:var(--gold)}
+.ani i{width:16px;font-size:13px}
+.adm-main{flex:1;overflow-y:auto;background:var(--bg)}
+.adm-topb{padding:14px 28px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;background:var(--bg2)}
+.adm-pg{display:none;padding:28px}.adm-pg.act{display:block}
+.adm-ph{margin-bottom:28px}
+.adm-ph-ti{font-size:22px;font-weight:800;margin-bottom:5px}
+.adm-ph-sub{font-size:13px;color:var(--t2)}
+.stats-gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px;margin-bottom:28px}
+.sc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r3);padding:20px}
+.sc-ic{width:44px;height:44px;border-radius:var(--r2);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
+.sc-num{font-size:26px;font-weight:900;margin-bottom:3px}
+.sc-lbl{font-size:12px;color:var(--t2)}
+.sc-tr{font-size:11px;color:var(--t3);margin-top:6px}
+.tbl-wrap{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r3);overflow:auto}
+table.dt{width:100%;border-collapse:collapse}
+table.dt th{padding:11px 14px;text-align:right;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--t3);border-bottom:1px solid var(--bdr);background:rgba(255,255,255,.02)}
+table.dt td{padding:13px 14px;font-size:13px;border-bottom:1px solid var(--bdr);vertical-align:middle}
+table.dt tr:last-child td{border-bottom:none}
+table.dt tr:hover td{background:rgba(255,255,255,.02)}
+
+/* MODAL */
+.mo{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
+.mo.open{display:flex}
+.mo-box{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r4);width:100%;max-width:580px;max-height:90vh;overflow-y:auto}
+.mo-hdr{padding:20px 24px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.mo-ti{font-size:17px;font-weight:700}
+.mo-cl{width:32px;height:32px;background:rgba(255,255,255,.05);border-radius:var(--r1);display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;color:var(--t1);font-size:14px;transition:var(--tr)}
+.mo-cl:hover{background:rgba(255,68,68,.1);color:var(--red)}
+.mo-bdy{padding:24px}
+.mo-ftr{padding:14px 24px;border-top:1px solid var(--bdr);display:flex;justify-content:flex-end;gap:10px}
+
+/* SWITCH */
+.sw{position:relative;display:inline-block;width:44px;height:24px}
+.sw input{opacity:0;width:0;height:0}
+.sl{position:absolute;inset:0;background:rgba(255,255,255,.1);border-radius:12px;cursor:pointer;transition:.3s}
+.sl::before{content:'';position:absolute;height:18px;width:18px;right:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}
+input:checked+.sl{background:var(--gold)}
+input:checked+.sl::before{transform:translateX(-20px)}
+
+/* LEGAL */
+.legal-c{font-size:13px;line-height:1.85;color:var(--t2)}
+.legal-c h3{color:var(--t1);font-size:15px;margin:18px 0 7px;font-weight:700}
+.legal-c p{margin-bottom:12px}
+.legal-c ul{padding-right:20px;margin-bottom:12px}
+.legal-c li{margin-bottom:5px}
+
+/* CHECKOUT */
+.co-gr{display:grid;grid-template-columns:1fr 360px;gap:36px;align-items:start}
+.co-sum{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r3);padding:24px;position:sticky;top:82px}
+
+/* ACCOUNT */
+.acc-tabs{display:flex;gap:4px;background:rgba(255,255,255,.03);border-radius:var(--r2);padding:4px;margin-bottom:28px}
+.acc-tab{flex:1;padding:9px;text-align:center;font-size:13px;font-weight:600;border-radius:var(--r1);cursor:pointer;transition:var(--tr);color:var(--t2);border:none;background:none}
+.acc-tab.act{background:rgba(212,175,55,.1);color:var(--gold)}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:52px 20px;color:var(--t2)}
+.empty i{font-size:44px;margin-bottom:14px;opacity:.25}
+.empty h3{font-size:17px;color:var(--t1);margin-bottom:7px}
+
+/* PROGRESS */
+.pbar{height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+.pfill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;transition:width .5s}
+
+/* SKELETON */
+.sk{background:linear-gradient(90deg,rgba(255,255,255,.05) 25%,rgba(255,255,255,.09) 50%,rgba(255,255,255,.05) 75%);background-size:200%;animation:shim 1.5s infinite;border-radius:var(--r1)}
+@keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.fup{animation:fadeUp .45s ease forwards}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .hero-gr{grid-template-columns:1fr}
+  .hero-vis{display:none}
+  .ftr-gr{grid-template-columns:1fr 1fr}
+  .pd-gr{grid-template-columns:1fr}.pgal{position:static}
+  .co-gr{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .nav{display:none}.mob-btn{display:block}
+  .prods-gr{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px}
+  .cats-gr{grid-template-columns:repeat(3,1fr)}
+  .ftr-gr{grid-template-columns:1fr;gap:28px}
+  .mbrs-gr{grid-template-columns:1fr}
+  #adm{flex-direction:column}
+  .adm-sb{width:100%;min-height:auto;border-left:none;border-bottom:1px solid var(--bdr)}
+  .adm-nav{display:flex;overflow-x:auto;flex-direction:row;padding:6px;gap:3px}
+  .adm-nsec{display:none}
+  .ani{white-space:nowrap;font-size:12px;padding:8px 10px}
+  .stats-gr{grid-template-columns:1fr 1fr}
+  #cart-sb{width:100%;right:0;left:0;transform:translateY(100%)}
+  #cart-ov.open #cart-sb{transform:translateY(0)}
+}
+@media(max-width:480px){
+  .prods-gr{grid-template-columns:repeat(2,1fr);gap:8px}
+  .cats-gr{grid-template-columns:repeat(3,1fr);gap:8px}
+  .lo-card{padding:24px 16px}
+  .hero-btns{flex-direction:column;width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- TOASTS -->
+<div id="toasts"></div>
+
+<!-- LOGIN OVERLAY -->
+<div id="lo">
+<div class="lo-wrap">
+  <div class="lo-logo">
+    <div class="lo-big">⚡ TechZone</div>
+    <p class="lo-tag">אביזרי סלולר מקצועיים · חברי מועדון בלבד</p>
+  </div>
+  <div class="lo-card">
+    <div class="lo-tabs">
+      <button class="lo-tab act" onclick="loTab('login')">כניסה לחנות</button>
+      <button class="lo-tab" onclick="loTab('register')">הרשמה למועדון</button>
+    </div>
+    <!-- LOGIN -->
+    <div class="lo-form act" id="lo-login">
+      <div class="fg"><label class="fl">שם משתמש / אימייל</label>
+        <input type="text" class="fi" id="lo-u" placeholder="הזן שם משתמש" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div class="fg"><label class="fl">סיסמה</label>
+        <input type="password" class="fi" id="lo-p" placeholder="הזן סיסמה" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+        <label style="display:flex;align-items:center;gap:7px;font-size:12px;cursor:pointer;color:var(--t2)">
+          <input type="checkbox" id="lo-rem"> זכור אותי
+        </label>
+        <span class="lo-link" onclick="showForgot()">שכחתי סיסמה?</span>
+      </div>
+      <button class="btn btn-p btn-bl btn-lg" onclick="doLogin()">
+        <i class="fas fa-sign-in-alt"></i> כניסה
+      </button>
+      <div class="demo-box">
+        <div><strong>🔑 משתמשי הדגמה:</strong></div>
+        <div>👑 מנהל: <strong>admin</strong> / <strong>Admin@123</strong></div>
+        <div>🏢 עסקי: <strong>biz@demo.com</strong> / <strong>Biz@123</strong></div>
+        <div>👤 פרטי: <strong>user@demo.com</strong> / <strong>User@123</strong></div>
+      </div>
+    </div>
+    <!-- REGISTER -->
+    <div class="lo-form" id="lo-register">
+      <div class="fg"><label class="fl">שם מלא *</label>
+        <input type="text" class="fi" id="rg-name" placeholder="שם ושם משפחה"></div>
+      <div class="fg"><label class="fl">אימייל *</label>
+        <input type="email" class="fi" id="rg-email" placeholder="your@email.com"></div>
+      <div class="fg"><label class="fl">סיסמה * (מינימום 8 תווים)</label>
+        <input type="password" class="fi" id="rg-pass" placeholder="לפחות 8 תווים"></div>
+      <div class="fg"><label class="fl">סוג חברות *</label>
+        <select class="fs" id="rg-type" onchange="toggleBizFields(this.value)">
+          <option value="private">👤 לקוח פרטי</option>
+          <option value="business">🏢 לקוח עסקי</option>
+        </select>
+      </div>
+      <div id="biz-fields" style="display:none">
+        <div class="fg"><label class="fl">שם עסק / חברה</label>
+          <input type="text" class="fi" id="rg-biz" placeholder="שם החברה"></div>
+        <div class="fg"><label class="fl">מספר ח.פ / ע.מ</label>
+          <input type="text" class="fi" id="rg-vat" placeholder="515XXXXXX"></div>
+      </div>
+      <div class="fg"><label class="fl">טלפון</label>
+        <input type="tel" class="fi" id="rg-phone" placeholder="05X-XXXXXXX"></div>
+      <p style="font-size:11px;color:var(--t3);margin-bottom:14px;line-height:1.6">
+        בלחיצה על "הרשמה" אתה מסכים ל<span class="lo-link" onclick="showLegal('terms')">תנאי השימוש</span>,
+        <span class="lo-link" onclick="showLegal('privacy')">מדיניות הפרטיות</span> ולקבלת עדכונים.
+      </p>
+      <button class="btn btn-p btn-bl btn-lg" onclick="doRegister()">
+        <i class="fas fa-user-plus"></i> הרשמה למועדון
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- COOKIE CONSENT -->
+<div id="ck-bar">
+  <div style="flex:1;font-size:12px;color:var(--t2)">
+    🍪 אנו משתמשים בעוגיות לשיפור חוויית הגלישה, ניתוח תנועה והתאמה אישית.
+    <span class="lo-link" onclick="showLegal('cookies')">מדיניות עוגיות</span>
+  </div>
+  <div style="display:flex;gap:8px;flex-shrink:0">
+    <button class="btn btn-g btn-sm" onclick="rejectCK()">הכרחי בלבד</button>
+    <button class="btn btn-p btn-sm" onclick="acceptCK()">אשר הכל</button>
+  </div>
+</div>
+
+<!-- MAIN SITE -->
+<div id="site" style="display:none">
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="con">
+    <div class="logo" onclick="go('home')">
+      <div class="logo-ic">⚡</div>
+      <div class="logo-txt">Tech<span>Zone</span></div>
+    </div>
+    <nav class="nav">
+      <span class="nl" onclick="go('home')">ראשי</span>
+      <span class="nl" onclick="go('products')">מוצרים</span>
+      <span class="nl" onclick="go('members')">חברי מועדון</span>
+      <span class="nl" onclick="go('about')">אודות</span>
+      <span class="nl" onclick="go('contact')">צור קשר</span>
+    </nav>
+    <div class="hdr-act">
+      <div class="lang-sw">
+        <button class="lang-btn act" onclick="setLang('he')">עב</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('yi')">יי</button>
+      </div>
+      <div class="cart-ic" onclick="openCart()" title="עגלת קניות">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="cart-ct" id="cart-ct" style="display:none">0</span>
+      </div>
+      <div class="umenu-btn" onclick="toggleUDrop()">
+        <i class="fas fa-user-circle" style="color:var(--gold)"></i>
+        <span id="hdr-name">משתמש</span>
+        <i class="fas fa-chevron-down" style="font-size:10px"></i>
+      </div>
+      <button class="mob-btn" onclick="toggleMobNav()"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- USER DROPDOWN -->
+<div id="udrop">
+  <div style="padding:10px 14px;border-bottom:1px solid var(--bdr);margin-bottom:6px">
+    <div style="font-weight:700;font-size:14px" id="ud-name">-</div>
+    <div style="font-size:11px;color:var(--t3)" id="ud-type">-</div>
+    <div style="font-size:11px;color:var(--t3);margin-top:2px" id="ud-email">-</div>
+  </div>
+  <div class="udrop-item" onclick="go('account');closeUDrop()"><i class="fas fa-user"></i>החשבון שלי</div>
+  <div class="udrop-item" onclick="showMyOrders();closeUDrop()"><i class="fas fa-box"></i>ההזמנות שלי</div>
+  <div id="adm-btn" style="display:none">
+    <div style="height:1px;background:var(--bdr);margin:6px 0"></div>
+    <div class="udrop-item" style="color:var(--gold)" onclick="openAdmin();closeUDrop()"><i class="fas fa-cog"></i>ניהול אתר</div>
+  </div>
+  <div style="height:1px;background:var(--bdr);margin:6px 0"></div>
+  <div class="udrop-item" style="color:var(--red)" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i>יציאה</div>
+</div>
+
+<!-- MOBILE NAV -->
+<div id="mob-nav">
+  <div class="mob-lnk" onclick="go('home');toggleMobNav()">🏠 ראשי</div>
+  <div class="mob-lnk" onclick="go('products');toggleMobNav()">📱 מוצרים</div>
+  <div class="mob-lnk" onclick="go('members');toggleMobNav()">⭐ חברי מועדון</div>
+  <div class="mob-lnk" onclick="go('about');toggleMobNav()">ℹ️ אודות</div>
+  <div class="mob-lnk" onclick="go('contact');toggleMobNav()">📞 צור קשר</div>
+  <div id="mob-adm" style="display:none" class="mob-lnk" style="color:var(--gold)" onclick="openAdmin();toggleMobNav()">⚙️ ניהול אתר</div>
+</div>
+
+<!-- PAGES -->
+<div id="pages">
+
+<!-- ===== HOME ===== -->
+<div class="pg act" id="pg-home">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-inn">
+      <div class="con">
+        <div class="hero-gr">
+          <div>
+            <div class="hero-bdg">
+              <i class="fas fa-star"></i>
+              <span>החנות המובילה לאביזרי סלולר בישראל</span>
+            </div>
+            <h1 class="hero-h1">
+              הטכנולוגיה<br>
+              <span class="hl">של מחר</span><br>
+              היום
+            </h1>
+            <p class="hero-sub">אביזרי סלולר מקצועיים מהמובילים בעולם — מחירים בלעדיים לחברי מועדון. עסקי ופרטי.</p>
+            <div class="hero-btns">
+              <button class="btn btn-p btn-lg" onclick="go('products')">
+                <i class="fas fa-shopping-bag"></i> קנה עכשיו
+              </button>
+              <button class="btn btn-s btn-lg" onclick="go('members')">
+                <i class="fas fa-crown"></i> הצטרף למועדון
+              </button>
+            </div>
+            <div class="hero-stats">
+              <div><div class="hs-num">5,000+</div><div class="hs-lbl">מוצרים</div></div>
+              <div><div class="hs-num">50K+</div><div class="hs-lbl">לקוחות</div></div>
+              <div><div class="hs-num">98%</div><div class="hs-lbl">שביעות רצון</div></div>
+              <div><div class="hs-num">24/7</div><div class="hs-lbl">תמיכה</div></div>
+            </div>
+          </div>
+          <div class="hero-vis">
+            <div style="position:relative">
+              <div class="phone-mock">
+                <div style="padding:22px 14px">
+                  <div style="text-align:center;color:var(--gold);font-size:28px;margin:16px 0">⚡</div>
+                  <div style="font-size:16px;font-weight:800;text-align:center;margin-bottom:14px">TechZone</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+                    <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:11px;text-align:center;font-size:22px">🎧</div>
+                    <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:11px;text-align:center;font-size:22px">🔊</div>
+                    <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:11px;text-align:center;font-size:22px">🔌</div>
+                    <div style="background:rgba(212,175,55,.1);border-radius:10px;padding:11px;text-align:center;font-size:22px;border:1px solid rgba(212,175,55,.3)">📱</div>
+                  </div>
+                  <div style="margin-top:14px;background:rgba(212,175,55,.1);border-radius:10px;padding:11px;font-size:12px;text-align:center;color:var(--gold);border:1px solid rgba(212,175,55,.2)">🛒 מחיר מועדון מיוחד!</div>
+                </div>
+              </div>
+              <div class="fl-bdg fl-1"><i class="fas fa-check"></i> משלוח חינם</div>
+              <div class="fl-bdg fl-2"><i class="fas fa-shield-alt"></i> אחריות 2 שנה</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section style="padding:56px 0">
+    <div class="con">
+      <div class="sh">
+        <div class="sb">קטגוריות</div>
+        <h2>כל מה שצריך</h2>
+        <p class="s-sub">מבחר עשיר של אביזרי סלולר מהמובילים בעולם</p>
+      </div>
+      <div class="cats-gr" id="home-cats"></div>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS -->
+  <section style="padding:20px 0 72px">
+    <div class="con">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:14px">
+        <div>
+          <div class="sb" style="display:inline-flex">🔥 מבצעים</div>
+          <h2 style="margin-top:8px">מוצרים מומלצים</h2>
+        </div>
+        <button class="btn btn-s" onclick="go('products')">כל המוצרים <i class="fas fa-arrow-left"></i></button>
+      </div>
+      <div class="prods-gr" id="feat-prods"></div>
+    </div>
+  </section>
+
+  <!-- MEMBERS -->
+  <section style="padding:72px 0;background:linear-gradient(135deg,rgba(212,175,55,.04) 0%,rgba(0,170,255,.03) 100%)">
+    <div class="con">
+      <div class="sh">
+        <div class="sb">חברות מועדון</div>
+        <h2>בחר את סוג החברות שלך</h2>
+        <p class="s-sub">מחירים ומוצרים שונים לכל סוג לקוח</p>
+      </div>
+      <div class="mbrs-gr">
+        <div class="mbr-c biz">
+          <div class="mbr-ic">🏢</div>
+          <div class="mbr-ti">לקוח עסקי</div>
+          <div class="mbr-ds">מחירי סיטונאי בלעדיים לעסקים וחברות עם מספר ח.פ/ע.מ תקין</div>
+          <ul class="mbr-ul">
+            <li>מחירים 15-40% נמוכים ממחיר קמעונאי</li>
+            <li>רכישה בכמויות גדולות</li>
+            <li>חשבונית מס מלאה כחוק</li>
+            <li>אשראי עסקי עד 30 יום</li>
+            <li>נציג מכירות אישי</li>
+            <li>משלוח חינם על כל הזמנה</li>
+          </ul>
+          <button class="btn btn-s btn-bl" onclick="loTab('register');document.getElementById('rg-type').value='business';toggleBizFields('business')">פתח חשבון עסקי</button>
+        </div>
+        <div class="mbr-c priv">
+          <div class="mbr-ic">👤</div>
+          <div class="mbr-ti">לקוח פרטי</div>
+          <div class="mbr-ds">מחירי מועדון VIP עם הטבות בלעדיות לאנשים פרטיים</div>
+          <ul class="mbr-ul">
+            <li>מחירי מועדון מיוחדים</li>
+            <li>1 נקודה לכל ₪1 שרכשת</li>
+            <li>10% הנחה ביום הולדת</li>
+            <li>גישה ראשונה למבצעים</li>
+            <li>משלוח חינם מ-200₪</li>
+            <li>14 ימי החזרה ללא שאלות</li>
+          </ul>
+          <button class="btn btn-p btn-bl" onclick="loTab('register')">הצטרף חינם</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section style="padding:60px 0">
+    <div class="con">
+      <div class="trust-gr">
+        <div class="trust-c"><div class="trust-ic">🚚</div><div class="trust-ti">משלוח מהיר</div><div class="trust-ds">עד 3 ימי עסקים לכל הארץ</div></div>
+        <div class="trust-c"><div class="trust-ic">🛡️</div><div class="trust-ti">אחריות מלאה</div><div class="trust-ds">12-24 חודשים על כל המוצרים</div></div>
+        <div class="trust-c"><div class="trust-ic">🔄</div><div class="trust-ti">החזרות קלות</div><div class="trust-ds">14 ימים להחזרה ללא שאלות</div></div>
+        <div class="trust-c"><div class="trust-ic">🔒</div><div class="trust-ti">תשלום מאובטח</div><div class="trust-ds">SSL · PCI DSS · 3D Secure</div></div>
+        <div class="trust-c"><div class="trust-ic">💬</div><div class="trust-ti">תמיכה 24/7</div><div class="trust-ds">צ'אט · טלפון · אימייל</div></div>
+        <div class="trust-c"><div class="trust-ic">✅</div><div class="trust-ti">מוצרים מקוריים</div><div class="trust-ds">ישירות מהיצרנים המובילים</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PRODUCTS PAGE ===== -->
+<div class="pg" id="pg-products">
+  <div style="padding:36px 0 72px">
+    <div class="con">
+      <div class="sh" style="text-align:right;margin-bottom:28px">
+        <h2>🛍️ כל המוצרים</h2>
+        <p class="s-sub">מחירים מיוחדים לחברי מועדון</p>
+      </div>
+      <!-- Category filter -->
+      <div class="cats-gr" id="prod-cats" style="margin-bottom:28px"></div>
+      <!-- Toolbar -->
+      <div class="tb">
+        <div class="srch"><i class="fas fa-search"></i>
+          <input type="text" class="srch-in" placeholder="חפש מוצר..." id="prod-srch" oninput="filterProds()">
+        </div>
+        <select class="fi" style="width:auto;padding:10px 14px" id="prod-sort" onchange="filterProds()">
+          <option value="">מומלצים</option>
+          <option value="pa">מחיר: נמוך לגבוה</option>
+          <option value="pd">מחיר: גבוה לנמוך</option>
+          <option value="nm">שם: א-ת</option>
+        </select>
+        <div style="font-size:12px;color:var(--t3)" id="prod-cnt"></div>
+      </div>
+      <div class="prods-gr" id="prods-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PRODUCT DETAIL ===== -->
+<div class="pg" id="pg-detail">
+  <div style="padding:36px 0 72px">
+    <div class="con">
+      <div class="bc" id="pd-bc"></div>
+      <div class="pd-gr" id="pd-main"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHECKOUT ===== -->
+<div class="pg" id="pg-checkout">
+  <div style="padding:36px 0 72px">
+    <div class="con">
+      <h2 style="margin-bottom:28px">🛒 סיכום הזמנה</h2>
+      <div class="co-gr" id="co-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ACCOUNT ===== -->
+<div class="pg" id="pg-account">
+  <div style="padding:36px 0 72px">
+    <div class="con">
+      <h2 style="margin-bottom:22px">👤 החשבון שלי</h2>
+      <div class="acc-tabs">
+        <button class="acc-tab act" onclick="accTab(this,'det')">פרטים אישיים</button>
+        <button class="acc-tab" onclick="accTab(this,'ord')">הזמנות</button>
+        <button class="acc-tab" onclick="accTab(this,'sec')">אבטחה</button>
+      </div>
+      <div id="acc-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MEMBERS PAGE ===== -->
+<div class="pg" id="pg-members">
+  <div style="padding:60px 0 72px">
+    <div class="con">
+      <div class="sh">
+        <div class="sb">חברות מועדון</div>
+        <h2>הצטרף למשפחת TechZone</h2>
+      </div>
+      <div class="mbrs-gr">
+        <div class="mbr-c biz">
+          <div class="mbr-ic">🏢</div>
+          <div class="mbr-ti">לקוח עסקי B2B</div>
+          <div class="mbr-ds">פתרונות מלאים לעסקים, חברות וארגונים. מחירים מיוחדים, הזמנות גדולות, ליווי אישי.</div>
+          <ul class="mbr-ul">
+            <li>מחירים 15-40% נמוכים ממחיר קמעונאי</li>
+            <li>רכישה בכמויות מ-5 יחידות</li>
+            <li>חשבונית מס ע"פ חוק ישראלי</li>
+            <li>תנאי תשלום נדיבים</li>
+            <li>מנהל חשבון ייעודי</li>
+            <li>משלוח חינם על כל הזמנה</li>
+            <li>הצעות מחיר מותאמות</li>
+          </ul>
+          <button class="btn btn-s btn-bl btn-lg" onclick="loTab('register')">פתח חשבון עסקי</button>
+        </div>
+        <div class="mbr-c priv">
+          <div class="mbr-ic">👤</div>
+          <div class="mbr-ti">לקוח פרטי VIP</div>
+          <div class="mbr-ds">חוויית קנייה פרמיום עם הטבות בלעדיות לאנשים פרטיים.</div>
+          <ul class="mbr-ul">
+            <li>מחירי מועדון מיוחדים</li>
+            <li>צבירת נקודות נאמנות</li>
+            <li>10% הנחה בחודש הולדת</li>
+            <li>גישה ראשונה למבצעים</li>
+            <li>משלוח חינם מ-200₪</li>
+            <li>14 ימי החזרה ללא שאלות</li>
+            <li>תמיכה בעדיפות גבוהה</li>
+          </ul>
+          <button class="btn btn-p btn-bl btn-lg" onclick="loTab('register')">הצטרף חינם</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<div class="pg" id="pg-about">
+  <div style="padding:60px 0 72px">
+    <div class="con">
+      <div class="sh">
+        <div class="sb">אודותינו</div>
+        <h2>הסיפור שלנו</h2>
+      </div>
+      <div style="max-width:680px;margin:0 auto;text-align:center">
+        <p style="font-size:17px;line-height:1.85;color:var(--t2);margin-bottom:20px">
+          TechZone נוסדה ב-2015 מתוך אהבה לטכנולוגיה ורצון לספק לישראלים גישה לאביזרי סלולר איכותיים במחירים הוגנים.
+        </p>
+        <p style="font-size:14px;line-height:1.8;color:var(--t2);margin-bottom:36px">
+          אנו עובדים ישירות עם יצרנים מובילים בעולם ומביאים לכם מוצרים מקוריים עם אחריות מלאה. מועדון הלקוחות שלנו כולל למעלה מ-50,000 חברים פעילים.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px">
+          <div class="card" style="padding:24px;text-align:center">
+            <div style="font-size:32px;margin-bottom:8px">🏆</div>
+            <div style="font-size:22px;font-weight:900;color:var(--gold)">9+</div>
+            <div style="font-size:12px;color:var(--t3);margin-top:4px">שנות ניסיון</div>
+          </div>
+          <div class="card" style="padding:24px;text-align:center">
+            <div style="font-size:32px;margin-bottom:8px">👥</div>
+            <div style="font-size:22px;font-weight:900;color:var(--gold)">50K+</div>
+            <div style="font-size:12px;color:var(--t3);margin-top:4px">לקוחות מרוצים</div>
+          </div>
+          <div class="card" style="padding:24px;text-align:center">
+            <div style="font-size:32px;margin-bottom:8px">📦</div>
+            <div style="font-size:22px;font-weight:900;color:var(--gold)">5K+</div>
+            <div style="font-size:12px;color:var(--t3);margin-top:4px">מוצרים במלאי</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONTACT ===== -->
+<div class="pg" id="pg-contact">
+  <div style="padding:60px 0 72px">
+    <div class="con">
+      <div class="sh"><div class="sb">צור קשר</div><h2>אנחנו כאן בשבילך</h2></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:860px;margin:0 auto">
+        <div>
+          <div class="card" style="padding:24px;margin-bottom:14px">
+            <div style="font-size:26px;margin-bottom:8px">📞</div>
+            <div style="font-weight:700;margin-bottom:3px">טלפון</div>
+            <div style="color:var(--gold);font-size:17px">03-1234567</div>
+            <div style="font-size:12px;color:var(--t3);margin-top:3px">א׳-ה׳ 9:00-18:00</div>
+          </div>
+          <div class="card" style="padding:24px;margin-bottom:14px">
+            <div style="font-size:26px;margin-bottom:8px">📧</div>
+            <div style="font-weight:700;margin-bottom:3px">אימייל</div>
+            <div style="color:var(--gold)">info@techzone.co.il</div>
+          </div>
+          <div class="card" style="padding:24px;margin-bottom:14px">
+            <div style="font-size:26px;margin-bottom:8px">💬</div>
+            <div style="font-weight:700;margin-bottom:3px">WhatsApp</div>
+            <div style="color:var(--green)">050-1234567</div>
+          </div>
+          <div class="card" style="padding:24px">
+            <div style="font-size:26px;margin-bottom:8px">📍</div>
+            <div style="font-weight:700;margin-bottom:3px">כתובת</div>
+            <div style="color:var(--t2);font-size:13px">רחוב הטכנולוגיה 5, תל אביב<br>מיקוד: 6100000</div>
+          </div>
+        </div>
+        <div class="card" style="padding:24px">
+          <h3 style="margin-bottom:18px">שלח הודעה</h3>
+          <div class="fg"><label class="fl">שם מלא</label><input type="text" class="fi" id="ct-name" placeholder="שם ושם משפחה"></div>
+          <div class="fg"><label class="fl">אימייל</label><input type="email" class="fi" id="ct-email" placeholder="your@email.com"></div>
+          <div class="fg"><label class="fl">נושא</label>
+            <select class="fs" id="ct-subject">
+              <option>שאלה כללית</option>
+              <option>תמיכה טכנית</option>
+              <option>החזרת מוצר</option>
+              <option>שאלה על הזמנה</option>
+              <option>פתיחת חשבון עסקי</option>
+            </select>
+          </div>
+          <div class="fg"><label class="fl">הודעה</label><textarea class="fta" id="ct-msg" placeholder="כתוב הודעתך כאן..."></textarea></div>
+          <button class="btn btn-p btn-bl" onclick="sendContact()"><i class="fas fa-paper-plane"></i> שלח הודעה</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /pages -->
+
+<!-- FOOTER -->
+<footer id="ftr">
+  <div class="con">
+    <div class="ftr-gr">
+      <div class="ftr-brand">
+        <span class="logo-txt">⚡ Tech<span>Zone</span></span>
+        <p class="ftr-ds">החנות המובילה לאביזרי סלולר בישראל. מוצרים מקוריים עם אחריות, מחירים מיוחדים לחברי מועדון ומשלוח מהיר לכל הארץ.</p>
+        <div class="ftr-soc">
+          <div class="soc-b" title="Facebook" onclick="window.open('https://facebook.com','_blank')"><i class="fab fa-facebook-f"></i></div>
+          <div class="soc-b" title="Instagram" onclick="window.open('https://instagram.com','_blank')"><i class="fab fa-instagram"></i></div>
+          <div class="soc-b" title="WhatsApp" onclick="window.open('https://wa.me/9720501234567','_blank')"><i class="fab fa-whatsapp"></i></div>
+          <div class="soc-b" title="TikTok"><i class="fab fa-tiktok"></i></div>
+          <div class="soc-b" title="YouTube"><i class="fab fa-youtube"></i></div>
+        </div>
+      </div>
+      <div>
+        <div class="ftr-ti">קטגוריות</div>
+        <div class="ftr-lnks">
+          <span class="ftr-lnk" onclick="filterCat('earphones')">🎧 אוזניות</span>
+          <span class="ftr-lnk" onclick="filterCat('speakers')">🔊 רמקולים</span>
+          <span class="ftr-lnk" onclick="filterCat('chargers')">🔌 מטענים</span>
+          <span class="ftr-lnk" onclick="filterCat('powerbanks')">🔋 מטענים ניידים</span>
+          <span class="ftr-lnk" onclick="filterCat('cables')">🪢 כבלים</span>
+          <span class="ftr-lnk" onclick="filterCat('phones')">📱 טלפונים</span>
+        </div>
+      </div>
+      <div>
+        <div class="ftr-ti">חשבון</div>
+        <div class="ftr-lnks">
+          <span class="ftr-lnk" onclick="go('account')">החשבון שלי</span>
+          <span class="ftr-lnk" onclick="showMyOrders()">ההזמנות שלי</span>
+          <span class="ftr-lnk" onclick="go('members')">חברות מועדון</span>
+          <span class="ftr-lnk" onclick="openCart()">עגלת קניות</span>
+        </div>
+      </div>
+      <div>
+        <div class="ftr-ti">מידע</div>
+        <div class="ftr-lnks">
+          <span class="ftr-lnk" onclick="go('about')">אודותנו</span>
+          <span class="ftr-lnk" onclick="go('contact')">צור קשר</span>
+          <span class="ftr-lnk" onclick="showLegal('shipping')">מדיניות משלוחים</span>
+          <span class="ftr-lnk" onclick="showLegal('returns')">מדיניות החזרות</span>
+          <span class="ftr-lnk" onclick="showLegal('terms')">תנאי שימוש</span>
+          <span class="ftr-lnk" onclick="showLegal('privacy')">מדיניות פרטיות</span>
+          <span class="ftr-lnk" onclick="showLegal('accessibility')">נגישות</span>
+        </div>
+      </div>
+    </div>
+    <div class="ftr-bot">
+      <div class="ftr-cp">© 2024 TechZone בע"מ · ח.פ 515234567 · כל הזכויות שמורות<br>
+        <span style="font-size:11px">כל המחירים כוללים מע"מ · 14 ימי החזרה · נגיש לכל</span></div>
+      <div style="font-size:11px;color:var(--t3)">
+        🔒 SSL מאובטח · PCI DSS Level 1 · ISO 27001
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;font-size:20px">
+        💳 🅿️ 📱
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /site -->
+
+<!-- CART OVERLAY -->
+<div id="cart-ov" onclick="if(event.target===this)closeCart()">
+  <div id="cart-sb">
+    <div class="cart-hdr">
+      <h3>🛒 עגלת קניות</h3>
+      <button class="mo-cl" onclick="closeCart()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cart-list"></div>
+    <div class="cart-ftr">
+      <div class="cart-tot">
+        <span>סה"כ לתשלום:</span>
+        <span class="cart-tot-amt" id="cart-total">₪0</span>
+      </div>
+      <div class="vat-note">מחיר כולל מע"מ 18%</div>
+      <button class="btn btn-p btn-bl btn-lg" style="margin-top:12px" onclick="gotoCheckout()">
+        <i class="fas fa-lock"></i> המשך לתשלום
+      </button>
+      <button class="btn btn-g btn-bl btn-sm" style="margin-top:8px" onclick="closeCart();go('products')">
+        המשך לקנות
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- =================== ADMIN PANEL =================== -->
+<div id="adm">
+  <div class="adm-sb">
+    <div class="adm-sb-hdr">
+      <div class="adm-sb-logo">⚙️ ניהול TechZone</div>
+      <div class="adm-sb-role" id="adm-role">מנהל ראשי</div>
+    </div>
+    <nav class="adm-nav">
+      <div class="adm-nsec">ראשי</div>
+      <div class="ani act" onclick="admPg('dash')"><i class="fas fa-chart-line"></i>לוח בקרה</div>
+      <div class="adm-nsec">ניהול תוכן</div>
+      <div class="ani" onclick="admPg('prods')"><i class="fas fa-box"></i>מוצרים</div>
+      <div class="ani" onclick="admPg('cats')"><i class="fas fa-tags"></i>קטגוריות</div>
+      <div class="adm-nsec">לקוחות</div>
+      <div class="ani" onclick="admPg('users')"><i class="fas fa-users"></i>משתמשים</div>
+      <div class="ani" onclick="admPg('orders')"><i class="fas fa-shopping-cart"></i>הזמנות</div>
+      <div class="adm-nsec" id="adm-adv-sec">ניהול מתקדם</div>
+      <div class="ani" id="adm-mgr-nav" onclick="admPg('mgrs')"><i class="fas fa-user-tie"></i>מנהלים</div>
+      <div class="ani" id="adm-perm-nav" onclick="admPg('perms')"><i class="fas fa-shield-alt"></i>הרשאות</div>
+      <div class="adm-nsec">הגדרות</div>
+      <div class="ani" onclick="admPg('sett')"><i class="fas fa-cog"></i>הגדרות כלליות</div>
+      <div class="ani" onclick="admPg('seo')"><i class="fas fa-search"></i>SEO</div>
+      <div class="ani" onclick="admPg('integ')"><i class="fas fa-plug"></i>אינטגרציות</div>
+      <div class="ani" onclick="admPg('legal')"><i class="fas fa-gavel"></i>מסמכים משפטיים</div>
+    </nav>
+    <div style="padding:12px 8px;border-top:1px solid var(--bdr)">
+      <div class="ani" style="color:var(--blue)" onclick="closeAdmin()"><i class="fas fa-store"></i>חזור לחנות</div>
+      <div class="ani" style="color:var(--red)" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i>יציאה</div>
+    </div>
+  </div>
+
+  <div class="adm-main">
+    <div class="adm-topb">
+      <div style="font-size:15px;font-weight:700" id="adm-pg-title">לוח בקרה</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:12px;color:var(--t3)" id="adm-time"></span>
+        <span class="bdg bdg-g" id="adm-ubdg">Admin</span>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="adm-pg act" id="adm-dash">
+      <div class="adm-ph"><div class="adm-ph-ti">לוח בקרה</div><div class="adm-ph-sub">סקירה כללית של פעילות החנות</div></div>
+      <div class="stats-gr" id="dash-stats"></div>
+      <div style="display:grid;grid-template-columns:3fr 2fr;gap:22px;flex-wrap:wrap">
+        <div><h3 style="margin-bottom:14px;font-size:15px">הזמנות אחרונות</h3>
+          <div class="tbl-wrap" id="dash-orders"></div>
+        </div>
+        <div><h3 style="margin-bottom:14px;font-size:15px">מוצרים מובילים</h3>
+          <div class="card" style="padding:16px" id="dash-top-prods"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="adm-pg" id="adm-prods">
+      <div class="adm-ph"><div class="adm-ph-ti">ניהול מוצרים</div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:12px">
+        <button class="btn btn-p btn-sm" onclick="openProdModal()"><i class="fas fa-plus"></i>הוסף מוצר</button>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <div class="srch" style="max-width:220px"><i class="fas fa-search"></i>
+            <input type="text" class="srch-in" placeholder="חפש מוצר..." oninput="admSrchProds(this.value)">
+          </div>
+          <select class="fi" style="width:auto;padding:9px 12px;font-size:12px" id="adm-cat-filter" onchange="admFilterCat(this.value)">
+            <option value="">כל הקטגוריות</option>
+          </select>
+        </div>
+      </div>
+      <div class="tbl-wrap"><table class="dt"><thead><tr>
+        <th>תמונה</th><th>שם מוצר</th><th>קטגוריה</th>
+        <th>מחיר פרטי</th><th>מחיר עסקי</th><th>מלאי</th><th>פעיל</th><th>פעולות</th>
+      </tr></thead><tbody id="adm-prods-tb"></tbody></table></div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="adm-pg" id="adm-cats">
+      <div class="adm-ph"><div class="adm-ph-ti">ניהול קטגוריות</div></div>
+      <div style="margin-bottom:16px">
+        <button class="btn btn-p btn-sm" onclick="openCatModal()"><i class="fas fa-plus"></i>הוסף קטגוריה</button>
+      </div>
+      <div class="tbl-wrap"><table class="dt"><thead><tr>
+        <th>אייקון</th><th>שם עברית</th><th>שם אנגלית</th><th>מוצרים</th><th>פעיל</th><th>פעולות</th>
+      </tr></thead><tbody id="adm-cats-tb"></tbody></table></div>
+    </div>
+
+    <!-- USERS -->
+    <div class="adm-pg" id="adm-users">
+      <div class="adm-ph"><div class="adm-ph-ti">ניהול משתמשים</div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:12px">
+        <button class="btn btn-p btn-sm" onclick="openUserModal()"><i class="fas fa-plus"></i>הוסף משתמש</button>
+        <div style="display:flex;gap:10px">
+          <div class="srch" style="max-width:200px"><i class="fas fa-search"></i>
+            <input type="text" class="srch-in" placeholder="חפש..." oninput="admSrchUsers(this.value)">
+          </div>
+          <select class="fi" style="width:auto;padding:9px 12px;font-size:12px" onchange="admFilterUsers(this.value)">
+            <option value="">כל הסוגים</option>
+            <option value="private">פרטי</option>
+            <option value="business">עסקי</option>
+            <option value="manager">מנהל</option>
+          </select>
+        </div>
+      </div>
+      <div class="tbl-wrap"><table class="dt"><thead><tr>
+        <th>שם</th><th>אימייל</th><th>סוג</th><th>הצטרף</th><th>הזמנות</th><th>סטטוס</th><th>פעולות</th>
+      </tr></thead><tbody id="adm-users-tb"></tbody></table></div>
+    </div>
+
+    <!-- ORDERS -->
+    <div class="adm-pg" id="adm-orders">
+      <div class="adm-ph"><div class="adm-ph-ti">ניהול הזמנות</div></div>
+      <div class="tbl-wrap"><table class="dt"><thead><tr>
+        <th>#</th><th>לקוח</th><th>פריטים</th><th>סכום</th><th>תאריך</th><th>סטטוס</th><th>פעולות</th>
+      </tr></thead><tbody id="adm-orders-tb"></tbody></table></div>
+    </div>
+
+    <!-- MANAGERS -->
+    <div class="adm-pg" id="adm-mgrs">
+      <div class="adm-ph"><div class="adm-ph-ti">ניהול מנהלים</div></div>
+      <div style="margin-bottom:16px">
+        <button class="btn btn-p btn-sm" onclick="openMgrModal()"><i class="fas fa-plus"></i>הוסף מנהל</button>
+      </div>
+      <div class="tbl-wrap"><table class="dt"><thead><tr>
+        <th>שם</th><th>אימייל</th><th>תפקיד</th><th>הרשאות</th><th>סטטוס</th><th>פעולות</th>
+      </tr></thead><tbody id="adm-mgrs-tb"></tbody></table></div>
+    </div>
+
+    <!-- PERMISSIONS -->
+    <div class="adm-pg" id="adm-perms">
+      <div class="adm-ph"><div class="adm-ph-ti">ניהול הרשאות</div><div class="adm-ph-sub">הגדר הרשאות לכל מנהל</div></div>
+      <div id="perms-content"></div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="adm-pg" id="adm-sett">
+      <div class="adm-ph"><div class="adm-ph-ti">הגדרות כלליות</div></div>
+      <div id="sett-content"></div>
+    </div>
+
+    <!-- SEO -->
+    <div class="adm-pg" id="adm-seo">
+      <div class="adm-ph"><div class="adm-ph-ti">הגדרות SEO</div></div>
+      <div id="seo-content"></div>
+    </div>
+
+    <!-- INTEGRATIONS -->
+    <div class="adm-pg" id="adm-integ">
+      <div class="adm-ph"><div class="adm-ph-ti">אינטגרציות חיצוניות</div></div>
+      <div id="integ-content"></div>
+    </div>
+
+    <!-- LEGAL ADMIN -->
+    <div class="adm-pg" id="adm-legal">
+      <div class="adm-ph"><div class="adm-ph-ti">מסמכים משפטיים</div></div>
+      <div id="legal-adm-content"></div>
+    </div>
+
+  </div>
+</div><!-- /admin -->
+
+<!-- ===== MODALS ===== -->
+
+<!-- Product Modal -->
+<div class="mo" id="mo-prod">
+  <div class="mo-box" style="max-width:660px">
+    <div class="mo-hdr"><div class="mo-ti" id="mo-prod-ti">הוסף מוצר</div>
+      <button class="mo-cl" onclick="closeMo('mo-prod')"><i class="fas fa-times"></i></button></div>
+    <div class="mo-bdy">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="fg" style="grid-column:1/-1"><label class="fl">שם מוצר עברית *</label>
+          <input type="text" class="fi" id="pm-he" placeholder="שם המוצר בעברית"></div>
+        <div class="fg"><label class="fl">שם מוצר אנגלית</label>
+          <input type="text" class="fi" id="pm-en" placeholder="English name"></div>
+        <div class="fg"><label class="fl">שם יידיש</label>
+          <input type="text" class="fi" id="pm-yi" placeholder="יידיש נאמען"></div>
+        <div class="fg"><label class="fl">קטגוריה</label><select class="fs" id="pm-cat"></select></div>
+        <div class="fg"><label class="fl">כמות במלאי</label>
+          <input type="number" class="fi" id="pm-stock" placeholder="0" min="0"></div>
+        <div class="fg" style="grid-column:1/-1"><label class="fl">תיאור מוצר</label>
+          <textarea class="fta" id="pm-desc" placeholder="תיאור המוצר..."></textarea></div>
+        <div class="fg"><label class="fl">מחיר לפרטי (₪) *</label>
+          <input type="number" class="fi" id="pm-pp" placeholder="0" min="0"></div>
+        <div class="fg"><label class="fl">מחיר לעסקי (₪) *</label>
+          <input type="number" class="fi" id="pm-pb" placeholder="0" min="0"></div>
+        <div class="fg"><label class="fl">מחיר מבצע פרטי (₪)</label>
+          <input type="number" class="fi" id="pm-sp" placeholder="0 = ללא מבצע" min="0"></div>
+        <div class="fg"><label class="fl">מחיר מבצע עסקי (₪)</label>
+          <input type="number" class="fi" id="pm-sb" placeholder="0 = ללא מבצע" min="0"></div>
+        <div class="fg" style="grid-column:1/-1"><label class="fl">URL תמונה ראשית</label>
+          <input type="text" class="fi" id="pm-img" placeholder="https://images.unsplash.com/...">
+          <div style="font-size:11px;color:var(--t3);margin-top:4px">הזן URL לתמונה מאתר תמונות כגון Unsplash או העלה לאחסון משלך</div>
+        </div>
+        <div class="fg" style="display:flex;align-items:center;gap:10px">
+          <label class="sw"><input type="checkbox" id="pm-feat"><span class="sl"></span></label>
+          <span style="font-size:13px">מוצר מומלץ</span>
+        </div>
+        <div class="fg" style="display:flex;align-items:center;gap:10px">
+          <label class="sw"><input type="checkbox" id="pm-act" checked><span class="sl"></span></label>
+          <span style="font-size:13px">מוצר פעיל</span>
+        </div>
+      </div>
+    </div>
+    <div class="mo-ftr">
+      <button class="btn btn-g" onclick="closeMo('mo-prod')">ביטול</button>
+      <button class="btn btn-p" onclick="saveProd()"><i class="fas fa-save"></i>שמור מוצר</button>
+    </div>
+  </div>
+</div>
+
+<!-- User Modal -->
+<div class="mo" id="mo-user">
+  <div class="mo-box">
+    <div class="mo-hdr"><div class="mo-ti" id="mo-user-ti">הוסף משתמש</div>
+      <button class="mo-cl" onclick="closeMo('mo-user')"><i class="fas fa-times"></i></button></div>
+    <div class="mo-bdy">
+      <div class="fg"><label class="fl">שם מלא *</label><input type="text" class="fi" id="um-name"></div>
+      <div class="fg"><label class="fl">אימייל *</label><input type="email" class="fi" id="um-email"></div>
+      <div class="fg"><label class="fl">סיסמה *</label><input type="password" class="fi" id="um-pass" placeholder="השאר ריק לאי שינוי"></div>
+      <div class="fg"><label class="fl">סוג לקוח</label>
+        <select class="fs" id="um-type">
+          <option value="private">👤 לקוח פרטי</option>
+          <option value="business">🏢 לקוח עסקי</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">טלפון</label><input type="tel" class="fi" id="um-phone"></div>
+      <div class="fg" style="display:flex;align-items:center;gap:10px">
+        <label class="sw"><input type="checkbox" id="um-act" checked><span class="sl"></span></label>
+        <span style="font-size:13px">חשבון פעיל</span>
+      </div>
+    </div>
+    <div class="mo-ftr">
+      <button class="btn btn-g" onclick="closeMo('mo-user')">ביטול</button>
+      <button class="btn btn-p" onclick="saveUser()">שמור</button>
+    </div>
+  </div>
+</div>
+
+<!-- Manager Modal -->
+<div class="mo" id="mo-mgr">
+  <div class="mo-box" style="max-width:640px">
+    <div class="mo-hdr"><div class="mo-ti" id="mo-mgr-ti">הוסף מנהל</div>
+      <button class="mo-cl" onclick="closeMo('mo-mgr')"><i class="fas fa-times"></i></button></div>
+    <div class="mo-bdy">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="fg"><label class="fl">שם מלא *</label><input type="text" class="fi" id="mm-name"></div>
+        <div class="fg"><label class="fl">אימייל *</label><input type="email" class="fi" id="mm-email"></div>
+        <div class="fg"><label class="fl">סיסמה *</label><input type="password" class="fi" id="mm-pass"></div>
+        <div class="fg"><label class="fl">תפקיד</label><input type="text" class="fi" id="mm-role" placeholder="מנהל מכירות..."></div>
+      </div>
+      <div class="fg" style="margin-top:8px">
+        <label class="fl" style="margin-bottom:12px">הרשאות</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" id="mgr-perms"></div>
+      </div>
+    </div>
+    <div class="mo-ftr">
+      <button class="btn btn-g" onclick="closeMo('mo-mgr')">ביטול</button>
+      <button class="btn btn-p" onclick="saveMgr()">שמור מנהל</button>
+    </div>
+  </div>
+</div>
+
+<!-- Category Modal -->
+<div class="mo" id="mo-cat">
+  <div class="mo-box" style="max-width:480px">
+    <div class="mo-hdr"><div class="mo-ti" id="mo-cat-ti">הוסף קטגוריה</div>
+      <button class="mo-cl" onclick="closeMo('mo-cat')"><i class="fas fa-times"></i></button></div>
+    <div class="mo-bdy">
+      <div class="fg"><label class="fl">מזהה (ID) *</label><input type="text" class="fi" id="cat-id" placeholder="earphones"></div>
+      <div class="fg"><label class="fl">שם עברית *</label><input type="text" class="fi" id="cat-he" placeholder="אוזניות"></div>
+      <div class="fg"><label class="fl">שם אנגלית</label><input type="text" class="fi" id="cat-en" placeholder="Earphones"></div>
+      <div class="fg"><label class="fl">שם יידיש</label><input type="text" class="fi" id="cat-yi"></div>
+      <div class="fg"><label class="fl">אייקון (emoji)</label><input type="text" class="fi" id="cat-ic" placeholder="🎧"></div>
+    </div>
+    <div class="mo-ftr">
+      <button class="btn btn-g" onclick="closeMo('mo-cat')">ביטול</button>
+      <button class="btn btn-p" onclick="saveCat()">שמור</button>
+    </div>
+  </div>
+</div>
+
+<!-- Legal Modal -->
+<div class="mo" id="mo-legal">
+  <div class="mo-box" style="max-width:680px">
+    <div class="mo-hdr"><div class="mo-ti" id="mo-legal-ti">מסמך</div>
+      <button class="mo-cl" onclick="closeMo('mo-legal')"><i class="fas fa-times"></i></button></div>
+    <div class="mo-bdy"><div class="legal-c" id="mo-legal-body"></div></div>
+    <div class="mo-ftr"><button class="btn btn-p" onclick="closeMo('mo-legal')">הבנתי</button></div>
+  </div>
+</div>
+
+<!-- Order Success Modal -->
+<div class="mo" id="mo-success">
+  <div class="mo-box" style="max-width:420px">
+    <div class="mo-bdy" style="text-align:center;padding:44px">
+      <div style="font-size:60px;margin-bottom:16px">✅</div>
+      <h2 style="margin-bottom:10px;color:var(--green)">ההזמנה בוצעה!</h2>
+      <p style="color:var(--t2);margin-bottom:10px" id="success-num">מספר הזמנה: #TZ-000000</p>
+      <p style="font-size:13px;color:var(--t3);margin-bottom:28px">אישור נשלח לאימייל שלך</p>
+      <button class="btn btn-p btn-bl" onclick="closeMo('mo-success');go('home')">המשך לקניות</button>
+      <button class="btn btn-g btn-bl" style="margin-top:8px" onclick="closeMo('mo-success');showMyOrders()">ההזמנות שלי</button>
+    </div>
+  </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div class="mo" id="mo-forgot">
+  <div class="mo-box" style="max-width:420px">
+    <div class="mo-hdr"><div class="mo-ti">שכחתי סיסמה</div>
+      <button class="mo-cl" onclick="closeMo('mo-forgot')"><i class="fas fa-times"></i></button></div>
+    <div class="mo-bdy">
+      <p style="color:var(--t2);font-size:13px;margin-bottom:18px">הזן את האימייל שלך ונשלח לך קישור לאיפוס הסיסמה</p>
+      <div class="fg"><label class="fl">אימייל</label>
+        <input type="email" class="fi" id="forgot-email" placeholder="your@email.com"></div>
+    </div>
+    <div class="mo-ftr">
+      <button class="btn btn-g" onclick="closeMo('mo-forgot')">ביטול</button>
+      <button class="btn btn-p" onclick="sendForgot()"><i class="fas fa-paper-plane"></i>שלח קישור</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== JAVASCRIPT ===================== -->
+<script>
+// =========================================================
+// TECHZONE FULL APP — All logic in one file
+// =========================================================
+
+// ===== DEFAULT DATA =====
+const DEF_CATS = [
+  {id:'earphones',he:'אוזניות',en:'Earphones',yi:'קאָפּגאַרניטורן',ic:'🎧',act:true},
+  {id:'speakers',he:'רמקולים',en:'Speakers',yi:'רעדנערס',ic:'🔊',act:true},
+  {id:'chargers',he:'מטענים',en:'Chargers',yi:'לאַדערס',ic:'🔌',act:true},
+  {id:'powerbanks',he:'מטענים ניידים',en:'Power Banks',yi:'קראַפֿט בענק',ic:'🔋',act:true},
+  {id:'cables',he:'כבלים',en:'Cables',yi:'קאַבלס',ic:'🪢',act:true},
+  {id:'phones',he:'טלפונים',en:'Phones',yi:'טעלעפֿאָנען',ic:'📱',act:true},
+  {id:'cases',he:'מגנים',en:'Cases',yi:'קעסטלעך',ic:'🛡️',act:true},
+  {id:'accessories',he:'אביזרים',en:'Accessories',yi:'צוגאָב',ic:'✨',act:true},
+];
+
+const DEF_PRODS = [
+  {id:1,he:'אוזניות אלחוטיות Pro Max',en:'Pro Max Wireless Earbuds',yi:'Pro Max קאָפּגאַרניטורן',cat:'earphones',desc:'אוזניות אלחוטיות True Wireless עם ביטול רעש אקטיבי מתקדם, סאונד Hi-Fi, עמידות מים IPX5 ואוטונומיה של 24 שעות. חוויית האזנה מושלמת לכל יום.',pp:299,pb:249,sp:249,sb:199,stock:45,feat:true,act:true,img:'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&q=80'},
+  {id:2,he:'רמקול Bluetooth פורטטיבי Ultra',en:'Ultra Portable Bluetooth Speaker',yi:'Ultra פּאָרטאַטיוו בלועטוט רעדנער',cat:'speakers',desc:'רמקול אלחוטי 360° עמיד למים IP67 עם סאונד עוצמתי, אוטונומיה של 20 שעות ועיצוב קומפקטי. מושלם לחוץ ופנים.',pp:399,pb:319,sp:349,sb:0,stock:32,feat:true,act:true,img:'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80'},
+  {id:3,he:'מטען מהיר 65W GaN Pro',en:'65W GaN Pro Fast Charger',yi:'65W GaN Pro שנעל לאַדער',cat:'chargers',desc:'מטען GaN קומפקטי 65W עם 3 יציאות (USB-C × 2 + USB-A). טעינה מהירה PD3.0 לטלפון, מחשב נייד וטאבלט בו זמנית.',pp:189,pb:149,sp:0,sb:0,stock:78,feat:true,act:true,img:'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&q=80'},
+  {id:4,he:'מטען נייד 20000mAh Slim',en:'20000mAh Slim Power Bank',yi:'20000mAh Slim קראַפֿט בענק',cat:'powerbanks',desc:'מטען נייד קיבולת גדולה 20,000mAh עם טעינה מהירה דו-כיוונית 22.5W. טעין את הטלפון 5-6 פעמים. עיצוב פרמיום.',pp:249,pb:199,sp:219,sb:179,stock:55,feat:true,act:true,img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500&q=80'},
+  {id:5,he:'כבל מגנטי 3 ב-1 Ultra',en:'3-in-1 Magnetic Cable Ultra',yi:'3-אין-1 מאַגנעטיש קאַבל',cat:'cables',desc:'כבל מגנטי איכותי עם 3 ראשים: Lightning, USB-C, Micro-USB. תומך בטעינה מהירה 100W ונתונים 480Mbps.',pp:89,pb:69,sp:75,sb:0,stock:120,feat:false,act:true,img:'https://images.unsplash.com/photo-1601524909162-ae8725290836?w=500&q=80'},
+  {id:6,he:'iPhone 15 Pro Max 256GB',en:'iPhone 15 Pro Max 256GB',yi:'iPhone 15 Pro Max 256GB',cat:'phones',desc:'הדגל של אפל — מסך 6.7" Super Retina XDR ProMotion, שבב A17 Pro, מערכת מצלמות 48MP מקצועית, טיטניום פרמיום.',pp:5999,pb:5499,sp:0,sb:0,stock:12,feat:true,act:true,img:'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=500&q=80'},
+  {id:7,he:'Samsung Galaxy S24 Ultra',en:'Samsung Galaxy S24 Ultra',yi:'Samsung Galaxy S24 Ultra',cat:'phones',desc:'הדגל של סמסונג עם S-Pen משולב, מסך Dynamic AMOLED 6.8", מצלמה 200MP, AI מובנה וסוללה 5000mAh.',pp:5499,pb:4999,sp:4999,sb:4499,stock:18,feat:true,act:true,img:'https://images.unsplash.com/photo-1610945264803-c22b62831a29?w=500&q=80'},
+  {id:8,he:'מגן MagSafe סיליקון',en:'MagSafe Silicone Case',yi:'MagSafe סיליקאָן מגן',cat:'cases',desc:'מגן סיליקון איכותי עם תמיכה MagSafe מלאה. הגנה ב-4 פינות, ציפוי נגד שריטות ועיצוב אלגנטי.',pp:79,pb:59,sp:0,sb:0,stock:200,feat:false,act:true,img:'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=500&q=80'},
+  {id:9,he:'מחזיק טלפון לרכב מגנטי Pro',en:'Magnetic Car Phone Holder Pro',yi:'מאַגנעטיש אויטאָ האַלטער',cat:'accessories',desc:'מחזיק טלפון לרכב עם מגנט N52 חזק ומנגנון שחרור בלחיצה. מתאים לכל גדלי המסכים, גם עם מגן.',pp:79,pb:59,sp:69,sb:49,stock:85,feat:false,act:true,img:'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&q=80'},
+  {id:10,he:'אוזניות Gaming RGB Pro',en:'RGB Gaming Headset Pro',yi:'RGB גיימינג קאָפּגאַרניטורן',cat:'earphones',desc:'אוזניות גיימינג מקצועיות עם תאורת RGB, מיקרופון כיוון בדיוק גבוה, סאונד היקפי 7.1 וכריות זיכרון.',pp:349,pb:279,sp:299,sb:239,stock:28,feat:false,act:true,img:'https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=500&q=80'},
+  {id:11,he:'כבל Lightning MFi 2m',en:'MFi Lightning Cable 2m',yi:'MFi Lightning קאַבל 2m',cat:'cables',desc:'כבל Lightning מאושר Apple MFi באורך 2 מטר. טעינה מהירה עד 20W, שכבת ניילון עמידה.',pp:59,pb:44,sp:0,sb:0,stock:0,feat:false,act:true,img:'https://images.unsplash.com/photo-1601524909162-ae8725290836?w=500&q=80'},
+  {id:12,he:'מטען אלחוטי 15W Qi2',en:'15W Qi2 Wireless Charger',yi:'15W Qi2 קאָלאָזלאָז לאַדער',cat:'chargers',desc:'מטען אלחוטי Qi2 מוסמך עם עוצמה מקסימלית 15W. תואם לאייפון, סמסונג וכל מכשיר Qi. עיצוב פרמיום.',pp:149,pb:119,sp:129,sb:99,stock:67,feat:false,act:true,img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500&q=80'},
+  {id:13,he:'שעון חכם Sport Pro',en:'Sport Pro Smartwatch',yi:'ספּאָרט פּראָ קלוג זייגער',cat:'accessories',desc:'שעון חכם עם GPS, מדידת דופק 24/7, SpO2, 100+ מצבי ספורט ועמידות מים 5ATM. סוללה 10 ימים.',pp:799,pb:649,sp:699,sb:549,stock:22,feat:true,act:true,img:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80'},
+  {id:14,he:'אוזניות On-Ear Studio',en:'Studio On-Ear Headphones',yi:'סטודיאָ On-Ear קאָפּגאַרניטורן',cat:'earphones',desc:'אוזניות Over-Ear מקצועיות עם בידוד רעש פסיבי, דרייברים 40mm, צליל שטוח ומדויק. מושלם לסטודיו.',pp:449,pb:369,sp:0,sb:0,stock:15,feat:false,act:true,img:'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80'},
+];
+
+const DEF_USERS = [
+  {id:1,un:'admin',name:'מנהל ראשי',email:'admin@techzone.co.il',pass:'Admin@123',type:'superadmin',perms:['all'],act:true,joined:'2024-01-01',orders:[]},
+  {id:2,un:'manager1',name:'מנהל מכירות',email:'manager@techzone.co.il',pass:'Manager@123',type:'manager',role:'מנהל מכירות',perms:['products','orders','users_view','pricing'],act:true,joined:'2024-01-15',orders:[]},
+  {id:3,un:'biz@demo.com',name:'TechCorp בע"מ',email:'biz@demo.com',pass:'Biz@123',type:'business',bizName:'TechCorp Ltd',vat:'515123456',phone:'03-9876543',act:true,joined:'2024-02-01',orders:['ORD-001']},
+  {id:4,un:'user@demo.com',name:'ישראל ישראלי',email:'user@demo.com',pass:'User@123',type:'private',phone:'050-1234567',act:true,joined:'2024-02-10',orders:[]},
+  {id:5,un:'stockmgr',name:'מנהל מלאי',email:'stock@techzone.co.il',pass:'Stock@123',type:'manager',role:'מנהל מלאי',perms:['products','inventory'],act:true,joined:'2024-03-01',orders:[]},
+];
+
+const DEF_ORDERS = [
+  {id:'ORD-001',uid:3,cname:'TechCorp בע"מ',items:[{id:1,nm:'אוזניות Pro Max',qty:5,pr:199},{id:3,nm:'מטען 65W',qty:5,pr:149}],total:1740,date:'2024-11-20',status:'delivered'},
+  {id:'ORD-002',uid:4,cname:'ישראל ישראלי',items:[{id:2,nm:'רמקול Bluetooth',qty:1,pr:349}],total:349,date:'2024-11-22',status:'shipped'},
+  {id:'ORD-003',uid:3,cname:'TechCorp בע"מ',items:[{id:6,nm:'iPhone 15 Pro Max',qty:2,pr:5499},{id:4,nm:'מטען נייד',qty:2,pr:179}],total:11356,date:'2024-11-25',status:'processing'},
+  {id:'ORD-004',uid:4,cname:'ישראל ישראלי',items:[{id:9,nm:'מחזיק לרכב',qty:1,pr:69}],total:69,date:'2024-11-28',status:'pending'},
+];
+
+const ALL_PERMS = [
+  {id:'products',lbl:'ניהול מוצרים',ic:'fas fa-box'},
+  {id:'inventory',lbl:'ניהול מלאי',ic:'fas fa-warehouse'},
+  {id:'orders',lbl:'ניהול הזמנות',ic:'fas fa-shopping-cart'},
+  {id:'users_view',lbl:'צפייה בלקוחות',ic:'fas fa-users'},
+  {id:'users_manage',lbl:'ניהול לקוחות',ic:'fas fa-user-cog'},
+  {id:'pricing',lbl:'שינוי מחירים',ic:'fas fa-tag'},
+  {id:'banners',lbl:'ניהול באנרים',ic:'fas fa-image'},
+  {id:'reports',lbl:'דוחות',ic:'fas fa-chart-bar'},
+  {id:'settings',lbl:'הגדרות אתר',ic:'fas fa-cog'},
+  {id:'legal',lbl:'מסמכים משפטיים',ic:'fas fa-gavel'},
+];
+
+// ===== APP STATE =====
+let S = {
+  lang:'he', user:null, cart:[], page:'home',
+  cat:'', srch:'', editPId:null, editUId:null, editMId:null,
+  prods:[], users:[], orders:[], cats:[],
+  cfg:{name:'TechZone',tag:'אביזרי סלולר מקצועיים',email:'info@techzone.co.il',phone:'03-1234567',addr:'רחוב הטכנולוגיה 5, תל אביב',vat:18,shipPriv:200,shipBiz:0,ga:'',fb:'',maps:'',wa:'972501234567'}
+};
+
+// ===== INIT =====
+function init(){
+  loadData(); checkSession(); updateCartCt();
+  setInterval(updTime,30000); updTime();
+  document.addEventListener('click',e=>{
+    const dd=document.getElementById('udrop');
+    const btn=document.querySelector('.umenu-btn');
+    if(dd&&dd.style.display!=='none'&&btn&&!btn.contains(e.target)&&!dd.contains(e.target))dd.style.display='none';
+  });
+  if(!localStorage.getItem('tz_ck'))setTimeout(()=>{document.getElementById('ck-bar').style.display='flex';},2000);
+}
+
+function loadData(){
+  const p=localStorage.getItem('tz_p'),u=localStorage.getItem('tz_u'),
+        o=localStorage.getItem('tz_o'),c=localStorage.getItem('tz_c'),cf=localStorage.getItem('tz_cf');
+  S.prods=p?JSON.parse(p):[...DEF_PRODS];
+  S.users=u?JSON.parse(u):[...DEF_USERS];
+  S.orders=o?JSON.parse(o):[...DEF_ORDERS];
+  S.cats=c?JSON.parse(c):[...DEF_CATS];
+  if(cf)S.cfg={...S.cfg,...JSON.parse(cf)};
+  if(!p)save();
+}
+
+function save(){
+  localStorage.setItem('tz_p',JSON.stringify(S.prods));
+  localStorage.setItem('tz_u',JSON.stringify(S.users));
+  localStorage.setItem('tz_o',JSON.stringify(S.orders));
+  localStorage.setItem('tz_c',JSON.stringify(S.cats));
+  localStorage.setItem('tz_cf',JSON.stringify(S.cfg));
+}
+
+function updTime(){
+  const el=document.getElementById('adm-time');
+  if(el){const n=new Date();el.textContent=n.toLocaleDateString('he-IL')+' '+n.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});}
+}
+
+// ===== AUTH =====
+function checkSession(){
+  const s=localStorage.getItem('tz_ses');
+  if(s){const u=JSON.parse(s);const found=S.users.find(x=>x.id===u.id);
+    if(found&&found.act){S.user=found;showSite();return;}}
+  showLogin();
+}
+
+function showLogin(){document.getElementById('lo').style.display='flex';document.getElementById('site').style.display='none';}
+function showSite(){
+  document.getElementById('lo').style.display='none';document.getElementById('site').style.display='block';
+  setupHdr();renderHome();
+}
+
+function setupHdr(){
+  const u=S.user;
+  document.getElementById('hdr-name').textContent=u.name.split(' ')[0];
+  document.getElementById('ud-name').textContent=u.name;
+  document.getElementById('ud-email').textContent=u.email;
+  const tmap={superadmin:'👑 מנהל ראשי',manager:'⚙️ מנהל',business:'🏢 לקוח עסקי',private:'👤 לקוח פרטי'};
+  document.getElementById('ud-type').textContent=tmap[u.type]||u.type;
+  if(u.type==='superadmin'||u.type==='manager'){
+    document.getElementById('adm-btn').style.display='block';
+    document.getElementById('mob-adm').style.display='block';
+    document.getElementById('adm-ubdg').textContent=u.type==='superadmin'?'Super Admin':'Manager';
+  }
+  document.getElementById('adm-role').textContent=u.type==='superadmin'?'מנהל ראשי':u.type==='manager'?`מנהל — ${u.name}`:u.name;
+  if(u.type!=='superadmin'){
+    document.getElementById('adm-adv-sec').style.display='none';
+    document.getElementById('adm-mgr-nav').style.display='none';
+    document.getElementById('adm-perm-nav').style.display='none';
+  }
+}
+
+function doLogin(){
+  const u=document.getElementById('lo-u').value.trim();
+  const p=document.getElementById('lo-p').value;
+  if(!u||!p){toast('נא למלא שם משתמש וסיסמה','er');return;}
+  const found=S.users.find(x=>(x.un===u||x.email===u)&&x.pass===p);
+  if(!found){toast('שם משתמש או סיסמה שגויים','er');return;}
+  if(!found.act){toast('החשבון מושהה. צור קשר עם תמיכה','er');return;}
+  S.user=found;localStorage.setItem('tz_ses',JSON.stringify({id:found.id}));
+  showSite();toast(`ברוך הבא, ${found.name.split(' ')[0]}! 👋`,'ok');
+}
+
+function doLogout(){
+  S.user=null;S.cart=[];localStorage.removeItem('tz_ses');
+  document.getElementById('adm').classList.remove('open');
+  document.getElementById('udrop').style.display='none';
+  showLogin();toast('התנתקת בהצלחה','in');
+}
+
+function doRegister(){
+  const name=document.getElementById('rg-name').value.trim();
+  const email=document.getElementById('rg-email').value.trim();
+  const pass=document.getElementById('rg-pass').value;
+  const type=document.getElementById('rg-type').value;
+  if(!name||!email||!pass){toast('נא למלא את כל השדות המסומנים *','er');return;}
+  if(pass.length<8){toast('הסיסמה חייבת להכיל לפחות 8 תווים','er');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){toast('כתובת אימייל לא תקינה','er');return;}
+  if(S.users.find(u=>u.email===email)){toast('האימייל כבר רשום במערכת','er');return;}
+  const nu={id:Date.now(),un:email,name,email,pass,type,
+    bizName:type==='business'?document.getElementById('rg-biz').value:'',
+    vat:type==='business'?document.getElementById('rg-vat').value:'',
+    phone:document.getElementById('rg-phone').value,
+    act:true,joined:new Date().toISOString().split('T')[0],orders:[]};
+  S.users.push(nu);save();S.user=nu;localStorage.setItem('tz_ses',JSON.stringify({id:nu.id}));
+  showSite();toast(`ברוך הבא למועדון TechZone! 🎉`,'ok');
+}
+
+function loTab(t){
+  document.querySelectorAll('.lo-tab').forEach((e,i)=>e.classList.toggle('act',i===(t==='login'?0:1)));
+  document.getElementById('lo-login').classList.toggle('act',t==='login');
+  document.getElementById('lo-register').classList.toggle('act',t==='register');
+}
+
+function toggleBizFields(v){document.getElementById('biz-fields').style.display=v==='business'?'block':'none';}
+function toggleUDrop(){const d=document.getElementById('udrop');d.style.display=d.style.display==='none'?'block':'none';}
+function closeUDrop(){document.getElementById('udrop').style.display='none';}
+function toggleMobNav(){document.getElementById('mob-nav').classList.toggle('open');}
+function showForgot(){document.getElementById('lo').style.display='none';openMo('mo-forgot');}
+function sendForgot(){toast('קישור לאיפוס סיסמה נשלח לאימייל שלך 📧','ok');closeMo('mo-forgot');document.getElementById('lo').style.display='flex';}
+
+// ===== NAVIGATION =====
+function go(pg){
+  S.page=pg;
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('act'));
+  document.querySelectorAll('.nl').forEach(n=>n.classList.remove('act'));
+  const el=document.getElementById('pg-'+pg);if(el)el.classList.add('act');
+  const ni=['home','products','members','about','contact'].indexOf(pg);
+  if(ni>=0)document.querySelectorAll('.nl')[ni]?.classList.add('act');
+  if(pg==='home')renderHome();
+  else if(pg==='products')renderProds();
+  else if(pg==='account')renderAcc();
+  closeUDrop();window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function filterCat(cat){S.cat=cat;go('products');}
+
+function showMyOrders(){go('account');setTimeout(()=>{
+  document.querySelectorAll('.acc-tab').forEach(t=>t.classList.remove('act'));
+  document.querySelectorAll('.acc-tab')[1].classList.add('act');
+  renderAccTab('ord');},50);}
+
+// ===== LANGUAGE =====
+function setLang(l){
+  S.lang=l;
+  document.querySelectorAll('.lang-btn').forEach((b,i)=>{b.classList.toggle('act',['he','en','yi'][i]===l);});
+  if(l!=='he')document.documentElement.setAttribute('lang',l);
+  else document.documentElement.setAttribute('lang','he');
+  renderHome();if(S.page!=='home')renderProds();
+  toast({he:'שפה: עברית',en:'Language: English',yi:'שפראַך: יידיש'}[l],'in');
+}
+
+function tx(p){
+  const T={catName:(c)=>c[S.lang==='he'?'he':S.lang==='en'?'en':'yi']||c.he,
+    prodName:(p)=>p[S.lang==='he'?'he':S.lang==='en'?'en':'yi']||p.he,
+    addCart:{he:'הוסף לעגלה',en:'Add to Cart',yi:'לייג צו וואָגן'},
+    oos:{he:'אזל מהמלאי',en:'Out of Stock',yi:'אויסגעגאַנגען'},
+    pricePriv:{he:'מחיר פרטי',en:'Private Price',yi:'פּריוואַטע פּרייז'},
+    priceBiz:{he:'מחיר עסקי',en:'Business Price',yi:'ביזנעס פּרייז'},
+  };return T[p]||'';}
+
+// ===== HOME =====
+function renderHome(){
+  renderCatsGrid('home-cats',true);renderFeatured();
+}
+
+function catName(c){return c[S.lang==='en'?'en':S.lang==='yi'?'yi':'he']||c.he;}
+function prodName(p){return p[S.lang==='en'?'en':S.lang==='yi'?'yi':'he']||p.he;}
+
+function renderCatsGrid(elId,allBtn=false){
+  const el=document.getElementById(elId);if(!el)return;
+  const cats=S.cats.filter(c=>c.act);
+  let html='';
+  if(allBtn)html+=`<div class="cat-c${S.cat===''?' act':''}" onclick="filterCat('')"><span class="cat-ic">🌟</span><div class="cat-nm">הכל</div><div class="cat-ct">${S.prods.length} מוצרים</div></div>`;
+  html+=cats.map(c=>{
+    const cnt=S.prods.filter(p=>p.cat===c.id&&p.act).length;
+    return `<div class="cat-c${S.cat===c.id?' act':''}" onclick="filterCat('${c.id}')">
+      <span class="cat-ic">${c.ic}</span>
+      <div class="cat-nm">${catName(c)}</div>
+      <div class="cat-ct">${cnt} מוצרים</div>
+    </div>`;
+  }).join('');
+  el.innerHTML=html;
+}
+
+function renderFeatured(){
+  const el=document.getElementById('feat-prods');if(!el)return;
+  const feat=S.prods.filter(p=>p.feat&&p.act).slice(0,8);
+  el.innerHTML=feat.map(p=>prodCard(p)).join('');
+}
+
+// ===== PRODUCTS =====
+function renderProds(){
+  renderCatsGrid('prod-cats',false);
+  filterProds();
+}
+
+function filterProds(){
+  const srch=(document.getElementById('prod-srch')?.value||'').toLowerCase();
+  const sort=document.getElementById('prod-sort')?.value||'';
+  const isBiz=S.user?.type==='business';
+  let list=S.prods.filter(p=>p.act);
+  if(S.cat)list=list.filter(p=>p.cat===S.cat);
+  if(srch)list=list.filter(p=>p.he.toLowerCase().includes(srch)||p.en.toLowerCase().includes(srch)||(p.desc||'').toLowerCase().includes(srch));
+  if(sort==='pa')list.sort((a,b)=>getP(a,isBiz)-getP(b,isBiz));
+  else if(sort==='pd')list.sort((a,b)=>getP(b,isBiz)-getP(a,isBiz));
+  else if(sort==='nm')list.sort((a,b)=>a.he.localeCompare(b.he));
+  const cnt=document.getElementById('prod-cnt');
+  if(cnt)cnt.textContent=`${list.length} מוצרים`;
+  const el=document.getElementById('prods-grid');
+  if(!el)return;
+  if(list.length===0){el.innerHTML='<div class="empty" style="grid-column:1/-1"><i class="fas fa-search"></i><h3>לא נמצאו מוצרים</h3><p>נסה לשנות את מסנן החיפוש</p></div>';return;}
+  el.innerHTML=list.map(p=>prodCard(p)).join('');
+}
+
+function getP(p,isBiz){return isBiz?(p.sb||p.pb):(p.sp||p.pp);}
+
+function prodCard(p){
+  const isBiz=S.user?.type==='business';
+  const pr=isBiz?p.pb:p.pp;const sale=isBiz?p.sb:p.sp;
+  const hasSale=sale&&sale>0;const disc=hasSale?Math.round((1-sale/pr)*100):0;
+  const cat=S.cats.find(c=>c.id===p.cat);const oos=p.stock===0;
+  return `<div class="pcard fup" onclick="openProd(${p.id})">
+    <div class="pimg">
+      <img src="${p.img||''}" alt="${p.he}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/111e35/D4AF37?text=📱'">
+      <div class="pbdgs">
+        ${hasSale?`<span class="bdg bdg-r">-${disc}%</span>`:''}
+        ${p.feat?`<span class="bdg bdg-g">✨</span>`:''}
+        ${p.stock>0&&p.stock<=5?`<span class="bdg bdg-b">נשארו ${p.stock}</span>`:''}
+      </div>
+      ${oos?`<div class="oos-ov"><i class="fas fa-ban"></i>אזל מהמלאי</div>`:''}
+    </div>
+    <div class="pbdy">
+      <div class="pcat">${cat?catName(cat):''}</div>
+      <div class="pnm">${prodName(p)}</div>
+      <div class="ppr">
+        <span class="ppr-cur">₪${(hasSale?sale:pr).toLocaleString()}</span>
+        ${hasSale?`<span class="ppr-old">₪${pr.toLocaleString()}</span>`:''}
+      </div>
+      <div class="pact">
+        <button class="btn btn-p btn-sm" style="flex:1" onclick="event.stopPropagation();${oos?'':'addCart('+p.id+')'}" ${oos?'disabled':''}>
+          <i class="fas fa-${oos?'ban':'cart-plus'}"></i>${oos?'אזל':'הוסף לעגלה'}
+        </button>
+        <div class="wl-btn" onclick="event.stopPropagation();toast('נוסף למשאלות ❤️','in')"><i class="fas fa-heart"></i></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function openProd(id){
+  const p=S.prods.find(x=>x.id===id);if(!p)return;
+  const isBiz=S.user?.type==='business';
+  const pr=isBiz?p.pb:p.pp;const sale=isBiz?p.sb:p.sp;
+  const hasSale=sale&&sale>0;const disc=hasSale?Math.round((1-sale/pr)*100):0;
+  const cat=S.cats.find(c=>c.id===p.cat);const oos=p.stock===0;
+  document.getElementById('pd-bc').innerHTML=`
+    <span class="bc-lnk" onclick="go('home')">ראשי</span><span class="bc-sep">/</span>
+    <span class="bc-lnk" onclick="filterCat('${p.cat}');go('products')">${cat?catName(cat):p.cat}</span><span class="bc-sep">/</span>
+    <span>${p.he}</span>`;
+  document.getElementById('pd-main').innerHTML=`
+  <div class="pgal">
+    <div class="pgal-main"><img src="${p.img}" alt="${p.he}" id="gal-img" onerror="this.src='https://via.placeholder.com/500x400/111e35/D4AF37?text=📱'"></div>
+    <div class="pgal-thumbs">
+      <div class="pgal-th act" onclick="chImg(this,'${p.img}')"><img src="${p.img}" alt="" onerror="this.src='https://via.placeholder.com/64'"></div>
+      <div class="pgal-th" onclick="chImg(this,'${p.img}')"><img src="${p.img}" alt=""></div>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">${cat?catName(cat):''}</div>
+    <h1 style="font-size:clamp(1.4rem,3vw,2rem);margin-bottom:14px;line-height:1.2">${prodName(p)}</h1>
+    <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:8px;font-weight:700;font-size:13px;margin-bottom:16px;${oos?'background:rgba(255,68,68,.1);border:1px solid rgba(255,68,68,.3);color:var(--red)':'background:rgba(0,230,118,.1);border:1px solid rgba(0,230,118,.3);color:var(--green)'}">
+      <i class="fas fa-${oos?'ban':'check'}"></i>${oos?'אזל מהמלאי':`במלאי · ${p.stock} יחידות`}
+    </div>
+    <div class="price-box">
+      <div style="font-size:11px;font-weight:800;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;color:${isBiz?'var(--blue)':'var(--gold)'}">
+        ${isBiz?'💼 מחיר עסקי מיוחד':'👤 מחיר חבר מועדון'}
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span style="font-size:30px;font-weight:900;color:var(--gold)">₪${(hasSale?sale:pr).toLocaleString()}</span>
+        ${hasSale?`<span style="background:var(--red);color:#fff;padding:3px 10px;border-radius:5px;font-size:12px;font-weight:700">-${disc}%</span>`:''}
+      </div>
+      ${hasSale?`<div style="font-size:12px;color:var(--t3);margin-top:6px">מחיר מלא: <s>₪${pr.toLocaleString()}</s> · חסכת: ₪${(pr-sale).toLocaleString()}</div>`:''}
+      <div style="font-size:11px;color:var(--t3);margin-top:4px">המחיר כולל מע"מ 18%</div>
+    </div>
+    ${!oos?`<div class="qty-sel">
+      <button class="qty-b" onclick="chQty(-1)">−</button>
+      <input type="number" class="qty-in" id="qty" value="1" min="1" max="${p.stock}">
+      <button class="qty-b" onclick="chQty(1)">+</button>
+    </div>`:''}
+    <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+      <button class="btn btn-p btn-lg" style="flex:1;min-width:160px" onclick="${oos?'toast(\'מוצר אינו זמין\',\'er\')':'addCart('+p.id+',parseInt(document.getElementById(\'qty\').value))'}" ${oos?'disabled':''}>
+        <i class="fas fa-${oos?'ban':'cart-plus'}"></i>${oos?'אזל מהמלאי':'הוסף לעגלה'}
+      </button>
+      <button class="btn btn-g" onclick="toast('נוסף למשאלות ❤️','in')"><i class="fas fa-heart"></i></button>
+      <button class="btn btn-g" onclick="shareP(${p.id})"><i class="fas fa-share-alt"></i></button>
+    </div>
+    <div class="product-tabs" style="margin-top:28px">
+      <div class="tabs-nav">
+        <button class="tab-b act" onclick="swTab(this,'t-desc')">תיאור</button>
+        <button class="tab-b" onclick="swTab(this,'t-spec')">מפרט</button>
+        <button class="tab-b" onclick="swTab(this,'t-rev')">ביקורות</button>
+      </div>
+      <div class="tab-c act" id="t-desc"><p>${p.desc||'אין תיאור זמין'}</p></div>
+      <div class="tab-c" id="t-spec">
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <tr><td style="padding:9px 0;border-bottom:1px solid var(--bdr);color:var(--t2);width:40%">קטגוריה</td><td style="padding:9px 0;border-bottom:1px solid var(--bdr)">${cat?catName(cat):'-'}</td></tr>
+          <tr><td style="padding:9px 0;border-bottom:1px solid var(--bdr);color:var(--t2)">מלאי</td><td style="padding:9px 0;border-bottom:1px solid var(--bdr)">${p.stock} יחידות</td></tr>
+          <tr><td style="padding:9px 0;border-bottom:1px solid var(--bdr);color:var(--t2)">אחריות</td><td style="padding:9px 0;border-bottom:1px solid var(--bdr)">12 חודשים</td></tr>
+          <tr><td style="padding:9px 0;color:var(--t2)">סוג לקוח</td><td style="padding:9px 0">${isBiz?'מחיר עסקי':'מחיר פרטי'}</td></tr>
+        </table>
+      </div>
+      <div class="tab-c" id="t-rev">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div style="font-size:44px;font-weight:900;color:var(--gold)">4.7</div>
+          <div><div style="color:var(--gold);font-size:16px">★★★★★</div>
+            <div style="font-size:12px;color:var(--t3)">מ-47 ביקורות</div></div>
+        </div>
+        <p style="font-size:13px;color:var(--t3)">טוען ביקורות...</p>
+      </div>
+    </div>
+  </div>`;
+  go('detail');
+}
+
+function chImg(th,src){document.getElementById('gal-img').src=src;document.querySelectorAll('.pgal-th').forEach(t=>t.classList.remove('act'));th.classList.add('act');}
+function chQty(d){const i=document.getElementById('qty');if(!i)return;i.value=Math.max(1,parseInt(i.value)+d);}
+function swTab(btn,id){document.querySelectorAll('.tab-b').forEach(b=>b.classList.remove('act'));document.querySelectorAll('.tab-c').forEach(c=>c.classList.remove('act'));btn.classList.add('act');document.getElementById(id)?.classList.add('act');}
+function shareP(id){if(navigator.share)navigator.share({title:'TechZone',url:location.href});else{navigator.clipboard?.writeText(location.href);toast('הקישור הועתק!','ok');}}
+
+// ===== CART =====
+function addCart(id,qty=1){
+  const p=S.prods.find(x=>x.id===id);if(!p||p.stock===0)return;
+  const isBiz=S.user?.type==='business';
+  const pr=isBiz?(p.sb||p.pb):(p.sp||p.pp);
+  const ex=S.cart.find(i=>i.id===id);
+  if(ex)ex.qty+=qty;else S.cart.push({id,nm:p.he,pr,qty,img:p.img});
+  updateCartCt();toast(`${p.he} נוסף לעגלה 🛒`,'ok');openCart();
+}
+
+function removeCart(id){S.cart=S.cart.filter(i=>i.id!==id);updateCartCt();renderCart();}
+function updCartQty(id,d){const i=S.cart.find(x=>x.id===id);if(!i)return;i.qty=Math.max(1,i.qty+d);updateCartCt();renderCart();}
+
+function updateCartCt(){
+  const tot=S.cart.reduce((s,i)=>s+i.qty,0);
+  const el=document.getElementById('cart-ct');
+  if(el){el.textContent=tot;el.style.display=tot>0?'flex':'none';}
+}
+
+function openCart(){renderCart();document.getElementById('cart-ov').classList.add('open');document.body.style.overflow='hidden';}
+function closeCart(){document.getElementById('cart-ov').classList.remove('open');document.body.style.overflow='';}
+
+function renderCart(){
+  const list=document.getElementById('cart-list');
+  const totEl=document.getElementById('cart-total');
+  if(!list)return;
+  if(S.cart.length===0){list.innerHTML='<div class="empty"><i class="fas fa-shopping-bag"></i><h3>העגלה ריקה</h3><p>הוסף מוצרים מהחנות</p></div>';}
+  else{list.innerHTML=S.cart.map(i=>`
+    <div class="ci">
+      <div class="ci-img"><img src="${i.img||''}" alt="${i.nm}" onerror="this.src='https://via.placeholder.com/60/111e35/D4AF37?text=📱'"></div>
+      <div style="flex:1">
+        <div class="ci-nm">${i.nm}</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:5px">
+          <div class="ci-pr">₪${(i.pr*i.qty).toLocaleString()}</div>
+          <div style="display:flex;align-items:center;gap:4px;font-size:11px">
+            <span onclick="updCartQty(${i.id},-1)" style="cursor:pointer;padding:2px 7px;background:rgba(255,255,255,.06);border-radius:4px;font-size:13px">−</span>
+            <span style="font-size:13px;font-weight:600">${i.qty}</span>
+            <span onclick="updCartQty(${i.id},1)" style="cursor:pointer;padding:2px 7px;background:rgba(255,255,255,.06);border-radius:4px;font-size:13px">+</span>
+          </div>
+        </div>
+      </div>
+      <div class="ci-rm" onclick="removeCart(${i.id})"><i class="fas fa-times"></i></div>
+    </div>`).join('');}
+  const sum=S.cart.reduce((s,i)=>s+i.pr*i.qty,0);
+  if(totEl)totEl.textContent=`₪${sum.toLocaleString()}`;
+}
+
+function gotoCheckout(){
+  if(S.cart.length===0){toast('העגלה ריקה!','er');return;}
+  closeCart();renderCheckout();go('checkout');
+}
+
+function renderCheckout(){
+  const el=document.getElementById('co-content');if(!el)return;
+  const u=S.user;const isBiz=u.type==='business';
+  const sum=S.cart.reduce((s,i)=>s+i.pr*i.qty,0);
+  const ship=sum>=(isBiz?0:200)?0:29;const tot=sum+ship;
+  el.innerHTML=`
+  <div>
+    <div class="card" style="padding:24px;margin-bottom:16px">
+      <h3 style="margin-bottom:18px;font-size:15px">פרטי משלוח</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="fg"><label class="fl">שם מלא</label><input type="text" class="fi" value="${u.name}" id="co-name"></div>
+        <div class="fg"><label class="fl">טלפון</label><input type="tel" class="fi" placeholder="05X-XXXXXXX" id="co-phone" value="${u.phone||''}"></div>
+        <div class="fg" style="grid-column:1/-1"><label class="fl">כתובת מלאה</label><input type="text" class="fi" placeholder="רחוב, מספר" id="co-addr"></div>
+        <div class="fg"><label class="fl">עיר</label><input type="text" class="fi" id="co-city"></div>
+        <div class="fg"><label class="fl">מיקוד</label><input type="text" class="fi" id="co-zip"></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap">
+        <button class="btn btn-g btn-sm" onclick="setShip(this,'standard')"><i class="fas fa-truck"></i>משלוח רגיל (3 ימים)</button>
+        <button class="btn btn-g btn-sm" onclick="setShip(this,'express')"><i class="fas fa-bolt"></i>משלוח מהיר (24 שעות) +₪29</button>
+        ${isBiz?'<button class="btn btn-g btn-sm" onclick="setShip(this,\'pickup\')"><i class="fas fa-store"></i>איסוף עצמי</button>':''}
+      </div>
+    </div>
+    <div class="card" style="padding:24px">
+      <h3 style="margin-bottom:18px;font-size:15px">אמצעי תשלום</h3>
+      <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap">
+        <button class="btn btn-p btn-sm" onclick="setPayM(this,'card')">💳 כרטיס אשראי</button>
+        <button class="btn btn-g btn-sm" onclick="setPayM(this,'bit')">📱 Bit</button>
+        <button class="btn btn-g btn-sm" onclick="setPayM(this,'paypal')">🅿️ PayPal</button>
+        ${isBiz?'<button class="btn btn-g btn-sm" onclick="setPayM(this,\'credit\')">📋 אשראי 30 יום</button>':''}
+      </div>
+      <div id="pay-details">
+        <div class="fg"><label class="fl">מספר כרטיס</label><input type="text" class="fi" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" oninput="fmtCard(this)"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+          <div class="fg"><label class="fl">חודש תפוגה</label><input type="text" class="fi" placeholder="MM"></div>
+          <div class="fg"><label class="fl">שנת תפוגה</label><input type="text" class="fi" placeholder="YY"></div>
+          <div class="fg"><label class="fl">CVV</label><input type="text" class="fi" placeholder="XXX" maxlength="4"></div>
+        </div>
+        <div class="fg"><label class="fl">שם על הכרטיס</label><input type="text" class="fi" placeholder="Name on Card" style="direction:ltr"></div>
+      </div>
+      <div style="background:rgba(0,230,118,.05);border:1px solid rgba(0,230,118,.2);border-radius:10px;padding:11px;font-size:12px;color:var(--t2);margin-top:10px">
+        🔒 תשלום מוצפן SSL 256-bit · PCI DSS Level 1 · 3D Secure
+      </div>
+    </div>
+  </div>
+  <div class="co-sum">
+    <h3 style="margin-bottom:18px;font-size:15px">סיכום הזמנה</h3>
+    ${S.cart.map(i=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bdr);font-size:13px">
+      <span style="flex:1">${i.nm} × ${i.qty}</span>
+      <span>₪${(i.pr*i.qty).toLocaleString()}</span>
+    </div>`).join('')}
+    <div style="padding-top:12px">
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--t2);margin-bottom:6px">
+        <span>סכום ביניים</span><span>₪${sum.toLocaleString()}</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--t2);margin-bottom:6px">
+        <span>משלוח</span>
+        <span>${ship===0?'<span style="color:var(--green)">חינם! 🎉</span>':'₪'+ship}</span>
+      </div>
+      ${ship>0?`<div style="font-size:11px;color:var(--t3);margin-bottom:10px">משלוח חינם מ-₪200</div>`:''}
+      <div style="display:flex;justify-content:space-between;font-size:18px;font-weight:800;border-top:1px solid var(--bdr);padding-top:12px;margin-top:6px">
+        <span>סה"כ לתשלום</span>
+        <span style="color:var(--gold)">₪${tot.toLocaleString()}</span>
+      </div>
+      <div style="font-size:11px;color:var(--t3);margin-bottom:18px">כולל מע"מ 18%</div>
+      <button class="btn btn-p btn-bl btn-lg" onclick="placeOrder(${tot})">
+        <i class="fas fa-lock"></i> שלם ₪${tot.toLocaleString()}
+      </button>
+      <p style="font-size:11px;color:var(--t3);text-align:center;margin-top:8px">
+        בלחיצה אתה מסכים ל<span class="lo-link" onclick="showLegal('terms')">תנאי השימוש</span>
+      </p>
+    </div>
+  </div>`;
+}
+
+function fmtCard(el){let v=el.value.replace(/\D/g,'');v=v.match(/.{1,4}/g)?.join(' ')||v;el.value=v;}
+function setShip(btn,m){document.querySelectorAll('#co-content .btn').forEach(b=>{if(b.classList.contains('btn-p')&&b!==document.querySelector('#co-content .btn-lg'))b.className=b.className.replace('btn-p','btn-g');});btn.className=btn.className.replace('btn-g','btn-p');}
+function setPayM(btn,m){
+  document.querySelectorAll('#pay-details').forEach(e=>{});
+  const d=document.getElementById('pay-details');
+  if(m==='bit')d.innerHTML='<div style="padding:14px;background:rgba(0,170,255,.07);border-radius:10px;font-size:13px;color:var(--t2)">📱 תועבר לאפליקציית Bit לאישור התשלום.</div>';
+  else if(m==='paypal')d.innerHTML='<div style="padding:14px;background:rgba(0,170,255,.07);border-radius:10px;font-size:13px;color:var(--t2)">🅿️ תועבר ל-PayPal לסיום הרכישה.</div>';
+  else if(m==='credit')d.innerHTML='<div style="padding:14px;background:rgba(0,170,255,.07);border-radius:10px;font-size:13px;color:var(--t2)">📋 אשראי עסקי 30 יום. חשבונית מס תישלח לאימייל.</div>';
+  else d.innerHTML=`<div class="fg"><label class="fl">מספר כרטיס</label><input type="text" class="fi" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" oninput="fmtCard(this)"></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px"><div class="fg"><label class="fl">חודש</label><input type="text" class="fi" placeholder="MM"></div><div class="fg"><label class="fl">שנה</label><input type="text" class="fi" placeholder="YY"></div><div class="fg"><label class="fl">CVV</label><input type="text" class="fi" placeholder="XXX" maxlength="4"></div></div><div class="fg"><label class="fl">שם על הכרטיס</label><input type="text" class="fi" placeholder="Name on Card" style="direction:ltr"></div>`;
+}
+
+function placeOrder(tot){
+  const oid='TZ-'+Date.now().toString().slice(-6);
+  const o={id:oid,uid:S.user.id,cname:S.user.name,items:S.cart.map(i=>({...i})),total:tot,date:new Date().toISOString().split('T')[0],status:'pending'};
+  S.orders.unshift(o);
+  const u=S.users.find(x=>x.id===S.user.id);
+  if(u){u.orders=u.orders||[];u.orders.push(oid);}
+  save();S.cart=[];updateCartCt();
+  document.getElementById('success-num').textContent=`מספר הזמנה: #${oid}`;
+  openMo('mo-success');
+}
+
+// ===== ACCOUNT =====
+function renderAcc(){accTab(document.querySelector('.acc-tab.act')||document.querySelector('.acc-tab'),'det');}
+
+function accTab(btn,t){
+  document.querySelectorAll('.acc-tab').forEach(b=>b.classList.remove('act'));
+  if(btn)btn.classList.add('act');
+  renderAccTab(t);
+}
+
+function renderAccTab(t){
+  const el=document.getElementById('acc-content');if(!el)return;
+  const u=S.user;
+  if(t==='det'){el.innerHTML=`
+    <div class="card" style="padding:28px;max-width:580px">
+      <div style="display:flex;align-items:center;gap:18px;margin-bottom:28px">
+        <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:24px;color:#070b14;font-weight:900;flex-shrink:0">${(u.name||'?')[0]}</div>
+        <div>
+          <div style="font-size:18px;font-weight:800">${u.name}</div>
+          <div style="font-size:12px;color:var(--t3)">${{superadmin:'👑 מנהל ראשי',manager:'⚙️ מנהל',business:'🏢 לקוח עסקי',private:'👤 לקוח פרטי'}[u.type]} · חבר מאז ${u.joined}</div>
+          ${u.type==='business'?`<div style="font-size:12px;color:var(--blue);margin-top:3px">ח.פ: ${u.vat||'-'} | ${u.bizName||'-'}</div>`:''}
+        </div>
+      </div>
+      <div class="fg"><label class="fl">שם מלא</label><input type="text" class="fi" value="${u.name}" id="ac-name"></div>
+      <div class="fg"><label class="fl">אימייל</label><input type="email" class="fi" value="${u.email}" id="ac-email"></div>
+      <div class="fg"><label class="fl">טלפון</label><input type="tel" class="fi" value="${u.phone||''}" id="ac-phone"></div>
+      ${u.type==='business'?`<div class="fg"><label class="fl">שם עסק</label><input type="text" class="fi" value="${u.bizName||''}" id="ac-biz"></div>`:''}
+      <button class="btn btn-p" onclick="saveAccDet()">שמור שינויים</button>
+    </div>`;}
+  else if(t==='ord'){
+    const myOrds=S.orders.filter(o=>o.uid===u.id);
+    el.innerHTML=myOrds.length===0?
+      '<div class="empty"><i class="fas fa-box"></i><h3>אין הזמנות עדיין</h3><p>לאחר ביצוע הזמנה תופיע כאן</p><button class="btn btn-p" onclick="go(\'products\')">קנה עכשיו</button></div>':
+      `<div class="tbl-wrap"><table class="dt"><thead><tr><th>מספר</th><th>מוצרים</th><th>סכום</th><th>תאריך</th><th>סטטוס</th></tr></thead><tbody>
+      ${myOrds.map(o=>`<tr><td><strong style="color:var(--gold)">#${o.id}</strong></td><td>${o.items.length} מוצרים</td><td style="color:var(--gold)">₪${o.total.toLocaleString()}</td><td>${o.date}</td><td>${ordStatus(o.status)}</td></tr>`).join('')}
+      </tbody></table></div>`;}
+  else{el.innerHTML=`<div class="card" style="padding:28px;max-width:480px">
+    <h3 style="margin-bottom:20px">שינוי סיסמה</h3>
+    <div class="fg"><label class="fl">סיסמה נוכחית</label><input type="password" class="fi" id="ac-op"></div>
+    <div class="fg"><label class="fl">סיסמה חדשה</label><input type="password" class="fi" id="ac-np"></div>
+    <div class="fg"><label class="fl">אישור סיסמה</label><input type="password" class="fi" id="ac-cp"></div>
+    <button class="btn btn-p" onclick="chgPass()">עדכן סיסמה</button>
+    <hr style="border:none;border-top:1px solid var(--bdr);margin:24px 0">
+    <h3 style="margin-bottom:14px">אימות דו-שלבי</h3>
+    <div style="display:flex;align-items:center;gap:12px">
+      <label class="sw"><input type="checkbox"><span class="sl"></span></label>
+      <span style="font-size:13px;color:var(--t2)">הפעל אימות דו-שלבי (2FA) עם אפליקציית Authenticator</span>
+    </div>
+  </div>`;}
+}
+
+function saveAccDet(){
+  const name=document.getElementById('ac-name')?.value.trim();
+  const email=document.getElementById('ac-email')?.value.trim();
+  if(!name||!email){toast('שדות חובה חסרים','er');return;}
+  const u=S.users.find(x=>x.id===S.user.id);
+  if(u){u.name=name;u.email=email;u.phone=document.getElementById('ac-phone')?.value||u.phone;}
+  S.user.name=name;S.user.email=email;save();setupHdr();toast('הפרטים עודכנו ✅','ok');
+}
+
+function chgPass(){
+  const op=document.getElementById('ac-op')?.value;
+  const np=document.getElementById('ac-np')?.value;
+  const cp=document.getElementById('ac-cp')?.value;
+  const u=S.users.find(x=>x.id===S.user.id);
+  if(!u||u.pass!==op){toast('הסיסמה הנוכחית שגויה','er');return;}
+  if(np.length<8){toast('הסיסמה חייבת להכיל לפחות 8 תווים','er');return;}
+  if(np!==cp){toast('הסיסמאות אינן תואמות','er');return;}
+  u.pass=np;S.user.pass=np;save();toast('הסיסמה שונתה ✅','ok');
+}
+
+function ordStatus(s){
+  const m={pending:['ממתין','bdg-muted'],processing:['בטיפול','bdg-b'],shipped:['נשלח','bdg-g'],delivered:['נמסר','bdg-ok'],cancelled:['בוטל','bdg-r']};
+  const [l,c]=m[s]||['לא ידוע','bdg-muted'];
+  return `<span class="bdg ${c}">${l}</span>`;
+}
+
+// ===== CONTACT =====
+function sendContact(){
+  const n=document.getElementById('ct-name')?.value.trim();
+  const e=document.getElementById('ct-email')?.value.trim();
+  const m=document.getElementById('ct-msg')?.value.trim();
+  if(!n||!e||!m){toast('נא למלא את כל השדות','er');return;}
+  toast('ההודעה נשלחה בהצלחה! נחזור אליך בהקדם 📧','ok');
+  document.getElementById('ct-name').value='';document.getElementById('ct-email').value='';document.getElementById('ct-msg').value='';
+}
+
+// ===== COOKIE =====
+function acceptCK(){localStorage.setItem('tz_ck','all');document.getElementById('ck-bar').style.display='none';toast('הגדרות עוגיות נשמרו','in');}
+function rejectCK(){localStorage.setItem('tz_ck','min');document.getElementById('ck-bar').style.display='none';}
+
+// ===== MODALS =====
+function openMo(id){document.getElementById(id)?.classList.add('open');}
+function closeMo(id){document.getElementById(id)?.classList.remove('open');}
+
+// ===== LEGAL =====
+const LEGAL={
+  terms:{ti:'תנאי שימוש',body:`<h3>1. הסכמה לתנאים</h3><p>השימוש באתר TechZone מהווה הסכמה לתנאי שימוש אלו. TechZone בע"מ (ח.פ 515234567) שומרת לעצמה את הזכות לעדכן תנאים אלו בכל עת.</p><h3>2. הגדרת חברות מועדון</h3><p>השימוש באתר מוגבל לחברי מועדון בלבד. ישנן שתי קטגוריות: לקוח עסקי ולקוח פרטי, לכל אחת מחירים ותנאים שונים.</p><h3>3. מחירים ומוצרים</h3><p>כל המחירים כוללים מע"מ כחוק. החברה שומרת על הזכות לשנות מחירים ומוצרים ללא הודעה מוקדמת. מחיר עסקי ייחודי לבעלי מספר ח.פ/ע.מ תקף.</p><h3>4. זכויות קניין רוחני</h3><p>כל התכנים, התמונות והשמות המסחריים שמורים ל-TechZone בע"מ ולספקיה.</p><h3>5. הגבלת אחריות</h3><p>TechZone אינה אחראית לנזקים עקיפים. האחריות המרבית מוגבלת לסכום הרכישה הספציפית.</p><h3>6. סמכות שיפוט</h3><p>כל סכסוך יוכרע בבתי משפט בתל אביב בהתאם לדין הישראלי. לשאלות: info@techzone.co.il</p>`},
+  privacy:{ti:'מדיניות פרטיות',body:`<h3>1. איסוף מידע</h3><p>אנו אוספים: שם, אימייל, טלפון, כתובת, מידע על רכישות והתנהגות גלישה. מידע זה נאסף בהתאם לחוק הגנת הפרטיות תשמ"א-1981.</p><h3>2. שימוש במידע</h3><p>המידע משמש לעיבוד הזמנות, שיפור השירות ושליחת עדכונים שיווקיים (בהסכמה). אנו לא מוכרים מידע לצד שלישי.</p><h3>3. אבטחת מידע</h3><p>אנו מפעילים אמצעי אבטחה מתקדמים: SSL, הצפנת סיסמאות, הגבלת גישה ועמידה בתקן PCI DSS.</p><h3>4. זכויות הנושא</h3><p>בהתאם לחוק: זכות עיון, תיקון, מחיקה וקבלת עותק. פנה ל: privacy@techzone.co.il</p><h3>5. GDPR (לאזרחי EU)</h3><p>משתמשים מהאיחוד האירופי זכאים לזכויות GDPR המלאות כולל: גישה, תיקון, מחיקה, ניידות נתונים והתנגדות לעיבוד.</p><h3>6. העברת מידע לחו"ל</h3><p>מידע עשוי להיעבר לשרתים בחו"ל תוך הבטחת רמת הגנה מתאימה.</p>`},
+  shipping:{ti:'מדיניות משלוחים',body:`<h3>זמני משלוח</h3><ul><li>משלוח רגיל: 3-5 ימי עסקים</li><li>משלוח מהיר: 24-48 שעות (+₪29)</li><li>לקוחות עסקיים: משלוח חינם על כל הזמנה</li><li>לקוחות פרטיים: משלוח חינם מ-₪200</li></ul><h3>אזורי משלוח</h3><p>משלוח לכל הארץ כולל ישובים מרוחקים. משלוח לחו"ל ייבדק בנפרד לפי בקשה.</p><h3>חברות שינוע</h3><p>אנו עובדים עם חברות שינוע מובילות: DHL, UPS, ישראל פוסט. מספר מעקב נשלח לאחר שליחה.</p><h3>אחריות לאיחורים</h3><p>החברה אינה אחראית לאיחורים שנגרמו מאסונות טבע, שביתות או גורמים שמחוץ לשליטתנו.</p>`},
+  returns:{ti:'מדיניות החזרות',body:`<h3>זכות החזרה</h3><p>בהתאם לחוק הגנת הצרכן תשמ"א-1981 ותקנות המכר, ניתן להחזיר מוצרים תוך <strong>14 ימים</strong> מיום קבלה ללא צורך בהסבר.</p><h3>תנאי ההחזרה</h3><ul><li>המוצר במצב מקורי ובאריזה שלמה</li><li>צירוף חשבונית/אסמכתת רכישה</li><li>לא נעשה שימוש במוצר (לבישה/שימוש קצר מותרים)</li></ul><h3>סייגים</h3><ul><li>מוצרים שנפתחו מאריזה אטומה</li><li>תוכן דיגיטלי שהופעל</li><li>מוצרים שהותאמו אישית</li></ul><h3>אופן ההחזרה</h3><p>צור קשר ב-returns@techzone.co.il לקבלת תווית משלוח חינם. ההחזר לכרטיס האשראי תוך 5-7 ימי עסקים.</p>`},
+  cookies:{ti:'מדיניות עוגיות',body:`<h3>סוגי עוגיות</h3><p>אנו משתמשים בעוגיות הבאות:</p><ul><li><strong>הכרחיות:</strong> אימות, עגלת קניות, אבטחה</li><li><strong>ביצועים:</strong> Google Analytics, מדידת תנועה</li><li><strong>שיווק:</strong> Facebook Pixel, רימרקטינג</li><li><strong>פונקציונלי:</strong> העדפות שפה, הגדרות תצוגה</li></ul><h3>ניהול העדפות</h3><p>ניתן לשנות את העדפות העוגיות בכל עת דרך הדפדפן. השבתת עוגיות הכרחיות עשויה לפגוע בתפקוד האתר.</p><h3>עוגיות צד שלישי</h3><p>Google, Facebook וספקים אחרים עשויים למקם עוגיות. ראה את מדיניות הפרטיות שלהם לפרטים.</p>`},
+  accessibility:{ti:'הצהרת נגישות',body:`<h3>מחויבות לנגישות</h3><p>TechZone מחויבת לנגישות דיגיטלית בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013.</p><h3>רמת עמידה</h3><p>האתר שואף לעמוד בתקן WCAG 2.1 ברמה AA. בוצעה בדיקת נגישות ע"י מומחה נגישות.</p><h3>תכונות נגישות</h3><ul><li>ניגודיות צבעים גבוהה</li><li>תמיכה בקוראי מסך (NVDA, JAWS, VoiceOver)</li><li>ניווט מקלדת מלא</li><li>טקסט חלופי לתמונות</li><li>גופן גמיש ואפשרות הגדלה</li></ul><h3>דיווח על בעיות</h3><p>נתקלת בבעיית נגישות? פנה אל: accessibility@techzone.co.il | 03-1234567 | נגיש 24/7</p>`},
+};
+
+function showLegal(k){
+  const d=LEGAL[k];if(!d)return;
+  document.getElementById('mo-legal-ti').textContent=d.ti;
+  document.getElementById('mo-legal-body').innerHTML=d.body;
+  openMo('mo-legal');
+}
+
+// ===== ADMIN =====
+function openAdmin(){
+  if(!S.user||(S.user.type!=='superadmin'&&S.user.type!=='manager')){toast('אין הרשאה','er');return;}
+  document.getElementById('adm').classList.add('open');admPg('dash');
+}
+function closeAdmin(){document.getElementById('adm').classList.remove('open');}
+
+function admPg(pg){
+  document.querySelectorAll('.adm-pg').forEach(p=>p.classList.remove('act'));
+  document.querySelectorAll('.ani').forEach(n=>n.classList.remove('act'));
+  document.getElementById('adm-'+pg)?.classList.add('act');
+  document.querySelector(`.ani[onclick="admPg('${pg}')"]`)?.classList.add('act');
+  const titles={dash:'לוח בקרה',prods:'ניהול מוצרים',cats:'קטגוריות',users:'משתמשים',orders:'הזמנות',mgrs:'מנהלים',perms:'הרשאות',sett:'הגדרות',seo:'SEO',integ:'אינטגרציות',legal:'מסמכים משפטיים'};
+  document.getElementById('adm-pg-title').textContent=titles[pg]||pg;
+  if(pg==='dash')rDash();
+  else if(pg==='prods')rAdmProds();
+  else if(pg==='cats')rAdmCats();
+  else if(pg==='users')rAdmUsers();
+  else if(pg==='orders')rAdmOrders();
+  else if(pg==='mgrs')rAdmMgrs();
+  else if(pg==='perms')rAdmPerms();
+  else if(pg==='sett')rAdmSett();
+  else if(pg==='seo')rAdmSeo();
+  else if(pg==='integ')rAdmInteg();
+  else if(pg==='legal')rAdmLegal();
+}
+
+function rDash(){
+  const totSales=S.orders.reduce((s,o)=>s+o.total,0);
+  const pend=S.orders.filter(o=>o.status==='pending').length;
+  const cust=S.users.filter(u=>u.type==='private'||u.type==='business').length;
+  const oos=S.prods.filter(p=>p.stock===0).length;
+  document.getElementById('dash-stats').innerHTML=[
+    {l:'סה"כ מכירות',n:'₪'+totSales.toLocaleString(),ic:'fas fa-shekel-sign',cl:'#D4AF37',tr:'+12% החודש'},
+    {l:'הזמנות',n:S.orders.length,ic:'fas fa-shopping-cart',cl:'#00aaff',tr:`${pend} ממתינות`},
+    {l:'לקוחות',n:cust,ic:'fas fa-users',cl:'#00e676',tr:'+3 השבוע'},
+    {l:'מוצרים',n:S.prods.length,ic:'fas fa-box',cl:'#ff9800',tr:`${oos} אזלו`},
+  ].map(s=>`<div class="sc">
+    <div class="sc-ic" style="background:${s.cl}22"><i class="${s.ic}" style="color:${s.cl}"></i></div>
+    <div class="sc-num" style="color:${s.cl}">${s.n}</div>
+    <div class="sc-lbl">${s.l}</div>
+    <div class="sc-tr">${s.tr}</div>
+  </div>`).join('');
+  document.getElementById('dash-orders').innerHTML=`<table class="dt"><thead><tr><th>#</th><th>לקוח</th><th>סכום</th><th>תאריך</th><th>סטטוס</th></tr></thead><tbody>
+  ${S.orders.slice(0,5).map(o=>`<tr><td style="color:var(--gold)">#${o.id}</td><td>${o.cname}</td><td>₪${o.total.toLocaleString()}</td><td>${o.date}</td><td>${ordStatus(o.status)}</td></tr>`).join('')}
+  </tbody></table>`;
+  document.getElementById('dash-top-prods').innerHTML=S.prods.slice(0,5).map((p,i)=>`
+  <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--bdr)">
+    <div style="font-weight:900;color:var(--gold);width:18px;font-size:13px">${i+1}</div>
+    <img src="${p.img}" style="width:36px;height:36px;object-fit:contain;border-radius:6px;background:rgba(255,255,255,.04)" onerror="this.src='https://via.placeholder.com/36/111e35/D4AF37?text=📱'">
+    <div style="flex:1;font-size:12px">${p.he}</div>
+    <div style="font-size:12px;color:var(--gold);font-weight:700">₪${p.pp}</div>
+  </div>`).join('');
+}
+
+function rAdmProds(f=''){
+  // Populate cat filter select
+  const cf=document.getElementById('adm-cat-filter');
+  if(cf)cf.innerHTML='<option value="">כל הקטגוריות</option>'+S.cats.map(c=>`<option value="${c.id}">${c.he}</option>`).join('');
+  // Populate product modal cat select
+  const pc=document.getElementById('pm-cat');
+  if(pc)pc.innerHTML=S.cats.map(c=>`<option value="${c.id}">${c.he}</option>`).join('');
+  let list=S.prods;
+  if(f)list=list.filter(p=>p.he.includes(f)||p.en.toLowerCase().includes(f.toLowerCase()));
+  document.getElementById('adm-prods-tb').innerHTML=list.map(p=>`<tr>
+    <td><img src="${p.img}" style="width:44px;height:44px;object-fit:contain;border-radius:8px;background:rgba(255,255,255,.04)" onerror="this.src='https://via.placeholder.com/44/111e35/D4AF37?text=📱'"></td>
+    <td><div style="font-weight:600;font-size:13px">${p.he}</div><div style="font-size:11px;color:var(--t3)">${p.en}</div></td>
+    <td style="font-size:12px">${S.cats.find(c=>c.id===p.cat)?.he||p.cat}</td>
+    <td>₪${p.pp}</td><td>₪${p.pb}</td>
+    <td>${p.stock===0?'<span class="bdg bdg-r">אזל</span>':`<span class="bdg bdg-ok">${p.stock}</span>`}</td>
+    <td><label class="sw"><input type="checkbox" ${p.act?'checked':''} onchange="togProdAct(${p.id},this.checked)"><span class="sl"></span></label></td>
+    <td><div style="display:flex;gap:5px">
+      <button class="btn btn-g btn-sm" onclick="openProdModal(${p.id})"><i class="fas fa-edit"></i></button>
+      <button class="btn btn-d btn-sm" onclick="delProd(${p.id})"><i class="fas fa-trash"></i></button>
+    </div></td>
+  </tr>`).join('');
+}
+
+function admSrchProds(q){rAdmProds(q);}
+function admFilterCat(cat){rAdmProds();const list=cat?S.prods.filter(p=>p.cat===cat):S.prods;document.getElementById('adm-prods-tb').innerHTML=list.map(p=>`<tr><td><img src="${p.img}" style="width:44px;height:44px;object-fit:contain;border-radius:8px" onerror="this.src='https://via.placeholder.com/44/111e35/D4AF37?text=📱'"></td><td><div style="font-weight:600;font-size:13px">${p.he}</div></td><td style="font-size:12px">${S.cats.find(c=>c.id===p.cat)?.he||p.cat}</td><td>₪${p.pp}</td><td>₪${p.pb}</td><td>${p.stock===0?'<span class="bdg bdg-r">אזל</span>':`<span class="bdg bdg-ok">${p.stock}</span>`}</td><td><label class="sw"><input type="checkbox" ${p.act?'checked':''} onchange="togProdAct(${p.id},this.checked)"><span class="sl"></span></label></td><td><div style="display:flex;gap:5px"><button class="btn btn-g btn-sm" onclick="openProdModal(${p.id})"><i class="fas fa-edit"></i></button><button class="btn btn-d btn-sm" onclick="delProd(${p.id})"><i class="fas fa-trash"></i></button></div></td></tr>`).join('');}
+function togProdAct(id,v){const p=S.prods.find(x=>x.id===id);if(p){p.act=v;save();toast(v?'מוצר הופעל':'מוצר הוסתר','in');}}
+function delProd(id){if(!confirm('למחוק מוצר זה?'))return;S.prods=S.prods.filter(p=>p.id!==id);save();rAdmProds();toast('המוצר נמחק','ok');}
+
+function openProdModal(id=null){
+  S.editPId=id;
+  document.getElementById('mo-prod-ti').textContent=id?'עריכת מוצר':'הוסף מוצר חדש';
+  const pc=document.getElementById('pm-cat');
+  if(pc)pc.innerHTML=S.cats.map(c=>`<option value="${c.id}">${c.he}</option>`).join('');
+  if(id){
+    const p=S.prods.find(x=>x.id===id);
+    if(p){
+      ['pm-he','pm-en','pm-yi','pm-desc','pm-img'].forEach(i=>{const el=document.getElementById(i);if(el)el.value=p[{[`pm-he`]:'he',[`pm-en`]:'en',[`pm-yi`]:'yi',[`pm-desc`]:'desc',[`pm-img`]:'img'}[i]]||'';});
+      if(pc)pc.value=p.cat;
+      document.getElementById('pm-pp').value=p.pp;document.getElementById('pm-pb').value=p.pb;
+      document.getElementById('pm-sp').value=p.sp||0;document.getElementById('pm-sb').value=p.sb||0;
+      document.getElementById('pm-stock').value=p.stock;
+      document.getElementById('pm-feat').checked=p.feat;document.getElementById('pm-act').checked=p.act;
+    }
+  }else{
+    ['pm-he','pm-en','pm-yi','pm-desc','pm-img'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});
+    ['pm-pp','pm-pb','pm-sp','pm-sb','pm-stock'].forEach(i=>{const el=document.getElementById(i);if(el)el.value=0;});
+    document.getElementById('pm-feat').checked=false;document.getElementById('pm-act').checked=true;
+  }
+  openMo('mo-prod');
+}
+
+function saveProd(){
+  const he=document.getElementById('pm-he').value.trim();
+  if(!he){toast('שם המוצר חובה','er');return;}
+  const d={he,en:document.getElementById('pm-en').value.trim(),yi:document.getElementById('pm-yi').value.trim(),
+    cat:document.getElementById('pm-cat').value,desc:document.getElementById('pm-desc').value.trim(),
+    pp:parseFloat(document.getElementById('pm-pp').value)||0,pb:parseFloat(document.getElementById('pm-pb').value)||0,
+    sp:parseFloat(document.getElementById('pm-sp').value)||0,sb:parseFloat(document.getElementById('pm-sb').value)||0,
+    stock:parseInt(document.getElementById('pm-stock').value)||0,img:document.getElementById('pm-img').value.trim(),
+    feat:document.getElementById('pm-feat').checked,act:document.getElementById('pm-act').checked};
+  if(S.editPId){const i=S.prods.findIndex(p=>p.id===S.editPId);if(i>-1)S.prods[i]={...S.prods[i],...d};}
+  else{d.id=Date.now();S.prods.push(d);}
+  save();closeMo('mo-prod');rAdmProds();toast(S.editPId?'מוצר עודכן ✅':'מוצר נוסף ✅','ok');S.editPId=null;
+}
+
+function rAdmCats(){
+  document.getElementById('adm-cats-tb').innerHTML=S.cats.map(c=>`<tr>
+    <td style="font-size:24px">${c.ic}</td>
+    <td style="font-weight:600">${c.he}</td>
+    <td>${c.en}</td>
+    <td>${S.prods.filter(p=>p.cat===c.id).length}</td>
+    <td><label class="sw"><input type="checkbox" ${c.act?'checked':''} onchange="togCatAct('${c.id}',this.checked)"><span class="sl"></span></label></td>
+    <td><div style="display:flex;gap:5px">
+      <button class="btn btn-g btn-sm" onclick="openCatModal('${c.id}')"><i class="fas fa-edit"></i></button>
+      <button class="btn btn-d btn-sm" onclick="delCat('${c.id}')"><i class="fas fa-trash"></i></button>
+    </div></td>
+  </tr>`).join('');
+}
+
+function togCatAct(id,v){const c=S.cats.find(x=>x.id===id);if(c){c.act=v;save();}}
+function delCat(id){if(!confirm('למחוק קטגוריה?'))return;S.cats=S.cats.filter(c=>c.id!==id);save();rAdmCats();}
+
+function openCatModal(id=null){
+  S.editCId=id;
+  document.getElementById('mo-cat-ti').textContent=id?'עריכת קטגוריה':'הוסף קטגוריה';
+  if(id){const c=S.cats.find(x=>x.id===id);if(c){document.getElementById('cat-id').value=c.id;document.getElementById('cat-he').value=c.he;document.getElementById('cat-en').value=c.en||'';document.getElementById('cat-yi').value=c.yi||'';document.getElementById('cat-ic').value=c.ic;}}
+  else{['cat-id','cat-he','cat-en','cat-yi','cat-ic'].forEach(i=>document.getElementById(i).value='');}
+  openMo('mo-cat');
+}
+
+function saveCat(){
+  const id=document.getElementById('cat-id').value.trim().toLowerCase().replace(/\s/g,'_');
+  const he=document.getElementById('cat-he').value.trim();
+  if(!id||!he){toast('שדות חובה חסרים','er');return;}
+  if(S.editCId){const c=S.cats.find(x=>x.id===S.editCId);if(c){c.he=he;c.en=document.getElementById('cat-en').value;c.yi=document.getElementById('cat-yi').value;c.ic=document.getElementById('cat-ic').value||'📦';}}
+  else{if(S.cats.find(c=>c.id===id)){toast('מזהה קטגוריה כבר קיים','er');return;}S.cats.push({id,he,en:document.getElementById('cat-en').value||he,yi:document.getElementById('cat-yi').value||he,ic:document.getElementById('cat-ic').value||'📦',act:true});}
+  save();closeMo('mo-cat');rAdmCats();toast('קטגוריה נשמרה ✅','ok');S.editCId=null;
+}
+
+function rAdmUsers(f='',t=''){
+  const tmap={superadmin:'👑 מנהל ראשי',manager:'⚙️ מנהל',business:'🏢 עסקי',private:'👤 פרטי'};
+  let list=S.users;
+  if(f)list=list.filter(u=>u.name.includes(f)||u.email.includes(f));
+  if(t)list=list.filter(u=>u.type===t);
+  document.getElementById('adm-users-tb').innerHTML=list.map(u=>`<tr>
+    <td><div style="font-weight:600;font-size:13px">${u.name}</div>${u.bizName?`<div style="font-size:11px;color:var(--blue)">${u.bizName}</div>`:''}</td>
+    <td style="font-size:12px">${u.email}</td>
+    <td><span class="bdg ${u.type==='superadmin'?'bdg-g':u.type==='manager'?'bdg-b':u.type==='business'?'bdg-b':'bdg-muted'}">${tmap[u.type]||u.type}</span></td>
+    <td style="font-size:12px">${u.joined||'-'}</td>
+    <td style="font-size:12px">${(u.orders||[]).length}</td>
+    <td><label class="sw"><input type="checkbox" ${u.act?'checked':''} ${u.type==='superadmin'?'disabled':''} onchange="togUserAct(${u.id},this.checked)"><span class="sl"></span></label></td>
+    <td><div style="display:flex;gap:5px">
+      <button class="btn btn-g btn-sm" onclick="openUserModal(${u.id})"><i class="fas fa-edit"></i></button>
+      ${u.type!=='superadmin'?`<button class="btn btn-d btn-sm" onclick="delUser(${u.id})"><i class="fas fa-trash"></i></button>`:''}
+    </div></td>
+  </tr>`).join('');
+}
+
+function admSrchUsers(q){rAdmUsers(q);}
+function admFilterUsers(t){rAdmUsers('',t);}
+function togUserAct(id,v){const u=S.users.find(x=>x.id===id);if(u){u.act=v;save();toast(v?'משתמש הופעל':'משתמש הושהה','in');}}
+function delUser(id){if(!confirm('למחוק משתמש?'))return;S.users=S.users.filter(u=>u.id!==id);save();rAdmUsers();toast('משתמש נמחק','ok');}
+
+function openUserModal(id=null){
+  S.editUId=id;
+  document.getElementById('mo-user-ti').textContent=id?'עריכת משתמש':'הוסף משתמש';
+  if(id){const u=S.users.find(x=>x.id===id);if(u){document.getElementById('um-name').value=u.name;document.getElementById('um-email').value=u.email;document.getElementById('um-pass').value='';document.getElementById('um-type').value=u.type==='superadmin'||u.type==='manager'?'private':u.type;document.getElementById('um-phone').value=u.phone||'';document.getElementById('um-act').checked=u.act;}}
+  else{['um-name','um-email','um-pass','um-phone'].forEach(i=>document.getElementById(i).value='');document.getElementById('um-act').checked=true;}
+  openMo('mo-user');
+}
+
+function saveUser(){
+  const name=document.getElementById('um-name').value.trim();
+  const email=document.getElementById('um-email').value.trim();
+  const pass=document.getElementById('um-pass').value;
+  const type=document.getElementById('um-type').value;
+  const phone=document.getElementById('um-phone').value;
+  const act=document.getElementById('um-act').checked;
+  if(!name||!email){toast('שדות חובה חסרים','er');return;}
+  if(S.editUId){const u=S.users.find(x=>x.id===S.editUId);if(u){u.name=name;u.email=email;u.type=type;u.phone=phone;u.act=act;if(pass)u.pass=pass;}}
+  else{if(!pass){toast('נדרשת סיסמה','er');return;}if(S.users.find(u=>u.email===email)){toast('אימייל כבר קיים','er');return;}S.users.push({id:Date.now(),un:email,name,email,pass,type,phone,act,joined:new Date().toISOString().split('T')[0],orders:[]});}
+  save();closeMo('mo-user');rAdmUsers();toast('משתמש נשמר ✅','ok');S.editUId=null;
+}
+
+function rAdmOrders(){
+  document.getElementById('adm-orders-tb').innerHTML=S.orders.map(o=>`<tr>
+    <td><strong style="color:var(--gold)">#${o.id}</strong></td>
+    <td style="font-size:12px">${o.cname}</td>
+    <td style="font-size:12px">${o.items.length} פריטים</td>
+    <td>₪${o.total.toLocaleString()}</td>
+    <td style="font-size:12px">${o.date}</td>
+    <td>
+      <select class="fi" style="padding:5px 10px;font-size:11px;width:auto" onchange="updOrdStatus('${o.id}',this.value)">
+        ${['pending','processing','shipped','delivered','cancelled'].map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${{pending:'ממתין',processing:'בטיפול',shipped:'נשלח',delivered:'נמסר',cancelled:'בוטל'}[s]}</option>`).join('')}
+      </select>
+    </td>
+    <td><button class="btn btn-g btn-sm" onclick="viewOrd('${o.id}')"><i class="fas fa-eye"></i></button></td>
+  </tr>`).join('');
+}
+
+function updOrdStatus(id,s){const o=S.orders.find(x=>x.id===id);if(o){o.status=s;save();toast('סטטוס עודכן','in');}}
+function viewOrd(id){const o=S.orders.find(x=>x.id===id);if(!o)return;toast(`הזמנה #${o.id} · ${o.cname} · ₪${o.total.toLocaleString()}`,'in');}
+
+function rAdmMgrs(){
+  const mgrs=S.users.filter(u=>u.type==='manager');
+  document.getElementById('adm-mgrs-tb').innerHTML=mgrs.length===0?
+    `<tr><td colspan="6" style="text-align:center;padding:36px;color:var(--t3)">אין מנהלים עדיין</td></tr>`:
+    mgrs.map(m=>`<tr>
+      <td style="font-weight:600">${m.name}</td>
+      <td style="font-size:12px">${m.email}</td>
+      <td style="font-size:12px">${m.role||'-'}</td>
+      <td><span style="font-size:12px;color:var(--gold)">${(m.perms||[]).length} הרשאות</span></td>
+      <td><label class="sw"><input type="checkbox" ${m.act?'checked':''} onchange="togUserAct(${m.id},this.checked)"><span class="sl"></span></label></td>
+      <td><div style="display:flex;gap:5px">
+        <button class="btn btn-g btn-sm" onclick="openMgrModal(${m.id})"><i class="fas fa-edit"></i></button>
+        <button class="btn btn-d btn-sm" onclick="delUser(${m.id});rAdmMgrs()"><i class="fas fa-trash"></i></button>
+      </div></td>
+    </tr>`).join('');
+}
+
+function openMgrModal(id=null){
+  S.editMId=id;
+  document.getElementById('mo-mgr-ti').textContent=id?'עריכת מנהל':'הוסף מנהל חדש';
+  document.getElementById('mgr-perms').innerHTML=ALL_PERMS.map(p=>`
+    <label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;padding:8px;border:1px solid var(--bdr);border-radius:8px">
+      <input type="checkbox" id="mp-${p.id}">
+      <i class="${p.ic}" style="color:var(--gold);width:14px;font-size:11px"></i>${p.lbl}
+    </label>`).join('');
+  if(id){const m=S.users.find(u=>u.id===id);if(m){document.getElementById('mm-name').value=m.name;document.getElementById('mm-email').value=m.email;document.getElementById('mm-pass').value='';document.getElementById('mm-role').value=m.role||'';(m.perms||[]).forEach(p=>{const el=document.getElementById('mp-'+p);if(el)el.checked=true;});}}
+  else{['mm-name','mm-email','mm-pass','mm-role'].forEach(i=>document.getElementById(i).value='');}
+  openMo('mo-mgr');
+}
+
+function saveMgr(){
+  const name=document.getElementById('mm-name').value.trim();
+  const email=document.getElementById('mm-email').value.trim();
+  const pass=document.getElementById('mm-pass').value;
+  const role=document.getElementById('mm-role').value.trim();
+  const perms=ALL_PERMS.filter(p=>document.getElementById('mp-'+p.id)?.checked).map(p=>p.id);
+  if(!name||!email){toast('שדות חובה חסרים','er');return;}
+  if(S.editMId){const m=S.users.find(u=>u.id===S.editMId);if(m){m.name=name;m.email=email;m.role=role;m.perms=perms;if(pass)m.pass=pass;}}
+  else{if(!pass){toast('נדרשת סיסמה','er');return;}if(S.users.find(u=>u.email===email)){toast('אימייל כבר קיים','er');return;}S.users.push({id:Date.now(),un:email,name,email,pass,type:'manager',role,perms,act:true,joined:new Date().toISOString().split('T')[0],orders:[]});}
+  save();closeMo('mo-mgr');rAdmMgrs();toast('מנהל נשמר ✅','ok');S.editMId=null;
+}
+
+function rAdmPerms(){
+  const mgrs=S.users.filter(u=>u.type==='manager');
+  const el=document.getElementById('perms-content');
+  if(mgrs.length===0){el.innerHTML='<div class="empty"><i class="fas fa-user-tie"></i><h3>אין מנהלים</h3><button class="btn btn-p" onclick="admPg(\'mgrs\')">הוסף מנהל</button></div>';return;}
+  el.innerHTML=mgrs.map(m=>`
+  <div class="card" style="padding:22px;margin-bottom:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+      <div><div style="font-weight:700">${m.name}</div><div style="font-size:12px;color:var(--t3)">${m.email} · ${m.role||'מנהל'}</div></div>
+      <button class="btn btn-p btn-sm" onclick="savePrms(${m.id})">שמור הרשאות</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px">
+      ${ALL_PERMS.map(p=>`<label style="display:flex;align-items:center;gap:9px;padding:9px;border:1px solid var(--bdr);border-radius:8px;cursor:pointer;font-size:12px">
+        <input type="checkbox" id="prm-${m.id}-${p.id}" ${(m.perms||[]).includes(p.id)?'checked':''}>
+        <i class="${p.ic}" style="color:var(--gold);width:14px;font-size:11px"></i>${p.lbl}
+      </label>`).join('')}
+    </div>
+  </div>`).join('');
+}
+
+function savePrms(uid){
+  const u=S.users.find(x=>x.id===uid);if(!u)return;
+  u.perms=ALL_PERMS.filter(p=>document.getElementById(`prm-${uid}-${p.id}`)?.checked).map(p=>p.id);
+  save();toast('הרשאות עודכנו ✅','ok');
+}
+
+function rAdmSett(){
+  document.getElementById('sett-content').innerHTML=`
+  <div style="display:grid;gap:22px;max-width:680px">
+    <div class="card" style="padding:24px">
+      <h3 style="margin-bottom:18px;font-size:15px">הגדרות כלליות</h3>
+      <div class="fg"><label class="fl">שם האתר</label><input type="text" class="fi" value="${S.cfg.name}" id="cf-name"></div>
+      <div class="fg"><label class="fl">תגית</label><input type="text" class="fi" value="${S.cfg.tag}" id="cf-tag"></div>
+      <div class="fg"><label class="fl">אימייל צור קשר</label><input type="email" class="fi" value="${S.cfg.email}" id="cf-email"></div>
+      <div class="fg"><label class="fl">טלפון</label><input type="tel" class="fi" value="${S.cfg.phone}" id="cf-phone"></div>
+      <div class="fg"><label class="fl">כתובת</label><input type="text" class="fi" value="${S.cfg.addr}" id="cf-addr"></div>
+      <div class="fg"><label class="fl">WhatsApp (ספרות בלבד)</label><input type="text" class="fi" value="${S.cfg.wa}" id="cf-wa"></div>
+      <button class="btn btn-p" onclick="saveSett()">שמור הגדרות</button>
+    </div>
+    <div class="card" style="padding:24px">
+      <h3 style="margin-bottom:18px;font-size:15px">מחירים ומשלוח</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="fg"><label class="fl">שיעור מע"מ (%)</label><input type="number" class="fi" value="${S.cfg.vat}" id="cf-vat"></div>
+        <div class="fg"><label class="fl">משלוח חינם פרטי מ- (₪)</label><input type="number" class="fi" value="${S.cfg.shipPriv}" id="cf-sp"></div>
+        <div class="fg"><label class="fl">משלוח חינם עסקי (0=תמיד)</label><input type="number" class="fi" value="${S.cfg.shipBiz}" id="cf-sb"></div>
+      </div>
+      <button class="btn btn-p" onclick="saveSett()">שמור</button>
+    </div>
+    <div class="card" style="padding:24px">
+      <h3 style="margin-bottom:18px;font-size:15px">איפוס נתוני הדגמה</h3>
+      <p style="font-size:13px;color:var(--t2);margin-bottom:14px">איפוס ישחזר את כל הנתונים לברירת המחדל של ההדגמה</p>
+      <button class="btn btn-d" onclick="resetDemo()"><i class="fas fa-trash"></i>איפוס מלא</button>
+    </div>
+  </div>`;
+}
+
+function saveSett(){
+  S.cfg.name=document.getElementById('cf-name').value;
+  S.cfg.tag=document.getElementById('cf-tag').value;
+  S.cfg.email=document.getElementById('cf-email').value;
+  S.cfg.phone=document.getElementById('cf-phone').value;
+  S.cfg.addr=document.getElementById('cf-addr').value;
+  S.cfg.wa=document.getElementById('cf-wa').value;
+  S.cfg.vat=parseInt(document.getElementById('cf-vat').value)||18;
+  S.cfg.shipPriv=parseInt(document.getElementById('cf-sp').value)||200;
+  S.cfg.shipBiz=parseInt(document.getElementById('cf-sb').value)||0;
+  save();toast('הגדרות נשמרו ✅','ok');
+}
+
+function resetDemo(){
+  if(!confirm('לאפס את כל הנתונים לברירת המחדל? פעולה זו בלתי הפיכה!'))return;
+  localStorage.clear();location.reload();
+}
+
+function rAdmSeo(){
+  document.getElementById('seo-content').innerHTML=`
+  <div class="card" style="padding:24px;max-width:660px">
+    <h3 style="margin-bottom:18px;font-size:15px">הגדרות SEO</h3>
+    <div class="fg"><label class="fl">כותרת Meta (Title)</label><input type="text" class="fi" value="TechZone | אביזרי סלולר מקצועיים" id="seo-title"></div>
+    <div class="fg"><label class="fl">תיאור Meta</label><textarea class="fta" id="seo-desc">החנות המובילה לאביזרי סלולר בישראל. אוזניות, רמקולים, מטענים ועוד במחירים מיוחדים לחברי מועדון.</textarea></div>
+    <div class="fg"><label class="fl">מילות מפתח</label><input type="text" class="fi" value="אביזרי סלולר, אוזניות, מטענים, כבלים, ישראל, TechZone" id="seo-kw"></div>
+    <div class="fg"><label class="fl">Google Search Console Verification</label><input type="text" class="fi" placeholder="google-site-verification=..."></div>
+    <div class="fg"><label class="fl">Canonical URL</label><input type="text" class="fi" placeholder="https://www.techzone.co.il" style="direction:ltr"></div>
+    <div style="background:rgba(0,170,255,.06);border:1px solid rgba(0,170,255,.2);border-radius:10px;padding:12px;font-size:12px;color:var(--t2);margin-bottom:16px">
+      <strong style="color:var(--blue)">💡 טיפים SEO:</strong> הוסף מילות מפתח עבריות ואנגליות לכל מוצר. ודא שלכל מוצר יש תיאור ייחודי ותמונה איכותית. הטמע נתוני Structured Data (Schema.org).
+    </div>
+    <button class="btn btn-p" onclick="toast('הגדרות SEO נשמרו ✅','ok')">שמור</button>
+  </div>`;
+}
+
+function rAdmInteg(){
+  const intgs=[
+    {nm:'Google Analytics 4',ic:'📊',ds:'מעקב מבקרים ומכירות',st:false,ph:'G-XXXXXXXXXX'},
+    {nm:'Google Tag Manager',ic:'🏷️',ds:'ניהול תגיות ופיקסלים',st:false,ph:'GTM-XXXXXXX'},
+    {nm:'Facebook Pixel',ic:'📘',ds:'רימרקטינג ומעקב קמפיינים',st:false,ph:'123456789012345'},
+    {nm:'Google Maps',ic:'🗺️',ds:'מפה בדף צור קשר',st:false,ph:'API Key'},
+    {nm:'WhatsApp Business',ic:'💬',ds:'כפתור WhatsApp לתמיכה',st:true,ph:S.cfg.wa},
+    {nm:'Mailchimp',ic:'📧',ds:'ניהול רשימות דיוור',st:false,ph:'API Key'},
+    {nm:'Google Translate',ic:'🌐',ds:'תרגום אוטומטי',st:true,ph:'מופעל'},
+    {nm:'PayPal',ic:'🅿️',ds:'תשלומי PayPal',st:false,ph:'Client ID'},
+    {nm:'Bit / Israel Pay',ic:'📱',ds:'תשלומי Bit',st:true,ph:'מספר עסק'},
+    {nm:'Google Merchant',ic:'🛒',ds:'הצגה בחיפוש Google Shopping',st:false,ph:'Merchant ID'},
+    {nm:'Firebase Auth',ic:'🔐',ds:'אימות מתקדם',st:false,ph:'API Key'},
+    {nm:'Cloudinary',ic:'🖼️',ds:'ניהול תמונות בענן',st:false,ph:'Cloud Name'},
+  ];
+  document.getElementById('integ-content').innerHTML=`
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px">
+    ${intgs.map((ig,i)=>`<div class="card" style="padding:18px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:9px">
+          <span style="font-size:26px">${ig.ic}</span>
+          <div><div style="font-weight:700;font-size:13px">${ig.nm}</div><div style="font-size:11px;color:var(--t3)">${ig.ds}</div></div>
+        </div>
+        <span class="bdg ${ig.st?'bdg-ok':'bdg-muted'}">${ig.st?'פעיל':'לא פעיל'}</span>
+      </div>
+      <input type="text" class="fi" placeholder="${ig.ph}" style="margin-bottom:9px;font-size:12px">
+      <button class="btn ${ig.st?'btn-s':'btn-p'} btn-sm btn-bl" onclick="togInteg(this)">
+        ${ig.st?'השבת':'הפעל'}
+      </button>
+    </div>`).join('')}
+  </div>`;
+}
+
+function togInteg(btn){
+  const isAct=btn.textContent.trim()==='השבת';
+  btn.textContent=isAct?'הפעל':'השבת';
+  btn.className='btn '+(isAct?'btn-p':'btn-s')+' btn-sm btn-bl';
+  const bdg=btn.closest('.card').querySelector('.bdg');
+  bdg.className='bdg '+(isAct?'bdg-muted':'bdg-ok');
+  bdg.textContent=isAct?'לא פעיל':'פעיל';
+  toast(isAct?'אינטגרציה הושבתה':'אינטגרציה הופעלה ✅','in');
+}
+
+function rAdmLegal(){
+  document.getElementById('legal-adm-content').innerHTML=`
+  <div style="display:grid;gap:12px;max-width:660px">
+    ${[{k:'terms',ti:'תנאי שימוש',ic:'📜'},{k:'privacy',ti:'מדיניות פרטיות',ic:'🔒'},{k:'shipping',ti:'מדיניות משלוחים',ic:'🚚'},{k:'returns',ti:'מדיניות החזרות',ic:'🔄'},{k:'cookies',ti:'מדיניות עוגיות',ic:'🍪'},{k:'accessibility',ti:'הצהרת נגישות',ic:'♿'}].map(d=>`
+    <div class="card" style="padding:18px;display:flex;align-items:center;gap:12px">
+      <span style="font-size:26px">${d.ic}</span>
+      <div style="flex:1"><div style="font-weight:700;font-size:14px">${d.ti}</div><div style="font-size:11px;color:var(--t3)">עדכון אחרון: 01/11/2024</div></div>
+      <div style="display:flex;gap:7px">
+        <button class="btn btn-g btn-sm" onclick="showLegal('${d.k}')"><i class="fas fa-eye"></i></button>
+        <button class="btn btn-s btn-sm" onclick="toast('פתיחת עורך מסמך...','in')"><i class="fas fa-edit"></i>ערוך</button>
+      </div>
+    </div>`).join('')}
+  </div>`;
+}
+
+// ===== TOAST =====
+function toast(msg,type='ok'){
+  const el=document.createElement('div');
+  el.className=`toast toast-${type}`;el.textContent=msg;
+  document.getElementById('toasts').appendChild(el);
+  setTimeout(()=>el.remove(),3500);
+}
+
+// ===== INIT =====
+window.addEventListener('load',init);
+</script>
+</body>
+</html>
