@@ -3656,29 +3656,58 @@ function savePrms(uid){
 }
 
 // ============================================================
-// HFD SHIPPING INTEGRATION
-// API Base: https://ws.hfd.co.il
-// Auth:     Bearer JWT (stored in localStorage tz_hfd_token)
-// Client:   14601 (from JWT claim clientno)
+// HFD SHIPPING INTEGRATION — RunCom API
+// Auth: Bearer JWT | Client: 14601
+// Note: Browser calls go through CORS proxy (server-side = direct)
 // ============================================================
 const HFD={
   token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL3J1bmNvbS5jby5pbC9jbGFpbXMvY2xpZW50bm8iOiIxNDYwMSIsImh0dHBzOi8vcnVuY29tLmNvLmlsL2NsYWltcy9waHJhc2UiOiJkYTc0ZTIzMC1mYTlhLTQyMDItOWRlOC05MjYyMWIyZmIzZWYiLCJleHAiOjE4NDEwMDUxMTUsImlzcyI6Imh0dHBzOi8vcnVuY29tLmNvLmlsIiwiYXVkIjoiaHR0cHM6Ly9ydW5jb20uY28uaWwifQ._4mVkv4h27PyuY9u1y2JVrVKA9gmbJhe0gopLCGJOm0',
   base:'https://ws.hfd.co.il',
-  clientno:'14601'
+  clientno:'14601',
+  proxies:[
+    'https://corsproxy.io/?',
+    'https://api.allorigins.win/raw?url=',
+    'https://cors-anywhere.herokuapp.com/'
+  ]
 };
 
 async function hfdReq(path,method='GET',body=null){
-  const opts={
-    method,
-    headers:{'Content-Type':'application/json','Authorization':'Bearer '+HFD.token}
-  };
+  const fullUrl=HFD.base+path;
+  const headers={'Content-Type':'application/json','Authorization':'Bearer '+HFD.token,'X-Requested-With':'XMLHttpRequest'};
+  const opts={method,headers};
   if(body)opts.body=JSON.stringify(body);
+
+  // Try direct first
   try{
-    const r=await fetch(HFD.base+path,opts);
+    const r=await fetch(fullUrl,opts);
     const txt=await r.text();
-    let data;try{data=JSON.parse(txt);}catch{data={raw:txt};}
-    return{ok:r.ok,status:r.status,data};
-  }catch(e){return{ok:false,status:0,data:{error:e.message}};}
+    let data;try{data=JSON.parse(txt);}catch{data={raw:txt,text:txt};}
+    if(r.status!==0)return{ok:r.ok,status:r.status,data,via:'direct'};
+  }catch(e){
+    // CORS or network error — try proxies
+  }
+
+  // Try CORS proxies
+  for(const proxy of HFD.proxies){
+    try{
+      const proxyUrl=proxy+encodeURIComponent(fullUrl);
+      const r2=await fetch(proxyUrl,{method,headers,body:body?JSON.stringify(body):undefined});
+      const txt2=await r2.text();
+      let data2;try{data2=JSON.parse(txt2);}catch{data2={raw:txt2,text:txt2};}
+      return{ok:r2.ok,status:r2.status,data:data2,via:proxy};
+    }catch(e2){continue;}
+  }
+
+  // All failed — return CORS error with instructions
+  return{
+    ok:false,status:0,via:'none',
+    data:{
+      error:'CORS_BLOCKED',
+      message:'הדפדפן חוסם את הגישה לשרת HFD (CORS). לפתרון: העלה את האתר לשרת אמיתי עם backend, או השתמש בטופס ידני למטה.',
+      manualUrl:fullUrl,
+      manualToken:HFD.token
+    }
+  };
 }
 
 // ── Test connection ──
@@ -3765,38 +3794,96 @@ async function hfdDoCreate(oid,payload){
   const btn=document.getElementById('hfd-confirm-btn');
   const res=document.getElementById('hfd-ship-result');
   if(btn)btn.disabled=true;
-  if(res)res.innerHTML='<div style="text-align:center;padding:14px;color:var(--t2)"><i class="fas fa-spinner fa-spin"></i> יוצר משלוח ב-HFD...</div>';
+  if(res)res.innerHTML='<div style="text-align:center;padding:14px;color:var(--t2)"><i class="fas fa-spinner fa-spin"></i> מתחבר ל-HFD...</div>';
 
   const r=await hfdReq('/api/v1/shipments','POST',payload);
 
-  if(r.ok&&r.data){
-    const trackNum=r.data.barcode||r.data.trackNumber||r.data.shipmentNumber||r.data.id||'—';
-    // Save tracking to order
+  if(r.status===0&&r.data?.error==='CORS_BLOCKED'){
+    // Show manual form
+    if(res)res.innerHTML=`
+      <div style="background:rgba(255,152,0,.08);border:1px solid rgba(255,152,0,.3);border-radius:12px;padding:16px;margin-top:12px">
+        <div style="font-weight:700;color:var(--orange);margin-bottom:8px">⚠️ חיבור ישיר חסום (CORS)</div>
+        <p style="font-size:13px;color:var(--t2);margin-bottom:12px">הדפדפן חוסם קריאות ישירות ל-HFD. <strong>פתרונות:</strong></p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <a href="https://ws.hfd.co.il" target="_blank" class="btn btn-p btn-sm" style="text-decoration:none"><i class="fas fa-external-link-alt"></i> פתח ממשק HFD ישירות</a>
+          <button class="btn btn-s btn-sm" onclick="hfdManualForm('${oid}')"><i class="fas fa-edit"></i> מלא טופס ידני ב-HFD</button>
+          <button class="btn btn-g btn-sm" onclick="hfdSaveManual('${oid}')"><i class="fas fa-save"></i> שמור ברקוד ידני</button>
+        </div>
+        <div style="margin-top:12px;font-size:11px;color:var(--t3)">לחיבור מלא אוטומטי: העלה את האתר לשרת עם backend</div>
+      </div>`;
+    if(btn)btn.disabled=false;
+    return;
+  }
+
+  if(r.ok&&r.data&&!r.data.error){
+    const trackNum=r.data.barcode||r.data.trackNumber||r.data.shipmentNumber||r.data.id||r.data.ShipmentNumber||'—';
     const o=S.orders.find(x=>x.id===oid);
     if(o){o.hfdTrack=trackNum;o.hfdStatus='נוצר';o.status='processing';save();}
     if(res)res.innerHTML=`
       <div style="background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.3);border-radius:12px;padding:16px;margin-top:12px;text-align:center">
         <div style="font-size:28px;margin-bottom:8px">✅</div>
-        <div style="font-weight:700;color:var(--green);font-size:15px;margin-bottom:6px">משלוח נוצר בהצלחה!</div>
-        <div style="font-size:13px;color:var(--t2)">מספר מעקב: <strong style="color:var(--gold)">${trackNum}</strong></div>
-        <a href="https://track.hfd.co.il/?barcode=${trackNum}" target="_blank" class="btn btn-s btn-sm" style="margin-top:12px;text-decoration:none">
+        <div style="font-weight:700;color:var(--green);font-size:15px;margin-bottom:6px">משלוח נוצר בהצלחה! (דרך ${r.via})</div>
+        <div style="font-size:13px;color:var(--t2)">מספר מעקב: <strong style="color:var(--gold);font-size:16px">${trackNum}</strong></div>
+        <a href="https://ws.hfd.co.il/EpostTracking/?client=${HFD.clientno}&ref=${trackNum}" target="_blank" class="btn btn-s btn-sm" style="margin-top:12px;text-decoration:none">
           <i class="fas fa-search"></i> עקוב אחר המשלוח
         </a>
       </div>`;
-    toast(`✅ משלוח HFD נוצר! מעקב: ${trackNum}`,'ok');
-    // Refresh HFD page
+    toast('✅ משלוח HFD נוצר! מעקב: '+trackNum,'ok');
     setTimeout(()=>rAdmHfd(),500);
   } else {
     const errMsg=r.data?.message||r.data?.error||r.data?.raw||JSON.stringify(r.data).slice(0,120);
     if(res)res.innerHTML=`
       <div style="background:rgba(255,68,68,.08);border:1px solid rgba(255,68,68,.3);border-radius:12px;padding:14px;margin-top:12px">
-        <div style="color:var(--red);font-weight:700;margin-bottom:6px">❌ שגיאה בעת יצירת משלוח</div>
-        <div style="font-size:12px;color:var(--t2)">${errMsg}</div>
-        <div style="font-size:11px;color:var(--t3);margin-top:8px">קוד תשובה: ${r.status}</div>
+        <div style="color:var(--red);font-weight:700;margin-bottom:6px">❌ שגיאה ביצירת משלוח</div>
+        <div style="font-size:12px;color:var(--t2);margin-bottom:8px">${errMsg}</div>
+        <div style="font-size:11px;color:var(--t3)">קוד: ${r.status} | דרך: ${r.via||'ישיר'}</div>
+        <button class="btn btn-s btn-sm" style="margin-top:8px" onclick="hfdManualForm('${oid}')"><i class="fas fa-edit"></i> טופס ידני</button>
       </div>`;
     if(btn)btn.disabled=false;
-    toast('שגיאה ביצירת משלוח HFD','er');
   }
+}
+
+// Manual form — opens HFD site with prefilled data
+function hfdManualForm(oid){
+  const o=S.orders.find(x=>x.id===oid);if(!o)return;
+  const u=S.users.find(x=>String(x.id)===String(o.uid));
+  const bodyEl=document.getElementById('mo-ord-body');
+  const tiEl=document.getElementById('mo-ord-ti');
+  const ftrEl=document.getElementById('mo-ord-ftr');
+  if(tiEl) tiEl.textContent='טופס משלוח ידני — #'+o.id;
+  if(bodyEl) bodyEl.innerHTML=`
+    <div style="background:rgba(0,170,255,.06);border:1px solid rgba(0,170,255,.2);border-radius:12px;padding:16px;margin-bottom:14px;font-size:13px;color:var(--t2)">
+      📋 <strong style="color:var(--t1)">העתק את הפרטים הבאים לממשק HFD</strong> כדי ליצור את המשלוח ידנית, ואחר כך שמור את הברקוד שתקבל.
+    </div>
+    ${[
+      ['שם הנמען',o.cname],['עיר',u?.city||'—'],['רחוב',u?.street||'—'],
+      ['מיקוד',u?.zip||'—'],['טלפון',u?.phone||'—'],['אימייל',o.email||u?.email||'—'],
+      ['הערה','הזמנה #'+o.id+' TechZone'],['משקל משוער',o.items.reduce((s,i)=>s+i.qty*0.5,0).toFixed(1)+' ק"ג']
+    ].map(([l,v])=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bdr)">
+      <span style="font-size:12px;color:var(--t3);min-width:120px">${l}</span>
+      <span style="font-weight:600;font-size:13px">${v}</span>
+      <button onclick="navigator.clipboard?.writeText('${v}');toast('${l} הועתק!','ok')" class="btn btn-g btn-sm" style="font-size:10px;padding:4px 8px"><i class="fas fa-copy"></i></button>
+    </div>`).join('')}
+    <div style="margin-top:16px">
+      <label class="fl">ברקוד HFD שקיבלת:</label>
+      <input type="text" class="fi" id="manual-track" placeholder="הזן ברקוד שקיבלת מ-HFD...">
+    </div>`;
+  if(ftrEl) ftrEl.innerHTML=`
+    <button class="btn btn-g" onclick="closeMo('mo-ord-detail')">סגור</button>
+    <a href="https://ws.hfd.co.il" target="_blank" class="btn btn-s" style="text-decoration:none"><i class="fas fa-external-link-alt"></i> פתח HFD</a>
+    <button class="btn btn-p" onclick="hfdSaveManual('${o.id}')"><i class="fas fa-save"></i> שמור ברקוד</button>`;
+  openMo('mo-ord-detail');
+}
+
+function hfdSaveManual(oid){
+  const inp=document.getElementById('manual-track');
+  const track=inp?.value.trim();
+  if(!track){toast('נא להזין ברקוד','er');return;}
+  const o=S.orders.find(x=>x.id===oid);
+  if(o){o.hfdTrack=track;o.status='processing';save();}
+  closeMo('mo-ord-detail');
+  toast('✅ ברקוד '+track+' נשמר להזמנה #'+oid,'ok');
+  rAdmHfd();
 }
 
 // ── Track shipment ──
@@ -3856,57 +3943,71 @@ async function hfdLoadShipments(){
   }
 }
 
-// ── Main HFD page ──
 function rAdmHfd(){
   const el=document.getElementById('hfd-content');if(!el)return;
-
-  // Orders that have HFD tracking
   const hfdOrds=S.orders.filter(o=>o.hfdTrack);
-  // Orders pending shipment (processing/pending, no track yet)
   const pendShip=S.orders.filter(o=>!o.hfdTrack&&(o.status==='pending'||o.status==='processing'));
 
   el.innerHTML=`
-  <div style="display:grid;gap:22px;max-width:900px">
+  <div style="display:grid;gap:20px;max-width:940px">
 
-    <!-- Status bar -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
-      <div class="card" style="padding:18px;text-align:center">
-        <div style="font-size:28px;margin-bottom:6px">📦</div>
-        <div style="font-size:22px;font-weight:900;color:var(--gold)">${hfdOrds.length}</div>
-        <div style="font-size:12px;color:var(--t2)">משלוחים שנשלחו</div>
+    <!-- CORS Info Banner -->
+    <div style="background:rgba(255,152,0,.07);border:1px solid rgba(255,152,0,.3);border-radius:var(--r3);padding:16px">
+      <div style="display:flex;align-items:flex-start;gap:10px">
+        <span style="font-size:20px;flex-shrink:0">⚠️</span>
+        <div style="font-size:13px;color:var(--t2);line-height:1.7">
+          <strong style="color:var(--orange)">הערה חשובה על חיבור HFD מהדפדפן:</strong><br>
+          ה-API של HFD/RunCom מיועד לשרת-לשרת ואינו תומך בקריאות ישירות מהדפדפן (CORS).
+          המערכת מנסה אוטומטית דרך CORS proxies — אם נחסמות, השתמש ב<strong style="color:var(--gold)">כניסה ישירה לממשק HFD</strong> למטה.
+          <br><strong style="color:var(--green)">פתרון מלא:</strong> העלה את האתר לשרת עם backend (Node.js / PHP) שיבצע את הקריאות מצד השרת.
+        </div>
       </div>
-      <div class="card" style="padding:18px;text-align:center">
-        <div style="font-size:28px;margin-bottom:6px">⏳</div>
-        <div style="font-size:22px;font-weight:900;color:var(--orange)">${pendShip.length}</div>
-        <div style="font-size:12px;color:var(--t2)">ממתינים למשלוח</div>
-      </div>
-      <div class="card" style="padding:18px;text-align:center">
-        <div style="font-size:28px;margin-bottom:6px">🔗</div>
-        <div style="font-size:13px;color:var(--t2);margin-bottom:8px">סטטוס חיבור</div>
-        <button class="btn btn-g btn-sm btn-bl" id="hfd-test-btn" onclick="hfdTest()"><i class="fas fa-plug"></i> בדוק חיבור</button>
-        <div id="hfd-test-res" style="margin-top:7px;font-size:12px"></div>
+      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+        <a href="https://ws.hfd.co.il" target="_blank" class="btn btn-g btn-sm" style="text-decoration:none"><i class="fas fa-external-link-alt"></i> פתח ממשק HFD</a>
+        <a href="https://run.hfd.co.il/RunCom.Server/Request.aspx?APPNAME=run&PRGNAME=call_knisa" target="_blank" class="btn btn-s btn-sm" style="text-decoration:none"><i class="fas fa-sign-in-alt"></i> RunCom ישירות</a>
+        <button class="btn btn-sm" onclick="hfdTest()" id="hfd-test-btn" style="background:rgba(0,170,255,.1);border:1px solid rgba(0,170,255,.3);color:var(--blue)"><i class="fas fa-plug"></i> בדוק חיבור</button>
+        <div id="hfd-test-res" style="display:flex;align-items:center;font-size:12px;padding:0 8px"></div>
       </div>
     </div>
 
-    <!-- Orders pending HFD shipment -->
+    <!-- Stats row -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+      <div class="card" style="padding:18px;text-align:center">
+        <div style="font-size:28px;margin-bottom:4px">📦</div>
+        <div style="font-size:24px;font-weight:900;color:var(--gold)">${hfdOrds.length}</div>
+        <div style="font-size:12px;color:var(--t2)">משלוחים שנשלחו</div>
+      </div>
+      <div class="card" style="padding:18px;text-align:center">
+        <div style="font-size:28px;margin-bottom:4px">⏳</div>
+        <div style="font-size:24px;font-weight:900;color:var(--orange)">${pendShip.length}</div>
+        <div style="font-size:12px;color:var(--t2)">ממתינים למשלוח</div>
+      </div>
+      <div class="card" style="padding:18px;text-align:center">
+        <div style="font-size:28px;margin-bottom:4px">🔑</div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:6px">מספר לקוח HFD</div>
+        <div style="font-size:16px;font-weight:900;color:var(--gold)">${HFD.clientno}</div>
+      </div>
+    </div>
+
+    <!-- Pending shipments -->
     ${pendShip.length>0?`
     <div class="card" style="padding:22px">
-      <h3 style="font-size:15px;margin-bottom:16px;color:var(--orange)">⏳ הזמנות שממתינות לשליחה (${pendShip.length})</h3>
+      <h3 style="font-size:15px;margin-bottom:14px;color:var(--orange)">⏳ הזמנות הממתינות לשליחה (${pendShip.length})</h3>
       <div style="display:flex;flex-direction:column;gap:10px">
         ${pendShip.map(o=>{
           const u=S.users.find(x=>String(x.id)===String(o.uid));
           return `<div style="display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:10px;flex-wrap:wrap">
             <div style="flex:1;min-width:180px">
-              <div style="font-weight:700;font-size:13px;color:var(--gold)">#${o.id}</div>
-              <div style="font-size:12px;color:var(--t2)">${o.cname} · ${u?.city||'—'} · ${u?.street||'—'}</div>
+              <div style="font-weight:700;font-size:13px;color:var(--gold)">#${o.id} · ${o.cname}</div>
+              <div style="font-size:12px;color:var(--t2)">📍 ${u?.city||'—'}, ${u?.street||'—'} · 📞 ${u?.phone||'—'}</div>
               <div style="font-size:11px;color:var(--t3)">${o.items.length} פריטים · ₪${o.total.toLocaleString()} · ${o.date}</div>
             </div>
-            <div style="display:flex;gap:7px;flex-shrink:0">
+            <div style="display:flex;gap:7px;flex-shrink:0;flex-wrap:wrap">
               <button class="btn btn-p btn-sm" onclick="hfdCreateShipment('${o.id}')">
                 <i class="fas fa-truck"></i> שלח ב-HFD
               </button>
-              <button class="btn btn-g btn-sm" onclick="openOrdDetail('${o.id}')">
-                <i class="fas fa-eye"></i> פרטים
+              <button class="btn btn-s btn-sm" onclick="hfdManualForm('${o.id}')">
+                <i class="fas fa-edit"></i> טופס ידני
               </button>
             </div>
           </div>`;
@@ -3914,53 +4015,49 @@ function rAdmHfd(){
       </div>
     </div>`:''}
 
-    <!-- Already shipped orders -->
+    <!-- Shipped orders -->
     ${hfdOrds.length>0?`
     <div class="card" style="padding:22px">
-      <h3 style="font-size:15px;margin-bottom:16px;color:var(--green)">✅ משלוחים שנשלחו ב-HFD (${hfdOrds.length})</h3>
-      <div class="tbl-wrap">
-        <table class="dt"><thead><tr>
-          <th>הזמנה</th><th>לקוח</th><th>ברקוד HFD</th><th>תאריך</th><th>פעולות</th>
-        </tr></thead><tbody>
-          ${hfdOrds.map(o=>`<tr>
-            <td style="color:var(--gold);font-weight:700">#${o.id}</td>
-            <td style="font-size:12px">${o.cname}</td>
-            <td><span style="font-family:monospace;color:var(--gold);font-size:13px">${o.hfdTrack}</span></td>
-            <td style="font-size:12px">${o.date}</td>
-            <td><div style="display:flex;gap:6px">
-              <button class="btn btn-g btn-sm" onclick="document.getElementById('hfd-track-input').value='${o.hfdTrack}';hfdTrack('${o.hfdTrack}');document.getElementById('hfd-track-input').scrollIntoView({behavior:'smooth'})">
-                <i class="fas fa-map-marker-alt"></i> עקוב
-              </button>
-              <a href="https://track.hfd.co.il/?barcode=${o.hfdTrack}" target="_blank" class="btn btn-s btn-sm" style="text-decoration:none">
-                <i class="fas fa-external-link-alt"></i>
-              </a>
-            </div></td>
-          </tr>`).join('')}
-        </tbody></table>
-      </div>
+      <h3 style="font-size:15px;margin-bottom:14px;color:var(--green)">✅ משלוחים פעילים ב-HFD (${hfdOrds.length})</h3>
+      <div class="tbl-wrap"><table class="dt"><thead><tr>
+        <th>הזמנה</th><th>לקוח</th><th>ברקוד HFD</th><th>תאריך</th><th>מעקב</th>
+      </tr></thead><tbody>
+        ${hfdOrds.map(o=>`<tr>
+          <td style="color:var(--gold);font-weight:700">#${o.id}</td>
+          <td style="font-size:12px">${o.cname}</td>
+          <td><span style="font-family:monospace;color:var(--gold)">${o.hfdTrack}</span></td>
+          <td style="font-size:12px">${o.date}</td>
+          <td><div style="display:flex;gap:6px">
+            <a href="https://ws.hfd.co.il/EpostTracking/?client=${HFD.clientno}&ref=${o.hfdTrack}" target="_blank" class="btn btn-ok btn-sm" style="text-decoration:none"><i class="fas fa-map-marker-alt"></i> עקוב</a>
+            <a href="https://run.hfd.co.il/run_public/pub_random_form.htm" target="_blank" class="btn btn-g btn-sm" style="text-decoration:none"><i class="fas fa-external-link-alt"></i></a>
+          </div></td>
+        </tr>`).join('')}
+      </tbody></table></div>
     </div>`:''}
 
     <!-- Manual track -->
     <div class="card" style="padding:22px">
-      <h3 style="font-size:15px;margin-bottom:14px">🔍 מעקב ידני אחר משלוח</h3>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <h3 style="font-size:15px;margin-bottom:12px">🔍 מעקב אחר משלוח</h3>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">
         <input type="text" class="fi" id="hfd-track-input" placeholder="הזן מספר ברקוד / מעקב..." style="flex:1;min-width:200px" onkeydown="if(event.key==='Enter')hfdTrack(this.value.trim())">
-        <button class="btn btn-p" onclick="hfdTrack(document.getElementById('hfd-track-input').value.trim())">
-          <i class="fas fa-search"></i> עקוב
-        </button>
+        <button class="btn btn-p" onclick="hfdTrack(document.getElementById('hfd-track-input').value.trim())"><i class="fas fa-search"></i> עקוב</button>
+        <a href="https://ws.hfd.co.il/EpostTracking/?client=${HFD.clientno}" target="_blank" class="btn btn-s" style="text-decoration:none"><i class="fas fa-external-link-alt"></i> אתר HFD</a>
       </div>
       <div id="hfd-track-result"></div>
     </div>
 
-    <!-- Load all from HFD API -->
-    <div class="card" style="padding:22px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
-        <h3 style="font-size:15px">📋 כל המשלוחים מ-HFD API</h3>
-        <button class="btn btn-s btn-sm" onclick="hfdLoadShipments()"><i class="fas fa-sync"></i> טען מ-HFD</button>
+    <!-- Token info -->
+    <div class="card" style="padding:18px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+        <h3 style="font-size:14px">🔑 פרטי חיבור HFD/RunCom</h3>
+        <button class="btn btn-g btn-sm" onclick="hfdLoadShipments()"><i class="fas fa-sync"></i> טען מה-API</button>
       </div>
-      <div id="hfd-shipments-list">
-        <div style="text-align:center;padding:20px;color:var(--t3);font-size:13px">לחץ "טען מ-HFD" לטעינת כל המשלוחים מהשרת</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;margin-bottom:10px">
+        <div style="background:rgba(255,255,255,.03);border-radius:8px;padding:10px"><span style="color:var(--t3)">Base URL:</span><br><code style="color:var(--blue);font-size:11px">${HFD.base}</code></div>
+        <div style="background:rgba(255,255,255,.03);border-radius:8px;padding:10px"><span style="color:var(--t3)">Client No:</span><br><strong style="color:var(--gold)">${HFD.clientno}</strong></div>
+        <div style="background:rgba(255,255,255,.03);border-radius:8px;padding:10px;grid-column:1/-1"><span style="color:var(--t3)">JWT Token (ראשית):</span><br><code style="color:var(--t2);font-size:10px;word-break:break-all">${HFD.token.slice(0,60)}...</code><button class="btn btn-g btn-sm" style="margin-top:6px" onclick="navigator.clipboard?.writeText(HFD.token);toast('Token הועתק!','ok')"><i class="fas fa-copy"></i> העתק</button></div>
       </div>
+      <div id="hfd-shipments-list"></div>
     </div>
 
   </div>`;
