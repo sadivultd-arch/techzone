@@ -3728,20 +3728,22 @@ async function hfdTest(){
 }
 
 // ── Create shipment from order ──
+// Global pending HFD payload storage (avoids passing JSON through onclick attr)
+let _hfdPending={};
+
 async function hfdCreateShipment(oid){
   const o=S.orders.find(x=>x.id===oid);
   if(!o){toast('הזמנה לא נמצאה','er');return;}
   const u=S.users.find(x=>String(x.id)===String(o.uid));
 
-  // Build HFD shipment payload
-  // Weight estimate: 0.5kg per item
   const totalWeight=o.items.reduce((s,i)=>s+(i.qty*0.5),0);
   const phone=(u?.phone||'').replace(/\D/g,'').replace(/^0/,'');
 
-  const payload={
+  // Store payload globally - avoids onclick JSON escaping issues
+  _hfdPending[oid]={
     clientNumber:HFD.clientno,
-    shipmentType:1,          // 1 = standard
-    serviceType:2,           // 2 = delivery to door
+    shipmentType:1,
+    serviceType:2,
     shipperCity:'תל אביב',
     shipperStreet:'רחוב הטכנולוגיה 5',
     shipperZipCode:'6100000',
@@ -3752,49 +3754,51 @@ async function hfdCreateShipment(oid){
     receiverZipCode:u?.zip||'',
     receiverPhone:phone,
     receiverEmail:o.email||u?.email||'',
-    weight:Math.max(0.1,totalWeight),
+    weight:Math.max(0.1,Math.round(totalWeight*10)/10),
     packages:1,
-    comments:`הזמנה #${o.id} - TechZone`,
+    comments:'הזמנה #'+o.id+' - TechZone',
     reference1:o.id,
     COD:0,
     shipmentDate:new Date().toISOString().split('T')[0]
   };
 
-  // Show confirmation modal
   const tiEl=document.getElementById('mo-ord-ti');
   const bodyEl=document.getElementById('mo-ord-body');
   const ftrEl=document.getElementById('mo-ord-ftr');
-  if(tiEl) tiEl.textContent=`שלח משלוח HFD — הזמנה #${o.id}`;
+  if(tiEl) tiEl.textContent='שלח משלוח HFD — הזמנה #'+o.id;
   if(bodyEl) bodyEl.innerHTML=`
     <div style="margin-bottom:16px;background:rgba(0,170,255,.07);border:1px solid rgba(0,170,255,.2);border-radius:12px;padding:16px">
-      <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:10px;text-transform:uppercase">פרטי המשלוח שישלח ל-HFD</div>
+      <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:12px;text-transform:uppercase">פרטי המשלוח שישלח ל-HFD</div>
       ${[
-        ['מספר הזמנה',o.id],
+        ['מספר הזמנה','#'+o.id],
         ['נמען',o.cname],
         ['עיר',u?.city||'—'],
         ['רחוב',u?.street||'—'],
         ['טלפון',u?.phone||'—'],
         ['אימייל',o.email||u?.email||'—'],
-        ['משקל משוער',totalWeight.toFixed(1)+' ק"ג'],
+        ['משקל משוער',Math.max(0.1,totalWeight).toFixed(1)+' ק"ג'],
         ['חבילות','1'],
-      ].map(([l,v])=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:13px">
-        <span style="color:var(--t3)">${l}</span><span style="font-weight:600">${v}</span>
-      </div>`).join('')}
+      ].map(([l,v])=>'<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bdr);font-size:13px">'
+        +'<span style="color:var(--t3)">'+l+'</span>'
+        +'<span style="font-weight:600">'+v+'</span>'
+        +'</div>').join('')}
     </div>
     <div id="hfd-ship-result"></div>`;
-  if(ftrEl) ftrEl.innerHTML=`
-    <button class="btn btn-g" onclick="closeMo('mo-ord-detail')">ביטול</button>
-    <button class="btn btn-p" id="hfd-confirm-btn" onclick="hfdDoCreate('${oid}',${JSON.stringify(payload).replace(/'/g,"\\'")})">
-      <i class="fas fa-truck"></i> צור משלוח ב-HFD
-    </button>`;
+  if(ftrEl) ftrEl.innerHTML=
+    '<button class="btn btn-g" onclick="closeMo(\'mo-ord-detail\')">ביטול</button>'
+    +'<button class="btn btn-p" id="hfd-confirm-btn" onclick="hfdDoCreate(\''+oid+'\')">'
+    +'<i class="fas fa-truck"></i> צור משלוח ב-HFD'
+    +'</button>';
   openMo('mo-ord-detail');
 }
 
-async function hfdDoCreate(oid,payload){
+async function hfdDoCreate(oid){
+  const payload=_hfdPending[oid];
+  if(!payload){toast('שגיאה: פרטי המשלוח לא נמצאו','er');return;}
   const btn=document.getElementById('hfd-confirm-btn');
   const res=document.getElementById('hfd-ship-result');
-  if(btn)btn.disabled=true;
-  if(res)res.innerHTML='<div style="text-align:center;padding:14px;color:var(--t2)"><i class="fas fa-spinner fa-spin"></i> מתחבר ל-HFD...</div>';
+  if(btn){btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> מתחבר ל-HFD...';}
+  if(res)res.innerHTML='<div style="text-align:center;padding:14px;color:var(--t2)"><i class="fas fa-spinner fa-spin"></i> שולח בקשה ל-HFD...</div>';
 
   const r=await hfdReq('/api/v1/shipments','POST',payload);
 
