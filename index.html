@@ -1238,6 +1238,20 @@ input:checked+.sl::before{transform:translateX(-20px)}
   </div>
 </footer>
 
+<!-- Order Detail Modal -->
+<div class="mo" id="mo-ord-detail">
+  <div class="mo-box" style="max-width:640px">
+    <div class="mo-hdr">
+      <div class="mo-ti" id="mo-ord-ti">פרטי הזמנה</div>
+      <button class="mo-cl" onclick="closeMo('mo-ord-detail')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mo-bdy" id="mo-ord-body"></div>
+    <div class="mo-ftr" id="mo-ord-ftr">
+      <button class="btn btn-g" onclick="closeMo('mo-ord-detail')">סגור</button>
+    </div>
+  </div>
+</div>
+
 <!-- Business Detail Modal -->
 <div class="mo" id="mo-biz-detail">
   <div class="mo-box" style="max-width:700px">
@@ -1345,6 +1359,7 @@ input:checked+.sl::before{transform:translateX(-20px)}
       <div class="ani" id="biz-req-nav" onclick="admPg('bizreq')"><i class="fas fa-building"></i>בקשות עסקיות <span id="biz-req-badge" style="display:none;background:var(--orange);color:#070b14;font-size:10px;font-weight:900;border-radius:10px;padding:1px 7px;margin-right:4px"></span></div>
       <div class="ani" onclick="admPg('users')"><i class="fas fa-users"></i>משתמשים</div>
       <div class="ani" onclick="admPg('orders')"><i class="fas fa-shopping-cart"></i>הזמנות</div>
+      <div class="ani" onclick="admPg('hfd')"><i class="fas fa-truck"></i>HFD שליחויות</div>
       <div class="adm-nsec" id="adm-adv-sec">ניהול מתקדם</div>
       <div class="ani" id="adm-mgr-nav" onclick="admPg('mgrs')"><i class="fas fa-user-tie"></i>מנהלים</div>
       <div class="ani" id="adm-perm-nav" onclick="admPg('perms')"><i class="fas fa-shield-alt"></i>הרשאות</div>
@@ -1372,15 +1387,12 @@ input:checked+.sl::before{transform:translateX(-20px)}
 
     <!-- DASHBOARD -->
     <div class="adm-pg act" id="adm-dash">
-      <div class="adm-ph"><div class="adm-ph-ti">לוח בקרה</div><div class="adm-ph-sub">סקירה כללית של פעילות החנות</div></div>
+      <div class="adm-ph"><div class="adm-ph-ti">לוח בקרה</div><div class="adm-ph-sub">סקירה כללית בזמן אמת — לחץ על כל כרטיס לניווט</div></div>
       <div class="stats-gr" id="dash-stats"></div>
+      <div id="dash-biz-alert"></div>
       <div style="display:grid;grid-template-columns:3fr 2fr;gap:22px;flex-wrap:wrap">
-        <div><h3 style="margin-bottom:14px;font-size:15px">הזמנות אחרונות</h3>
-          <div class="tbl-wrap" id="dash-orders"></div>
-        </div>
-        <div><h3 style="margin-bottom:14px;font-size:15px">מוצרים מובילים</h3>
-          <div class="card" style="padding:16px" id="dash-top-prods"></div>
-        </div>
+        <div id="dash-orders"></div>
+        <div id="dash-top-prods"></div>
       </div>
     </div>
 
@@ -1452,6 +1464,15 @@ input:checked+.sl::before{transform:translateX(-20px)}
       <div class="tbl-wrap"><table class="dt"><thead><tr>
         <th>#</th><th>לקוח</th><th>פריטים</th><th>סכום</th><th>תאריך</th><th>סטטוס</th><th>פעולות</th>
       </tr></thead><tbody id="adm-orders-tb"></tbody></table></div>
+    </div>
+
+    <!-- HFD SHIPPING -->
+    <div class="adm-pg" id="adm-hfd">
+      <div class="adm-ph">
+        <div class="adm-ph-ti">🚚 HFD שליחויות</div>
+        <div class="adm-ph-sub">יצירת משלוחים, מעקב ושליחת כמות לHFD</div>
+      </div>
+      <div id="hfd-content"></div>
     </div>
 
     <!-- MANAGERS -->
@@ -2872,7 +2893,7 @@ function admPg(pg){
   document.querySelectorAll('.ani').forEach(n=>n.classList.remove('act'));
   document.getElementById('adm-'+pg)?.classList.add('act');
   document.querySelector(`.ani[onclick="admPg('${pg}')"]`)?.classList.add('act');
-  const titles={dash:'לוח בקרה',prods:'ניהול מוצרים',cats:'קטגוריות',bizreq:'🏢 בקשות עסקיות',users:'משתמשים',orders:'הזמנות',mgrs:'מנהלים',perms:'הרשאות',sett:'הגדרות',suppls:'ספקים ויבוא',seo:'SEO',integ:'אינטגרציות',legal:'מסמכים משפטיים'};
+  const titles={dash:'לוח בקרה',prods:'ניהול מוצרים',cats:'קטגוריות',bizreq:'🏢 בקשות עסקיות',users:'משתמשים',orders:'הזמנות',hfd:'🚚 HFD שליחויות',mgrs:'מנהלים',perms:'הרשאות',sett:'הגדרות',suppls:'ספקים ויבוא',seo:'SEO',integ:'אינטגרציות',legal:'מסמכים משפטיים'};
   (document.getElementById('adm-pg-title')||{textContent:''}).textContent=titles[pg]||pg;
   if(pg==='dash')rDash();
   else if(pg==='prods')rAdmProds();
@@ -2880,6 +2901,7 @@ function admPg(pg){
   else if(pg==='bizreq')rAdmBizReq();
   else if(pg==='users')rAdmUsers();
   else if(pg==='orders')rAdmOrders();
+  else if(pg==='hfd')rAdmHfd();
   else if(pg==='mgrs')rAdmMgrs();
   else if(pg==='perms')rAdmPerms();
   else if(pg==='sett')rAdmSett();
@@ -2891,62 +2913,262 @@ function admPg(pg){
 
 function rDash(){
   const totSales=S.orders.reduce((s,o)=>s+o.total,0);
-  const pend=S.orders.filter(o=>o.status==='pending').length;
+  const pendOrds=S.orders.filter(o=>o.status==='pending').length;
+  const procOrds=S.orders.filter(o=>o.status==='processing').length;
   const cust=S.users.filter(u=>u.type==='private'||u.type==='business').length;
   const oos=S.prods.filter(p=>p.stock===0).length;
   const bizPend=S.users.filter(u=>u.type==='business_pending').length;
-  // Notifications
-  const notifs=JSON.parse(localStorage.getItem('tz_notifs')||'[]');
-  const unread=notifs.filter(n=>!n.read);
-  (document.getElementById('dash-stats')||{innerHTML:''}).innerHTML=[
-    {l:'סה"כ מכירות',n:'₪'+totSales.toLocaleString(),ic:'fas fa-shekel-sign',cl:'#D4AF37',tr:'+12% החודש'},
-    {l:'הזמנות',n:S.orders.length,ic:'fas fa-shopping-cart',cl:'#00aaff',tr:`${pend} ממתינות`},
-    {l:'לקוחות פעילים',n:cust,ic:'fas fa-users',cl:'#00e676',tr:`${bizPend} ממתינים לאישור`},
-    {l:'מוצרים',n:S.prods.length,ic:'fas fa-box',cl:'#ff9800',tr:`${oos} אזלו`},
-  ].map(s=>`<div class="sc" onclick="" style="cursor:default">
-    <div class="sc-ic" style="background:${s.cl}22"><i class="${s.ic}" style="color:${s.cl}"></i></div>
-    <div class="sc-num" style="color:${s.cl}">${s.n}</div>
-    <div class="sc-lbl">${s.l}</div>
-    <div class="sc-tr">${s.tr}</div>
-  </div>`).join('');
-  // Business pending notifications
+  const todayOrds=S.orders.filter(o=>o.date===new Date().toISOString().split('T')[0]).length;
+
+  // ── STAT CARDS (each clickable → relevant page) ──
+  const statsEl=document.getElementById('dash-stats');
+  if(statsEl)statsEl.innerHTML=[
+    {l:'סה"כ מכירות',n:'₪'+totSales.toLocaleString(),ic:'fas fa-shekel-sign',cl:'#D4AF37',tr:`${todayOrds} הזמנות היום`,pg:'orders'},
+    {l:'הזמנות',n:S.orders.length,ic:'fas fa-shopping-cart',cl:'#00aaff',tr:`${pendOrds} ממתינות · ${procOrds} בטיפול`,pg:'orders'},
+    {l:'לקוחות פעילים',n:cust,ic:'fas fa-users',cl:'#00e676',tr:bizPend>0?`⚠ ${bizPend} ממתינים לאישור`:'הכל מאושר',pg:bizPend>0?'bizreq':'users'},
+    {l:'מוצרים',n:S.prods.length,ic:'fas fa-box',cl:'#ff9800',tr:oos>0?`⚠ ${oos} אזלו מהמלאי`:'כל המוצרים זמינים',pg:'prods'},
+  ].map(s=>`
+    <div class="sc" onclick="admPg('${s.pg}')" style="cursor:pointer;transition:var(--tr)" onmouseover="this.style.borderColor='${s.cl}44'" onmouseout="this.style.borderColor=''">
+      <div class="sc-ic" style="background:${s.cl}22"><i class="${s.ic}" style="color:${s.cl}"></i></div>
+      <div class="sc-num" style="color:${s.cl}">${s.n}</div>
+      <div class="sc-lbl">${s.l}</div>
+      <div class="sc-tr" style="color:${s.cl}99">${s.tr}</div>
+      <div style="font-size:10px;color:var(--t3);margin-top:5px">לחץ לצפייה ←</div>
+    </div>`).join('');
+
+  // ── BUSINESS PENDING ALERT ──
   const bizPendUsers=S.users.filter(u=>u.type==='business_pending');
-  const notifHtml=bizPendUsers.length>0?`
-  <div style="margin-bottom:22px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-      <h3 style="font-size:15px">🔔 בקשות עסקיות ממתינות לאישור</h3>
-      <span class="bdg bdg-r" style="font-size:12px">${bizPendUsers.length} חדש</span>
+  const bizAlert=bizPendUsers.length>0?`
+    <div style="background:rgba(255,152,0,.07);border:1px solid rgba(255,152,0,.35);border-radius:var(--r3);padding:18px;margin-bottom:20px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+        <div style="display:flex;align-items:center;gap:9px">
+          <span style="font-size:20px">⏳</span>
+          <strong style="color:var(--orange);font-size:14px">בקשות עסקיות ממתינות לאישורך (${bizPendUsers.length})</strong>
+        </div>
+        <button class="btn btn-sm" onclick="admPg('bizreq')" style="background:var(--orange);color:#070b14;font-weight:700;border:none">
+          <i class="fas fa-arrow-left"></i> לכל הבקשות
+        </button>
+      </div>
+      ${bizPendUsers.slice(0,3).map(u=>`
+        <div onclick="viewBizDetail(${u.id})" style="display:flex;align-items:center;gap:12px;padding:11px 13px;background:rgba(255,255,255,.04);border-radius:10px;margin-bottom:8px;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(255,152,0,.1)'" onmouseout="this.style.background='rgba(255,255,255,.04)'">
+          <span style="font-size:24px">🏢</span>
+          <div style="flex:1">
+            <div style="font-weight:700;font-size:13px">${u.bizName||u.name}</div>
+            <div style="font-size:11px;color:var(--t3)">${u.name} · ${u.phone||u.email} · נרשם ${u.joined}</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-ok btn-sm" onclick="event.stopPropagation();approveBiz(${u.id});rDash()"><i class="fas fa-check"></i> אשר</button>
+            <button class="btn btn-d btn-sm" onclick="event.stopPropagation();rejectBiz(${u.id})"><i class="fas fa-times"></i></button>
+            <span style="font-size:11px;color:var(--gold);align-self:center;white-space:nowrap">← לחץ לפרטים</span>
+          </div>
+        </div>`).join('')}
+      ${bizPendUsers.length>3?`<div style="text-align:center;font-size:12px;color:var(--t3);padding-top:6px">ועוד ${bizPendUsers.length-3} בקשות נוספות...</div>`:''}
+    </div>`:'';
+
+  // ── RECENT ORDERS (clickable rows) ──
+  const recentOrds=S.orders.slice(0,8);
+  const ordsHtml=`
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <h3 style="font-size:15px">הזמנות אחרונות</h3>
+      <button class="btn btn-g btn-sm" onclick="admPg('orders')"><i class="fas fa-list"></i> כל ההזמנות</button>
     </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      ${bizPendUsers.map(u=>`
-      <div style="background:rgba(255,152,0,.06);border:1px solid rgba(255,152,0,.25);border-radius:12px;padding:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-        <div style="font-size:28px">🏢</div>
-        <div style="flex:1">
-          <div style="font-weight:700;font-size:14px">${u.name}</div>
-          <div style="font-size:12px;color:var(--t3)">${u.bizName||'-'} · ח.פ: ${u.vat||'-'} · ${u.email} · ${u.phone||'-'}</div>
-          <div style="font-size:11px;color:var(--t3)">נרשם: ${u.joined} · ${u.bizType||''} · ${u.monthlyVol||''}</div>
+    <div class="tbl-wrap">
+      <table class="dt"><thead><tr>
+        <th>#</th><th>לקוח</th><th>פריטים</th><th>סכום</th><th>תאריך</th><th>סטטוס</th>
+      </tr></thead><tbody>
+      ${recentOrds.length===0?'<tr><td colspan="6" style="text-align:center;padding:28px;color:var(--t3)">אין הזמנות עדיין</td></tr>':
+        recentOrds.map(o=>`
+        <tr onclick="openOrdDetail('${o.id}')" style="cursor:pointer" onmouseover="this.style.background='rgba(212,175,55,.04)'" onmouseout="this.style.background=''">
+          <td><strong style="color:var(--gold)">#${o.id}</strong></td>
+          <td style="font-size:12px">${o.cname}</td>
+          <td style="font-size:12px">${o.items.length} פריטים</td>
+          <td style="color:var(--gold);font-weight:700">₪${o.total.toLocaleString()}</td>
+          <td style="font-size:12px">${o.date}</td>
+          <td>${ordStatus(o.status)}</td>
+        </tr>`).join('')}
+      </tbody></table>
+    </div>`;
+
+  // ── TOP PRODUCTS (clickable) ──
+  const topProdsHtml=`
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <h3 style="font-size:15px">מוצרים מובילים</h3>
+      <button class="btn btn-g btn-sm" onclick="admPg('prods')"><i class="fas fa-box"></i> כל המוצרים</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0">
+    ${S.prods.slice(0,6).map((p,i)=>`
+      <div onclick="openProdModal(${p.id})" style="display:flex;align-items:center;gap:10px;padding:10px 8px;border-bottom:1px solid var(--bdr);cursor:pointer;border-radius:8px;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.04)'" onmouseout="this.style.background=''">
+        <div style="font-weight:900;color:var(--gold);width:18px;font-size:13px;text-align:center">${i+1}</div>
+        <img src="${p.img||''}" style="width:38px;height:38px;object-fit:contain;border-radius:7px;background:rgba(255,255,255,.04);flex-shrink:0" onerror="this.src='https://placehold.co/38x38/111e35/D4AF37?text=📱'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.he}</div>
+          <div style="font-size:10px;color:var(--t3)">${p.stock===0?'<span style="color:var(--red)">אזל מהמלאי</span>':`מלאי: ${p.stock}`}</div>
         </div>
-        <div style="display:flex;gap:8px;flex-shrink:0">
-          <button class="btn btn-ok btn-sm" onclick="approveBiz(${u.id});rDash()"><i class="fas fa-check"></i> אשר</button>
-          <button class="btn btn-d btn-sm" onclick="delUser(${u.id});rDash()"><i class="fas fa-times"></i> דחה</button>
-          <button class="btn btn-g btn-sm" onclick="admPg('users')"><i class="fas fa-eye"></i> פרטים</button>
-        </div>
+        <div style="font-size:13px;color:var(--gold);font-weight:700;flex-shrink:0">₪${p.pp.toLocaleString()}</div>
+        <i class="fas fa-edit" style="color:var(--t3);font-size:11px;flex-shrink:0"></i>
       </div>`).join('')}
-    </div>
-  </div>`:'';
+    </div>`;
+
+  // ── INJECT INTO DOM ──
+  // Use direct innerHTML on the pre-existing containers
   const dashOrdsEl=document.getElementById('dash-orders');
   const dashTopEl=document.getElementById('dash-top-prods');
-  if(dashOrdsEl)dashOrdsEl.outerHTML=`<div id="dash-orders">${notifHtml}<table class="dt" style="width:100%;border-collapse:collapse"><thead><tr><th>מספר</th><th>לקוח</th><th>סכום</th><th>תאריך</th><th>סטטוס</th></tr></thead><tbody>
-  ${S.orders.slice(0,5).map(o=>`<tr><td style="color:var(--gold)">#${o.id}</td><td>${o.cname}</td><td>₪${o.total.toLocaleString()}</td><td>${o.date}</td><td>${ordStatus(o.status)}</td></tr>`).join('')}
-  </tbody></table></div>`;
-  if(dashTopEl)dashTopEl.innerHTML=S.prods.slice(0,5).map((p,i)=>`
-  <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--bdr)">
-    <div style="font-weight:900;color:var(--gold);width:18px;font-size:13px">${i+1}</div>
-    <img src="${p.img}" style="width:36px;height:36px;object-fit:contain;border-radius:6px;background:rgba(255,255,255,.04)" onerror="this.src='https://placehold.co/36x36/111e35/D4AF37?text=📱'">
-    <div style="flex:1;font-size:12px">${p.he}</div>
-    <div style="font-size:12px;color:var(--gold);font-weight:700">₪${p.pp}</div>
-  </div>`).join('');
+  const dashBizEl=document.getElementById('dash-biz-alert');
+
+  // Build the layout fresh each time inside the dash containers
+  const dashMain=document.querySelector('#adm-dash > .adm-ph + *') || document.getElementById('adm-dash');
+
+  // Replace the whole dash-orders area (including biz alert)
+  if(dashOrdsEl){
+    // Insert biz alert before the orders div if not already there
+    let alertDiv=document.getElementById('dash-biz-alert');
+    if(!alertDiv){
+      alertDiv=document.createElement('div');
+      alertDiv.id='dash-biz-alert';
+      dashOrdsEl.parentNode.insertBefore(alertDiv,dashOrdsEl);
+    }
+    alertDiv.innerHTML=bizAlert;
+    dashOrdsEl.innerHTML=ordsHtml;
+  }
+  if(dashTopEl) dashTopEl.innerHTML=topProdsHtml;
 }
+
+function openOrdDetail(oid){
+  const o=S.orders.find(x=>x.id===oid);if(!o)return;
+  const statusOpts=['pending','processing','shipped','delivered','cancelled'];
+  const statusLbls={pending:'⏳ ממתין',processing:'🔄 בטיפול',shipped:'🚚 נשלח',delivered:'✅ נמסר',cancelled:'❌ בוטל'};
+  const statusColors={pending:'var(--orange)',processing:'var(--blue)',shipped:'var(--cyan)',delivered:'var(--green)',cancelled:'var(--red)'};
+
+  // Item rows
+  const itemsHtml=o.items.map(i=>`
+    <tr>
+      <td style="font-size:13px;padding:11px 14px">${i.nm}</td>
+      <td style="text-align:center;padding:11px 14px">${i.qty}</td>
+      <td style="text-align:left;padding:11px 14px;color:var(--t2)">₪${(i.pr||0).toLocaleString()}</td>
+      <td style="text-align:left;padding:11px 14px;color:var(--gold);font-weight:700">₪${((i.pr||0)*(i.qty||1)).toLocaleString()}</td>
+    </tr>`).join('');
+
+  const subtotal=o.items.reduce((s,i)=>s+(i.pr||0)*(i.qty||1),0);
+  const vat=Math.round(subtotal*0.18/1.18);
+  const ship=o.total-subtotal>0&&o.total-subtotal<100?o.total-subtotal:0;
+
+  const body=`
+    <!-- Header info -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
+      <div style="background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.2);border-radius:12px;padding:14px">
+        <div style="font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">מספר הזמנה</div>
+        <div style="font-size:20px;font-weight:900;color:var(--gold)">#${o.id}</div>
+        <div style="font-size:12px;color:var(--t3);margin-top:3px">${o.date}</div>
+      </div>
+      <div style="background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:12px;padding:14px">
+        <div style="font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">לקוח</div>
+        <div style="font-size:14px;font-weight:700">${o.cname}</div>
+        ${o.email?`<div style="font-size:12px;color:var(--blue);margin-top:3px"><a href="mailto:${o.email}" style="color:var(--blue)">${o.email}</a></div>`:''}
+      </div>
+    </div>
+
+    <!-- Items table -->
+    <div style="font-size:12px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">
+      📦 פריטים שהוזמנו (${o.items.length})
+    </div>
+    <div class="tbl-wrap" style="margin-bottom:16px">
+      <table style="width:100%;border-collapse:collapse">
+        <thead>
+          <tr style="background:rgba(255,255,255,.03)">
+            <th style="padding:10px 14px;text-align:right;font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase;border-bottom:1px solid var(--bdr)">מוצר</th>
+            <th style="padding:10px 14px;text-align:center;font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase;border-bottom:1px solid var(--bdr)">כמות</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase;border-bottom:1px solid var(--bdr)">מחיר יחידה</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase;border-bottom:1px solid var(--bdr)">סה"כ</th>
+          </tr>
+        </thead>
+        <tbody>${itemsHtml}</tbody>
+      </table>
+    </div>
+
+    <!-- Totals -->
+    <div style="background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:12px;padding:16px;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--t2);margin-bottom:8px">
+        <span>סכום ביניים</span><span>₪${subtotal.toLocaleString()}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--t2);margin-bottom:8px">
+        <span>מע"מ (18%)</span><span>₪${vat.toLocaleString()}</span>
+      </div>
+      ${ship>0?`<div style="display:flex;justify-content:space-between;font-size:13px;color:var(--t2);margin-bottom:8px"><span>משלוח</span><span>₪${ship.toLocaleString()}</span></div>`:'<div style="display:flex;justify-content:space-between;font-size:13px;color:var(--green);margin-bottom:8px"><span>משלוח</span><span>חינם 🎉</span></div>'}
+      <div style="border-top:1px solid var(--bdr);margin-top:8px;padding-top:12px;display:flex;justify-content:space-between;font-size:18px;font-weight:900">
+        <span>סה"כ לתשלום</span>
+        <span style="color:var(--gold)">₪${o.total.toLocaleString()}</span>
+      </div>
+    </div>
+
+    <!-- Status update -->
+    <div style="background:rgba(255,255,255,.02);border:1px solid var(--bdr);border-radius:12px;padding:14px">
+      <div style="font-size:12px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">עדכון סטטוס הזמנה</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        ${statusOpts.map(s=>`
+          <button onclick="updOrdStatus('${o.id}','${s}');this.closest('.mo').querySelectorAll('[data-status]').forEach(b=>b.style.opacity='.5');this.style.opacity='1';this.style.background='${statusColors[s]}22';this.style.borderColor='${statusColors[s]}'" 
+            data-status="${s}"
+            style="padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Heebo',sans-serif;transition:all .2s;background:${o.status===s?statusColors[s]+'22':'rgba(255,255,255,.04)'};border:1px solid ${o.status===s?statusColors[s]:'var(--bdr)'};color:${o.status===s?statusColors[s]:'var(--t2)'};opacity:${o.status===s?'1':'.7'}">
+            ${statusLbls[s]}
+          </button>`).join('')}
+      </div>
+    </div>`;
+
+  const tiEl=document.getElementById('mo-ord-ti');
+  const bodyEl=document.getElementById('mo-ord-body');
+  const ftrEl=document.getElementById('mo-ord-ftr');
+  if(tiEl) tiEl.textContent=`הזמנה #${o.id} · ${o.cname}`;
+  if(bodyEl) bodyEl.innerHTML=body;
+  if(ftrEl) ftrEl.innerHTML=`
+    <button class="btn btn-g" onclick="closeMo('mo-ord-detail')">סגור</button>
+    <button class="btn btn-p btn-sm" onclick="printOrd('${o.id}')"><i class="fas fa-print"></i> הדפס</button>
+    ${o.email?`<a href="mailto:${o.email}?subject=עדכון הזמנה #${o.id}" class="btn btn-s btn-sm" style="text-decoration:none"><i class="fas fa-envelope"></i> שלח עדכון</a>`:''}`;
+  openMo('mo-ord-detail');
+}
+
+function printOrd(oid){
+  const o=S.orders.find(x=>x.id===oid);if(!o)return;
+  const rows=o.items.map(i=>'<tr><td>'+i.nm+'</td><td style="text-align:center">'+i.qty+'</td><td>\u20aa'+(i.pr||0).toLocaleString()+'</td><td style="color:#D4AF37;font-weight:bold">\u20aa'+((i.pr||0)*(i.qty||1)).toLocaleString()+'</td></tr>').join('');
+  const emailRow=o.email?('<p><strong>\u05d0\u05d9\u05de\u05d9\u05d9\u05dc:</strong> '+o.email+'</p>'):'';
+  const css='body{font-family:Arial,sans-serif;padding:30px;direction:rtl;color:#222}'
+    +'h1{font-size:22px;margin-bottom:4px}p{margin:4px 0;font-size:14px;color:#555}'
+    +'table{width:100%;border-collapse:collapse;margin:20px 0}'
+    +'th,td{border:1px solid #ddd;padding:10px;text-align:right;font-size:14px}'
+    +'th{background:#f5f5f5;font-weight:bold}'
+    +'.tb{border:2px solid #D4AF37;border-radius:8px;padding:14px;margin-top:16px;display:flex;justify-content:space-between;font-size:18px;font-weight:bold}'
+    +'.gold{color:#D4AF37}.footer{margin-top:24px;font-size:12px;color:#999;text-align:center}';
+  const h='<!DOCTYPE html>'
+    +'<html dir="rtl"><head><meta charset="UTF-8">'
+    +'<title>\u05d4\u05d6\u05de\u05e0\u05d4 #'+o.id+'</title>'
+    +'<style>'+css+'</style></head>'
+    +'<body>'
+    +'<h1>&#9889; TechZone \u2014 \u05d7\u05e9\u05d1\u05d5\u05e0\u05d9\u05ea \u05d4\u05d6\u05de\u05e0\u05d4</h1>'
+    +'<p><strong>\u05de\u05e1\u05e4\u05e8 \u05d4\u05d6\u05de\u05e0\u05d4:</strong> #'+o.id+'</p>'
+    +'<p><strong>\u05dc\u05e7\u05d5\u05d7:</strong> '+o.cname+'</p>'
+    +'<p><strong>\u05ea\u05d0\u05e8\u05d9\u05da:</strong> '+o.date+'</p>'
+    +emailRow
+    +'<table><thead><tr>'
+    +'<th>\u05de\u05d5\u05e6\u05e8</th>'
+    +'<th>\u05db\u05de\u05d5\u05ea</th>'
+    +'<th>\u05de\u05d7\u05d9\u05e8 \u05d9\u05d7\u05d9\u05d3\u05d4</th>'
+    +'<th>\u05e1\u05d4"\u05db</th>'
+    +'</tr></thead><tbody>'+rows+'</tbody></table>'
+    +'<div class="tb"><span>\u05e1\u05d4"\u05db \u05dc\u05ea\u05e9\u05dc\u05d5\u05dd (\u05db\u05d5\u05dc\u05dc \u05de\u05e2"\u05de)</span>'
+    +'<span class="gold">\u20aa'+o.total.toLocaleString()+'</span></div>'
+    +'<div class="footer">TechZone &middot; sadivu.ltd@gmail.com &middot; 052-4454125</div>'
+    +'<scr'+'ipt>window.onload=function(){window.print();}<'+'\/scr'+'ipt>'
+    +'</body></html>';
+  const w=window.open('','_blank','width=700,height=800');
+  if(w){w.document.open();w.document.write(h);w.document.close();}
+  else{
+    const blob=new Blob([h],{type:'text/html'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.target='_blank';a.rel='noopener';
+    document.body.appendChild(a);a.click();
+    setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
+  }
+}
+
 
 function rAdmProds(f=''){
   // Populate cat filter select
@@ -3052,34 +3274,117 @@ function rAdmUsers(f='',t=''){
   let list=S.users;
   if(f)list=list.filter(u=>u.name.toLowerCase().includes(f.toLowerCase())||u.email.toLowerCase().includes(f.toLowerCase()));
   if(t)list=list.filter(u=>u.type===t);
-  // Show pending at top
   list.sort((a,b)=>(a.type==='business_pending'?-1:1));
   const pending=S.users.filter(u=>u.type==='business_pending').length;
-  (document.getElementById('adm-users-tb')||{innerHTML:''}).innerHTML=list.map(u=>`<tr ${u.type==='business_pending'?'style="background:rgba(255,152,0,.04)"':''}>
-    <td>
-      <div style="font-weight:600;font-size:13px">${u.name}</div>
-      ${u.bizName?`<div style="font-size:11px;color:var(--blue)">${u.bizName}</div>`:''}
-      ${u.pendingReason?`<div style="font-size:10px;color:var(--orange)">${u.pendingReason}</div>`:''}
-    </td>
-    <td style="font-size:12px">${u.email}</td>
-    <td><span class="bdg ${u.type==='superadmin'?'bdg-g':u.type==='manager'?'bdg-b':u.type==='business'?'bdg-b':u.type==='business_pending'?'bdg-muted':''}" style="${u.type==='business_pending'?'color:var(--orange);background:rgba(255,152,0,.1)':''}">${tmap[u.type]||u.type}</span></td>
-    <td style="font-size:12px">${u.joined||'-'}</td>
-    <td style="font-size:12px">${(u.orders||[]).length}</td>
-    <td>
-      ${u.type==='business_pending'
-        ?`<button class="btn btn-ok btn-sm" onclick="approveBiz(${u.id})"><i class="fas fa-check"></i> אשר</button>`
-        :`<label class="sw"><input type="checkbox" ${u.act?'checked':''} ${u.type==='superadmin'?'disabled':''} onchange="togUserAct(${u.id},this.checked)"><span class="sl"></span></label>`
-      }
-    </td>
-    <td><div style="display:flex;gap:5px">
-      <button class="btn btn-g btn-sm" onclick="openUserModal(${u.id})"><i class="fas fa-edit"></i></button>
-      ${u.type!=='superadmin'?`<button class="btn btn-d btn-sm" onclick="delUser(${u.id})"><i class="fas fa-trash"></i></button>`:''}
-    </div></td>
-  </tr>`).join('');
-  // Show pending badge on tab
+  // Build table with headers matching columns
+  const tbEl=document.getElementById('adm-users-tb');
+  // Update thead
+  const thead=document.querySelector('#adm-users table.dt thead tr');
+  if(thead)thead.innerHTML=`<th>שם</th><th>אימייל</th><th>סוג</th><th>הצטרף</th><th>הזמנות</th><th>סטטוס</th><th>פעולות</th>`;
+  if(tbEl)tbEl.innerHTML=list.map(u=>{
+    const userOrds=S.orders.filter(o=>String(o.uid)===String(u.id));
+    const ordTotal=userOrds.reduce((s,o)=>s+o.total,0);
+    return `<tr ${u.type==='business_pending'?'style="background:rgba(255,152,0,.04)"':''}>
+      <td>
+        <div style="font-weight:600;font-size:13px">${u.name}</div>
+        ${u.bizName?`<div style="font-size:11px;color:var(--blue)">${u.bizName}</div>`:''}
+        ${u.pendingReason?`<div style="font-size:10px;color:var(--orange)">${u.pendingReason}</div>`:''}
+      </td>
+      <td style="font-size:12px"><a href="mailto:${u.email}" style="color:var(--blue)">${u.email}</a></td>
+      <td><span class="bdg ${u.type==='superadmin'?'bdg-g':u.type==='manager'?'bdg-b':u.type==='business'?'bdg-b':u.type==='business_pending'?'bdg-muted':''}" style="${u.type==='business_pending'?'color:var(--orange);background:rgba(255,152,0,.1)':''}">${tmap[u.type]||u.type}</span></td>
+      <td style="font-size:12px">${u.joined||'-'}</td>
+      <td>
+        ${userOrds.length>0
+          ?`<button class="btn btn-g btn-sm" onclick="viewUserOrders(${u.id})" title="צפה בהזמנות">
+              <i class="fas fa-box"></i> ${userOrds.length}
+              <span style="font-size:10px;color:var(--gold)">₪${ordTotal.toLocaleString()}</span>
+            </button>`
+          :`<span style="font-size:12px;color:var(--t3)">אין הזמנות</span>`}
+      </td>
+      <td>
+        ${u.type==='business_pending'
+          ?`<button class="btn btn-ok btn-sm" onclick="approveBiz(${u.id})"><i class="fas fa-check"></i> אשר</button>`
+          :`<label class="sw"><input type="checkbox" ${u.act?'checked':''} ${u.type==='superadmin'?'disabled':''} onchange="togUserAct(${u.id},this.checked)"><span class="sl"></span></label>`
+        }
+      </td>
+      <td><div style="display:flex;gap:5px">
+        <button class="btn btn-g btn-sm" onclick="openUserModal(${u.id})"><i class="fas fa-edit"></i></button>
+        ${u.type==='business'||u.type==='business_pending'?`<button class="btn btn-s btn-sm" onclick="viewBizDetail(${u.id})"><i class="fas fa-building"></i></button>`:''}
+        ${u.type!=='superadmin'?`<button class="btn btn-d btn-sm" onclick="delUser(${u.id})"><i class="fas fa-trash"></i></button>`:''}
+      </div></td>
+    </tr>`;
+  }).join('');
   const pendBadge=pending>0?`<span style="display:inline-block;background:var(--orange);color:#070b14;font-size:10px;font-weight:700;border-radius:10px;padding:1px 7px;margin-right:5px">${pending}</span>`:'';
   const adm_users_title=document.querySelector('[onclick="admPg(\'users\')"]');
   if(adm_users_title&&pending>0){const txt=adm_users_title.textContent.replace(/\d+/,'');adm_users_title.innerHTML=`<i class="fas fa-users"></i>${txt.trim()}${pendBadge}`;}
+}
+
+function viewUserOrders(uid){
+  const u=S.users.find(x=>x.id===uid);if(!u)return;
+  const userOrds=S.orders.filter(o=>String(o.uid)===String(uid));
+  const total=userOrds.reduce((s,o)=>s+o.total,0);
+  const tiEl=document.getElementById('mo-ord-ti');
+  const bodyEl=document.getElementById('mo-ord-body');
+  const ftrEl=document.getElementById('mo-ord-ftr');
+  if(tiEl) tiEl.textContent=`הזמנות של ${u.name}`;
+  if(bodyEl){
+    if(userOrds.length===0){
+      bodyEl.innerHTML=`<div class="empty"><i class="fas fa-box-open"></i><h3>אין הזמנות עדיין</h3><p style="color:var(--t2)">ללקוח ${u.name} אין הזמנות עדיין</p></div>`;
+    } else {
+      bodyEl.innerHTML=`
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div style="font-size:13px;color:var(--t2)">${userOrds.length} הזמנות · סה"כ רכישות: <strong style="color:var(--gold)">₪${total.toLocaleString()}</strong></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          ${userOrds.map(o=>`
+          <div style="background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:12px;overflow:hidden">
+            <!-- Order header -->
+            <div onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'" style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(212,175,55,.05)'" onmouseout="this.style.background=''">
+              <div style="display:flex;align-items:center;gap:12px">
+                <strong style="color:var(--gold);font-size:14px">#${o.id}</strong>
+                <span style="font-size:12px;color:var(--t3)">${o.date}</span>
+                <span style="font-size:12px;color:var(--t2)">${o.items.length} פריטים</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <strong style="color:var(--gold)">₪${o.total.toLocaleString()}</strong>
+                ${ordStatus(o.status)}
+                <i class="fas fa-chevron-down" style="color:var(--t3);font-size:11px"></i>
+              </div>
+            </div>
+            <!-- Order items - hidden by default, click to expand -->
+            <div style="display:none;border-top:1px solid var(--bdr)">
+              <table style="width:100%;border-collapse:collapse">
+                <thead><tr style="background:rgba(255,255,255,.02)">
+                  <th style="padding:9px 16px;text-align:right;font-size:11px;color:var(--t3);font-weight:700">מוצר</th>
+                  <th style="padding:9px 16px;text-align:center;font-size:11px;color:var(--t3);font-weight:700">כמות</th>
+                  <th style="padding:9px 16px;text-align:left;font-size:11px;color:var(--t3);font-weight:700">מחיר</th>
+                  <th style="padding:9px 16px;text-align:left;font-size:11px;color:var(--t3);font-weight:700">סה"כ</th>
+                </tr></thead>
+                <tbody>
+                  ${o.items.map(i=>`<tr>
+                    <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--bdr)">${i.nm}</td>
+                    <td style="padding:10px 16px;text-align:center;font-size:13px;border-bottom:1px solid var(--bdr)">${i.qty}</td>
+                    <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--bdr);color:var(--t2)">₪${(i.pr||0).toLocaleString()}</td>
+                    <td style="padding:10px 16px;font-size:13px;border-bottom:1px solid var(--bdr);color:var(--gold);font-weight:700">₪${((i.pr||0)*(i.qty||1)).toLocaleString()}</td>
+                  </tr>`).join('')}
+                </tbody>
+              </table>
+              <div style="padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+                <div style="display:flex;gap:6px;flex-wrap:wrap">
+                  ${['pending','processing','shipped','delivered','cancelled'].map(s=>`
+                    <button onclick="updOrdStatus('${o.id}','${s}');rAdmUsers()" style="padding:5px 10px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Heebo',sans-serif;background:${o.status===s?'rgba(212,175,55,.15)':'rgba(255,255,255,.04)'};border:1px solid ${o.status===s?'var(--gold)':'var(--bdr)'};color:${o.status===s?'var(--gold)':'var(--t2)'}">${{pending:'⏳ ממתין',processing:'🔄 בטיפול',shipped:'🚚 נשלח',delivered:'✅ נמסר',cancelled:'❌ בוטל'}[s]}</button>`).join('')}
+                </div>
+                <button class="btn btn-g btn-sm" onclick="openOrdDetail('${o.id}')"><i class="fas fa-expand"></i> פתח מלא</button>
+              </div>
+            </div>
+          </div>`).join('')}
+        </div>`;
+    }
+  }
+  if(ftrEl) ftrEl.innerHTML=`
+    <button class="btn btn-g" onclick="closeMo('mo-ord-detail')">סגור</button>
+    <button class="btn btn-s btn-sm" onclick="closeMo('mo-ord-detail');admPg('orders')"><i class="fas fa-list"></i> כל ההזמנות</button>`;
+  openMo('mo-ord-detail');
 }
 
 function rAdmBizReq(){
@@ -3272,12 +3577,16 @@ function rAdmOrders(){
         ${['pending','processing','shipped','delivered','cancelled'].map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${{pending:'ממתין',processing:'בטיפול',shipped:'נשלח',delivered:'נמסר',cancelled:'בוטל'}[s]}</option>`).join('')}
       </select>
     </td>
-    <td><button class="btn btn-g btn-sm" onclick="viewOrd('${o.id}')"><i class="fas fa-eye"></i></button></td>
+    <td><div style="display:flex;gap:5px">
+      <button class="btn btn-g btn-sm" onclick="viewOrd('${o.id}')"><i class="fas fa-eye"></i></button>
+      ${!o.hfdTrack&&(o.status==='pending'||o.status==='processing')?`<button class="btn btn-sm" onclick="hfdCreateShipment('${o.id}')" style="background:rgba(0,170,255,.1);border:1px solid rgba(0,170,255,.3);color:var(--blue)" title="שלח ב-HFD"><i class="fas fa-truck"></i></button>`:''}
+      ${o.hfdTrack?`<a href="https://track.hfd.co.il/?barcode=${o.hfdTrack}" target="_blank" class="btn btn-sm" style="background:rgba(0,230,118,.1);border:1px solid rgba(0,230,118,.3);color:var(--green);text-decoration:none" title="מעקב HFD: ${o.hfdTrack}"><i class="fas fa-map-marker-alt"></i></a>`:''}
+    </div></td>
   </tr>`).join('');
 }
 
 function updOrdStatus(id,s){const o=S.orders.find(x=>x.id===id);if(o){o.status=s;save();toast('סטטוס עודכן','in');}}
-function viewOrd(id){const o=S.orders.find(x=>x.id===id);if(!o)return;toast(`הזמנה #${o.id} · ${o.cname} · ₪${o.total.toLocaleString()}`,'in');}
+function viewOrd(id){openOrdDetail(id);}
 
 function rAdmMgrs(){
   const mgrs=S.users.filter(u=>u.type==='manager');
@@ -3344,6 +3653,317 @@ function savePrms(uid){
   const u=S.users.find(x=>x.id===uid);if(!u)return;
   u.perms=ALL_PERMS.filter(p=>document.getElementById(`prm-${uid}-${p.id}`)?.checked).map(p=>p.id);
   save();toast('הרשאות עודכנו ✅','ok');
+}
+
+// ============================================================
+// HFD SHIPPING INTEGRATION
+// API Base: https://ws.hfd.co.il
+// Auth:     Bearer JWT (stored in localStorage tz_hfd_token)
+// Client:   14601 (from JWT claim clientno)
+// ============================================================
+const HFD={
+  token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL3J1bmNvbS5jby5pbC9jbGFpbXMvY2xpZW50bm8iOiIxNDYwMSIsImh0dHBzOi8vcnVuY29tLmNvLmlsL2NsYWltcy9waHJhc2UiOiJkYTc0ZTIzMC1mYTlhLTQyMDItOWRlOC05MjYyMWIyZmIzZWYiLCJleHAiOjE4NDEwMDUxMTUsImlzcyI6Imh0dHBzOi8vcnVuY29tLmNvLmlsIiwiYXVkIjoiaHR0cHM6Ly9ydW5jb20uY28uaWwifQ._4mVkv4h27PyuY9u1y2JVrVKA9gmbJhe0gopLCGJOm0',
+  base:'https://ws.hfd.co.il',
+  clientno:'14601'
+};
+
+async function hfdReq(path,method='GET',body=null){
+  const opts={
+    method,
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+HFD.token}
+  };
+  if(body)opts.body=JSON.stringify(body);
+  try{
+    const r=await fetch(HFD.base+path,opts);
+    const txt=await r.text();
+    let data;try{data=JSON.parse(txt);}catch{data={raw:txt};}
+    return{ok:r.ok,status:r.status,data};
+  }catch(e){return{ok:false,status:0,data:{error:e.message}};}
+}
+
+// ── Test connection ──
+async function hfdTest(){
+  const btn=document.getElementById('hfd-test-btn');
+  const res=document.getElementById('hfd-test-res');
+  if(btn)btn.disabled=true;
+  if(res)res.innerHTML='<span style="color:var(--t3)">בודק חיבור...</span>';
+  const r=await hfdReq('/api/v1/shipments?page=1&pageSize=1');
+  if(btn)btn.disabled=false;
+  if(res){
+    if(r.ok||r.status===200){
+      res.innerHTML='<span style="color:var(--green)">✅ חיבור תקין! HFD מחובר</span>';
+    } else {
+      res.innerHTML=`<span style="color:var(--red)">❌ שגיאה ${r.status}: ${JSON.stringify(r.data).slice(0,80)}</span>`;
+    }
+  }
+}
+
+// ── Create shipment from order ──
+async function hfdCreateShipment(oid){
+  const o=S.orders.find(x=>x.id===oid);
+  if(!o){toast('הזמנה לא נמצאה','er');return;}
+  const u=S.users.find(x=>String(x.id)===String(o.uid));
+
+  // Build HFD shipment payload
+  // Weight estimate: 0.5kg per item
+  const totalWeight=o.items.reduce((s,i)=>s+(i.qty*0.5),0);
+  const phone=(u?.phone||'').replace(/\D/g,'').replace(/^0/,'');
+
+  const payload={
+    clientNumber:HFD.clientno,
+    shipmentType:1,          // 1 = standard
+    serviceType:2,           // 2 = delivery to door
+    shipperCity:'תל אביב',
+    shipperStreet:'רחוב הטכנולוגיה 5',
+    shipperZipCode:'6100000',
+    shipperPhone:'524454125',
+    receiverName:o.cname,
+    receiverCity:u?.city||'',
+    receiverStreet:u?.street||'',
+    receiverZipCode:u?.zip||'',
+    receiverPhone:phone,
+    receiverEmail:o.email||u?.email||'',
+    weight:Math.max(0.1,totalWeight),
+    packages:1,
+    comments:`הזמנה #${o.id} - TechZone`,
+    reference1:o.id,
+    COD:0,
+    shipmentDate:new Date().toISOString().split('T')[0]
+  };
+
+  // Show confirmation modal
+  const tiEl=document.getElementById('mo-ord-ti');
+  const bodyEl=document.getElementById('mo-ord-body');
+  const ftrEl=document.getElementById('mo-ord-ftr');
+  if(tiEl) tiEl.textContent=`שלח משלוח HFD — הזמנה #${o.id}`;
+  if(bodyEl) bodyEl.innerHTML=`
+    <div style="margin-bottom:16px;background:rgba(0,170,255,.07);border:1px solid rgba(0,170,255,.2);border-radius:12px;padding:16px">
+      <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:10px;text-transform:uppercase">פרטי המשלוח שישלח ל-HFD</div>
+      ${[
+        ['מספר הזמנה',o.id],
+        ['נמען',o.cname],
+        ['עיר',u?.city||'—'],
+        ['רחוב',u?.street||'—'],
+        ['טלפון',u?.phone||'—'],
+        ['אימייל',o.email||u?.email||'—'],
+        ['משקל משוער',totalWeight.toFixed(1)+' ק"ג'],
+        ['חבילות','1'],
+      ].map(([l,v])=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:13px">
+        <span style="color:var(--t3)">${l}</span><span style="font-weight:600">${v}</span>
+      </div>`).join('')}
+    </div>
+    <div id="hfd-ship-result"></div>`;
+  if(ftrEl) ftrEl.innerHTML=`
+    <button class="btn btn-g" onclick="closeMo('mo-ord-detail')">ביטול</button>
+    <button class="btn btn-p" id="hfd-confirm-btn" onclick="hfdDoCreate('${oid}',${JSON.stringify(payload).replace(/'/g,"\\'")})">
+      <i class="fas fa-truck"></i> צור משלוח ב-HFD
+    </button>`;
+  openMo('mo-ord-detail');
+}
+
+async function hfdDoCreate(oid,payload){
+  const btn=document.getElementById('hfd-confirm-btn');
+  const res=document.getElementById('hfd-ship-result');
+  if(btn)btn.disabled=true;
+  if(res)res.innerHTML='<div style="text-align:center;padding:14px;color:var(--t2)"><i class="fas fa-spinner fa-spin"></i> יוצר משלוח ב-HFD...</div>';
+
+  const r=await hfdReq('/api/v1/shipments','POST',payload);
+
+  if(r.ok&&r.data){
+    const trackNum=r.data.barcode||r.data.trackNumber||r.data.shipmentNumber||r.data.id||'—';
+    // Save tracking to order
+    const o=S.orders.find(x=>x.id===oid);
+    if(o){o.hfdTrack=trackNum;o.hfdStatus='נוצר';o.status='processing';save();}
+    if(res)res.innerHTML=`
+      <div style="background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.3);border-radius:12px;padding:16px;margin-top:12px;text-align:center">
+        <div style="font-size:28px;margin-bottom:8px">✅</div>
+        <div style="font-weight:700;color:var(--green);font-size:15px;margin-bottom:6px">משלוח נוצר בהצלחה!</div>
+        <div style="font-size:13px;color:var(--t2)">מספר מעקב: <strong style="color:var(--gold)">${trackNum}</strong></div>
+        <a href="https://track.hfd.co.il/?barcode=${trackNum}" target="_blank" class="btn btn-s btn-sm" style="margin-top:12px;text-decoration:none">
+          <i class="fas fa-search"></i> עקוב אחר המשלוח
+        </a>
+      </div>`;
+    toast(`✅ משלוח HFD נוצר! מעקב: ${trackNum}`,'ok');
+    // Refresh HFD page
+    setTimeout(()=>rAdmHfd(),500);
+  } else {
+    const errMsg=r.data?.message||r.data?.error||r.data?.raw||JSON.stringify(r.data).slice(0,120);
+    if(res)res.innerHTML=`
+      <div style="background:rgba(255,68,68,.08);border:1px solid rgba(255,68,68,.3);border-radius:12px;padding:14px;margin-top:12px">
+        <div style="color:var(--red);font-weight:700;margin-bottom:6px">❌ שגיאה בעת יצירת משלוח</div>
+        <div style="font-size:12px;color:var(--t2)">${errMsg}</div>
+        <div style="font-size:11px;color:var(--t3);margin-top:8px">קוד תשובה: ${r.status}</div>
+      </div>`;
+    if(btn)btn.disabled=false;
+    toast('שגיאה ביצירת משלוח HFD','er');
+  }
+}
+
+// ── Track shipment ──
+async function hfdTrack(barcode){
+  const el=document.getElementById('hfd-track-result');
+  if(el)el.innerHTML='<span style="color:var(--t3)"><i class="fas fa-spinner fa-spin"></i> מחפש...</span>';
+  const r=await hfdReq(`/api/v1/shipments/${barcode}`);
+  if(el){
+    if(r.ok&&r.data){
+      const d=r.data;
+      el.innerHTML=`
+        <div style="background:rgba(0,230,118,.06);border:1px solid rgba(0,230,118,.2);border-radius:12px;padding:16px;margin-top:12px">
+          <div style="font-weight:700;color:var(--green);margin-bottom:10px">✅ נמצא</div>
+          ${[
+            ['ברקוד',d.barcode||barcode],
+            ['סטטוס',d.statusDescription||d.status||'—'],
+            ['נמען',d.receiverName||'—'],
+            ['עיר',d.receiverCity||'—'],
+            ['תאריך',d.shipmentDate||'—'],
+            ['עדכון אחרון',d.lastUpdateDate||'—'],
+          ].map(([l,v])=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--bdr);font-size:13px"><span style="color:var(--t3)">${l}</span><span style="font-weight:600">${v}</span></div>`).join('')}
+          <a href="https://track.hfd.co.il/?barcode=${barcode}" target="_blank" class="btn btn-s btn-sm" style="margin-top:10px;text-decoration:none"><i class="fas fa-external-link-alt"></i> מעקב מלא</a>
+        </div>`;
+    } else {
+      el.innerHTML=`<div style="color:var(--red);margin-top:8px;font-size:13px">❌ ברקוד לא נמצא (${r.status})</div>`;
+    }
+  }
+}
+
+// ── Get all HFD shipments ──
+async function hfdLoadShipments(){
+  const el=document.getElementById('hfd-shipments-list');
+  if(el)el.innerHTML='<div style="text-align:center;padding:24px;color:var(--t2)"><i class="fas fa-spinner fa-spin"></i> טוען משלוחים...</div>';
+  const r=await hfdReq('/api/v1/shipments?page=1&pageSize=20');
+  if(el){
+    if(r.ok&&r.data){
+      const items=r.data.items||r.data.shipments||r.data.data||r.data||[];
+      if(Array.isArray(items)&&items.length>0){
+        el.innerHTML=`<div class="tbl-wrap"><table class="dt"><thead><tr>
+          <th>ברקוד</th><th>נמען</th><th>עיר</th><th>תאריך</th><th>סטטוס</th><th>מעקב</th>
+        </tr></thead><tbody>
+        ${items.map(s=>`<tr>
+          <td style="font-size:12px;color:var(--gold)">${s.barcode||s.shipmentNumber||'—'}</td>
+          <td style="font-size:12px">${s.receiverName||'—'}</td>
+          <td style="font-size:12px">${s.receiverCity||'—'}</td>
+          <td style="font-size:12px">${(s.shipmentDate||'').split('T')[0]||'—'}</td>
+          <td><span class="bdg bdg-b" style="font-size:11px">${s.statusDescription||s.status||'—'}</span></td>
+          <td><a href="https://track.hfd.co.il/?barcode=${s.barcode||''}" target="_blank" class="btn btn-g btn-sm" style="text-decoration:none"><i class="fas fa-map-marker-alt"></i> עקוב</a></td>
+        </tr>`).join('')}
+        </tbody></table></div>`;
+      } else {
+        el.innerHTML='<div class="empty"><i class="fas fa-truck"></i><h3>אין משלוחים עדיין</h3><p>משלוחים שתיצור יופיעו כאן</p></div>';
+      }
+    } else {
+      el.innerHTML=`<div style="color:var(--red);padding:16px;font-size:13px">שגיאה בטעינת משלוחים: ${r.status}</div>`;
+    }
+  }
+}
+
+// ── Main HFD page ──
+function rAdmHfd(){
+  const el=document.getElementById('hfd-content');if(!el)return;
+
+  // Orders that have HFD tracking
+  const hfdOrds=S.orders.filter(o=>o.hfdTrack);
+  // Orders pending shipment (processing/pending, no track yet)
+  const pendShip=S.orders.filter(o=>!o.hfdTrack&&(o.status==='pending'||o.status==='processing'));
+
+  el.innerHTML=`
+  <div style="display:grid;gap:22px;max-width:900px">
+
+    <!-- Status bar -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+      <div class="card" style="padding:18px;text-align:center">
+        <div style="font-size:28px;margin-bottom:6px">📦</div>
+        <div style="font-size:22px;font-weight:900;color:var(--gold)">${hfdOrds.length}</div>
+        <div style="font-size:12px;color:var(--t2)">משלוחים שנשלחו</div>
+      </div>
+      <div class="card" style="padding:18px;text-align:center">
+        <div style="font-size:28px;margin-bottom:6px">⏳</div>
+        <div style="font-size:22px;font-weight:900;color:var(--orange)">${pendShip.length}</div>
+        <div style="font-size:12px;color:var(--t2)">ממתינים למשלוח</div>
+      </div>
+      <div class="card" style="padding:18px;text-align:center">
+        <div style="font-size:28px;margin-bottom:6px">🔗</div>
+        <div style="font-size:13px;color:var(--t2);margin-bottom:8px">סטטוס חיבור</div>
+        <button class="btn btn-g btn-sm btn-bl" id="hfd-test-btn" onclick="hfdTest()"><i class="fas fa-plug"></i> בדוק חיבור</button>
+        <div id="hfd-test-res" style="margin-top:7px;font-size:12px"></div>
+      </div>
+    </div>
+
+    <!-- Orders pending HFD shipment -->
+    ${pendShip.length>0?`
+    <div class="card" style="padding:22px">
+      <h3 style="font-size:15px;margin-bottom:16px;color:var(--orange)">⏳ הזמנות שממתינות לשליחה (${pendShip.length})</h3>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        ${pendShip.map(o=>{
+          const u=S.users.find(x=>String(x.id)===String(o.uid));
+          return `<div style="display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:10px;flex-wrap:wrap">
+            <div style="flex:1;min-width:180px">
+              <div style="font-weight:700;font-size:13px;color:var(--gold)">#${o.id}</div>
+              <div style="font-size:12px;color:var(--t2)">${o.cname} · ${u?.city||'—'} · ${u?.street||'—'}</div>
+              <div style="font-size:11px;color:var(--t3)">${o.items.length} פריטים · ₪${o.total.toLocaleString()} · ${o.date}</div>
+            </div>
+            <div style="display:flex;gap:7px;flex-shrink:0">
+              <button class="btn btn-p btn-sm" onclick="hfdCreateShipment('${o.id}')">
+                <i class="fas fa-truck"></i> שלח ב-HFD
+              </button>
+              <button class="btn btn-g btn-sm" onclick="openOrdDetail('${o.id}')">
+                <i class="fas fa-eye"></i> פרטים
+              </button>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`:''}
+
+    <!-- Already shipped orders -->
+    ${hfdOrds.length>0?`
+    <div class="card" style="padding:22px">
+      <h3 style="font-size:15px;margin-bottom:16px;color:var(--green)">✅ משלוחים שנשלחו ב-HFD (${hfdOrds.length})</h3>
+      <div class="tbl-wrap">
+        <table class="dt"><thead><tr>
+          <th>הזמנה</th><th>לקוח</th><th>ברקוד HFD</th><th>תאריך</th><th>פעולות</th>
+        </tr></thead><tbody>
+          ${hfdOrds.map(o=>`<tr>
+            <td style="color:var(--gold);font-weight:700">#${o.id}</td>
+            <td style="font-size:12px">${o.cname}</td>
+            <td><span style="font-family:monospace;color:var(--gold);font-size:13px">${o.hfdTrack}</span></td>
+            <td style="font-size:12px">${o.date}</td>
+            <td><div style="display:flex;gap:6px">
+              <button class="btn btn-g btn-sm" onclick="document.getElementById('hfd-track-input').value='${o.hfdTrack}';hfdTrack('${o.hfdTrack}');document.getElementById('hfd-track-input').scrollIntoView({behavior:'smooth'})">
+                <i class="fas fa-map-marker-alt"></i> עקוב
+              </button>
+              <a href="https://track.hfd.co.il/?barcode=${o.hfdTrack}" target="_blank" class="btn btn-s btn-sm" style="text-decoration:none">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div></td>
+          </tr>`).join('')}
+        </tbody></table>
+      </div>
+    </div>`:''}
+
+    <!-- Manual track -->
+    <div class="card" style="padding:22px">
+      <h3 style="font-size:15px;margin-bottom:14px">🔍 מעקב ידני אחר משלוח</h3>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <input type="text" class="fi" id="hfd-track-input" placeholder="הזן מספר ברקוד / מעקב..." style="flex:1;min-width:200px" onkeydown="if(event.key==='Enter')hfdTrack(this.value.trim())">
+        <button class="btn btn-p" onclick="hfdTrack(document.getElementById('hfd-track-input').value.trim())">
+          <i class="fas fa-search"></i> עקוב
+        </button>
+      </div>
+      <div id="hfd-track-result"></div>
+    </div>
+
+    <!-- Load all from HFD API -->
+    <div class="card" style="padding:22px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+        <h3 style="font-size:15px">📋 כל המשלוחים מ-HFD API</h3>
+        <button class="btn btn-s btn-sm" onclick="hfdLoadShipments()"><i class="fas fa-sync"></i> טען מ-HFD</button>
+      </div>
+      <div id="hfd-shipments-list">
+        <div style="text-align:center;padding:20px;color:var(--t3);font-size:13px">לחץ "טען מ-HFD" לטעינת כל המשלוחים מהשרת</div>
+      </div>
+    </div>
+
+  </div>`;
 }
 
 function rAdmSuppls(){
